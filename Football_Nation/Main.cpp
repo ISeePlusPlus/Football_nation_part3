@@ -10,7 +10,7 @@ using namespace std;
 #include "league.h"
 #include "fixture.h"
 #include "coach_player.h"
-
+#include "LinkedList.h"
 
 League * readLeague(ifstream& inputFile);
 Team * readTeam(ifstream& inputFile);
@@ -85,8 +85,9 @@ int main()
 	cout << lig << endl;
 	delete[] teams;
 	*/
-
-
+	int val = 5;
+	LinkedList<int> list(val);
+	cout << list;
 	system("pause");
 
 	ifstream inputFile("League.txt");
