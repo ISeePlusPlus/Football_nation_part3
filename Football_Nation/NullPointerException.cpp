@@ -1,9 +1,8 @@
 #include "NullPointerException.h"
 
-NullPointerException::NullPointerException(const char* var)
+NullPointerException::NullPointerException(const string& var)
 {
-	variable = new char[strlen(var) + 1];
-	strcpy(variable, var);
+	this->variable = var;
 }
 
 void NullPointerException::show() const

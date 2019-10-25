@@ -6,7 +6,7 @@
 class CoachPlayer : public Coach, public Player
 {
 public:
-	CoachPlayer(const char* name, int age, const char* nationality, const Coach& c, const Player& p);
+	CoachPlayer(const string& name, int age, const string& nationality, const Coach& c, const Player& p);
 
 	friend ostream& operator<<(ostream& os, const CoachPlayer& cp);
 };

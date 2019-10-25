@@ -9,9 +9,9 @@ using namespace std;
 class NullPointerException
 {
 protected:
-	char* variable;
+	string variable;
 public:
-	NullPointerException(const char* var);
+	NullPointerException(const string& var);
 	virtual void show() const;
 };
 

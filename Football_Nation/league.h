@@ -2,7 +2,6 @@
 #define __LEAGUE_H
 
 #pragma warning(disable:4996)
-#pragma warning(disable:4290)
 
 #include "team.h"
 #include "referee.h"
@@ -20,7 +19,7 @@ class League
 {
 
 private:
-	char* name;
+	string name;
 	int numberOfTeams;
 	int numberOfReferees;
 	int teamIndex;
@@ -34,7 +33,7 @@ private:
 	League(const League& other);
 	const League& operator=(const League& other) = delete;
 public:
-	League(const char* name, int numberOfTeams,
+	League(const string& name, int numberOfTeams,
 		Team** teams = nullptr, int numberofreferees = 0,
 		Referee** referees = nullptr); //in the constructor, number of teams must be the size of team array!
 
@@ -57,7 +56,7 @@ public:
 
 	int getPlayedFixtures() const;
 	void addPlayedFixture();
-	void setName(const char* name);
+//	void setName(const string& name);
 };
 
 class oddTeamNumberException 

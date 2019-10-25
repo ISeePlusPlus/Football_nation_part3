@@ -7,6 +7,7 @@
 #include "NoSpaceException.h"
 #include "NullPointerException.h"
 
+#pragma warning(disable:4290)
 using namespace std;
 
 const int MIN_RANDOM = 0;
@@ -39,12 +40,12 @@ public:
 
 	void setManager(Manager * manger); 
 	void addPoints(int points); // a negative number can be delievered here, it will decrease the team's points.
-	void addCoach(Coach * coach);
-	void addPlayer(Player * player);
-	void removePlayer(Player* Player); 
-	void removeCoach(Coach* coach);
-	void addToLineup(Player* player); //this will add player from the bench to the lineup. (will remove the other player from the bench).
-	void removeFromLineup(Player* player); //this will remove the player from the lineup to the bench. NOTE: this function will not return a feedback if the index is already a nullptr
+	void addCoach(Coach * coach) throw (NoSpaceException, NullPointerException);
+	void addPlayer(Player * player) throw (NoSpaceException);
+	void removePlayer(Player* Player) throw (NullPointerException);
+	void removeCoach(Coach* coach) throw (NullPointerException);
+	void addToLineup(Player* player) throw (NoSpaceException, NullPointerException); //this will add player from the bench to the lineup. (will remove the other player from the bench).
+	void removeFromLineup(Player* player) throw (NoSpaceException, NullPointerException); //this will remove the player from the lineup to the bench. NOTE: this function will not return a feedback if the index is already a nullptr
 	Player** getLineup() const; //returns the array of lineup
 	Player** getBench() const;
 	Team operator+(int points) const; // add points to the team

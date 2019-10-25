@@ -10,9 +10,9 @@ class Coach : virtual public Person
 {
 public:
 	
-	Coach(const char * name,
+	Coach(const string& name,
 		int age,
-		const char* nationality,
+		const string& nationality,
 		Role type = (Role) 0,
 		Team* currentTeam = nullptr);
 	Coach(const Coach& other);

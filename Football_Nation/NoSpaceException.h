@@ -10,9 +10,9 @@ class NoSpaceException
 {
 protected:
 	int index;
-	char* structName;
+	string structName;
 public:
-	NoSpaceException(const char* name, int index);
+	NoSpaceException(const string& name, int index);
 	virtual void show() const;
 };
 

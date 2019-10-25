@@ -1,6 +1,6 @@
 #include "manager.h"
 
-Manager::Manager(const char *name, int age, const char* nationality, int yearsOfExperience) : Person(name, age, nationality)
+Manager::Manager(const string& name, int age, const string& nationality, int yearsOfExperience) : Person(name, age, nationality)
 {
 	this->yearsOfExperience = yearsOfExperience;
 	this->currentTeam = nullptr;
@@ -13,6 +13,7 @@ void Manager::setTeam(Team* team)
 
 ostream& operator<<(ostream& os, const Manager& manager)
 {
+	//
 	const char* teamName;
 	if (manager.currentTeam == nullptr)
 		teamName = "None";

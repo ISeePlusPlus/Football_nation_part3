@@ -1,10 +1,9 @@
 #include "league.h"
 
 
-League::League(const char* name, int numberOfTeams, Team** teams, int numberofreferees, Referee** referees) : numberOfTeams(numberOfTeams), teams(teams), numberOfReferees(numberofreferees),
+League::League(const string& name, int numberOfTeams, Team** teams, int numberofreferees, Referee** referees) : name(name), numberOfTeams(numberOfTeams), teams(teams), numberOfReferees(numberofreferees),
 referees(referees), fixtures(nullptr)
 {
-	setName(name);
 	this->playedFixtures = 0;
 	refIndex = 0;
 	referees = new Referee*[numberOfReferees];
@@ -25,7 +24,7 @@ referees(referees), fixtures(nullptr)
 
 League::~League()
 {
-	delete[] name;
+	//delete[] name;
 	delete[] referees;
 	delete[] teams;
 	delete[] rotationTeams;
@@ -243,9 +242,9 @@ void League::addPlayedFixture()
 {
 	this->playedFixtures += 1;
 }
-
-void League::setName(const char* name)
+/*
+void League::setName(const string& name)
 {
-	this->name = new char[strlen(name) + 1];
-	strcpy(this->name, name);
+	this->name = name;
 }
+*/

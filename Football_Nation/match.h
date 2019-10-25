@@ -19,7 +19,7 @@ private:
 
 public:
 	Match(Team* homeTeam, Team* awayTeam, Referee * referee);
-	void playMatch(); //move to private?
+	void playMatch() throw(PlayMatchException); //move to private?
 
 	Team* getWinnerTeam() const; //returns the winner team. If match has ended with a tie, returns nullptr
 	Team* getHomeTeam() const;

@@ -3,12 +3,12 @@
 class LeagueException 
 {
 public:
-	LeagueException(const char* reason):
+	LeagueException(const std::string& reason):
 		exceptionReason(reason){}
 
 	virtual void show() const;
 
 protected:
-	const char* exceptionReason;
+	const std::string exceptionReason;
 	
 };

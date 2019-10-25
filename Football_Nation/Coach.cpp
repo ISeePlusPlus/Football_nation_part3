@@ -2,7 +2,7 @@
 
 const char* roles[] = { "Striker", "Defender", "GoalKepper", "Midfielder" };
 
-Coach::Coach(const char* name, int age, const char* nationality, Role type, Team * currentTeam) :
+Coach::Coach(const string& name, int age, const string& nationality, Role type, Team * currentTeam) :
 	Person(name, age, nationality)
 {
 	setType(type);

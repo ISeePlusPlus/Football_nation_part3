@@ -58,7 +58,7 @@ const string& Person::getNationality() const{ return nationality; }
 
 void Person::setName(const string& newName) throw (invalidNameException, NullPointerException)
 {
-	newName.compare("") == 0 ? throw invalidNameException() : 0;
+	newName.empty() ? throw invalidNameException() : 0;
 
 	this->name = name;
 }
@@ -73,7 +73,7 @@ bool Person::setAge(int newAge) throw (invalidAgeException)
 }
 void Person::setNationality(const string& newNationality) throw (NullPointerException)
 {
-	newNationality.compare(nullptr) ? throw NullPointerException("Person::nationality") : 0;
+	newNationality.empty() ? throw NullPointerException("Person::nationality") : 0;
 	this->nationality = nationality;
 }
 

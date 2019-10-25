@@ -124,7 +124,7 @@ int main()
 		e.show();
 	}
 	/*
-	 *Play matches until the end of the season
+	 *Play matches until the endF of the season
 	 *	-assign the match number of goals (random)
 	 *	-for each goal u assign u will need to assign (random) player that scored
 	 *	-display the fixture's matches results
