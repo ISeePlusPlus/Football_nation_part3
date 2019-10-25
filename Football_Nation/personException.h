@@ -14,6 +14,25 @@ public:
 	virtual const void show() const = 0;
 };
 
+class invalidAgeException : public PersonException
+{
+	int age;
+
+public:
+	invalidAgeException(int age) : age(age) {}
+
+	virtual const void show() const;
+
+};
+
+class invalidNameException : public PersonException
+{
+public:
+	invalidNameException() { }
+
+	virtual const void show() const;
+};
+
 
 
 
