@@ -12,7 +12,7 @@ const int MAX_AGE = 120;
 class Person
 {
 protected:
-	char* name;//[NAME_SIZE];
+	string name;//[NAME_SIZE];
 	int age;
 	char* nationality; //[NAME_SIZE] ;
 	Person(const Person& other);
