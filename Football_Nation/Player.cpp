@@ -2,7 +2,7 @@
 
 const char* playerRoles[] = { "Striker", "Defender", "GoalKepper", "Midfielder" };
 
-Player::Player(const char* name, int age, const char* nationality, int attack, int defence, int goalkeeping, int goalScored, int value,
+Player::Player(const string& name, int age, const string& nationality, int attack, int defence, int goalkeeping, int goalScored, int value,
 	Role role) : Person(name, age, nationality), attack(attack), defence(defence), goalkeeping(goalkeeping), goalScored(goalScored), value(value),
 	role(role), currentTeam(nullptr)
 {
