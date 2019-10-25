@@ -55,7 +55,22 @@ public:
 		node->setNext(newNode);
 	}
 
+	void deleteEnd()
+	{
+		Node<T>* preceding;
+		Node<T>* node = start;
+		do
+		{
 
+		} while ();
+	}
+
+	void deleteStart()
+	{
+		temp = start;
+		start = start->getNext();
+		delete temp;
+	}
 
 	LinkedList(T& item)
 	{
@@ -67,6 +82,17 @@ public:
 		start(other.node)
 	{
 
+	}
+
+	~LinkedList()
+	{
+		Node<T>* node = start;
+		do
+		{
+			Node<T>* next = node->getNext();
+			delete node;
+			node = next;
+		} while (node->getNext() != nullptr);
 	}
 
 	friend ostream& operator<<(ostream& os, const LinkedList& list) // IMPORTANT!!! operator << must be implemented for T!
