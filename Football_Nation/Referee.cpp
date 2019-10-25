@@ -2,7 +2,7 @@
 
 const int Referee::arr[] = {10, 15, 30, 50, 100 };
 
-Referee::Referee(const char* name, int age, const char* nationality, int rating = 0, int gamesPlayed = 0):
+Referee::Referee(const string& name, int age, const string& nationality, int rating = 0, int gamesPlayed = 0):
 	Person(name,age,nationality)
 {
 	setGamesPlayed(gamesPlayed);

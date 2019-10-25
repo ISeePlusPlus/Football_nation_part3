@@ -14,7 +14,7 @@ private:
 	int rating;
 
 public:
-	Referee(const char* name, int age, const char* nationality,int rating, int gamesPlayed);
+	Referee(const string& name, int age, const string& nationality,int rating, int gamesPlayed);
 	const Referee& operator++();
 	friend ostream& operator<<(ostream& os, const Referee& r);
 	Referee(const Referee& other) = delete;
