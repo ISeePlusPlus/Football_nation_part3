@@ -140,6 +140,7 @@
     <ClInclude Include="fixture.h" />
     <ClInclude Include="league.h" />
     <ClInclude Include="leagueException.h" />
+    <ClInclude Include="LinkedList.h" />
     <ClInclude Include="manager.h" />
     <ClInclude Include="match.h" />
     <ClInclude Include="NoSpaceException.h" />
