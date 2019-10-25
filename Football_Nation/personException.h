@@ -14,21 +14,21 @@ public:
 	virtual const void show() const = 0;
 };
 
-class invalidAgeException : public PersonException
+class InvalidAgeException : public PersonException
 {
 	int age;
 
 public:
-	invalidAgeException(int age) : age(age) {}
+	InvalidAgeException(int age) : age(age) {}
 
 	virtual const void show() const;
 
 };
 
-class invalidNameException : public PersonException
+class InvalidNameException : public PersonException
 {
 public:
-	invalidNameException() { }
+	  InvalidNameException() { }
 
 	virtual const void show() const;
 };

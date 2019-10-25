@@ -10,12 +10,12 @@ Person::Person(const string& name, int age, const string& nationality)
 		setNationality(nationality);
 	}
 
-	catch (invalidAgeException& e) 
+	catch (InvalidAgeException& e) 
 	{
 		e.show();
 		throw e;
 	}
-	catch (invalidNameException& e)
+	catch (InvalidNameException& e)
 	{
 		e.show();
 		throw e;
@@ -56,17 +56,17 @@ const string& Person::getNationality() const{ return nationality; }
 
 //Setters
 
-void Person::setName(const string& newName) throw (invalidNameException)
+void Person::setName(const string& newName) throw (InvalidNameException)
 {
-	newName.empty() ? throw invalidNameException() : 0;
+	newName.empty() ? throw InvalidNameException() : 0;
 
 	this->name = name;
 }
-void Person::setAge(int newAge) throw (invalidAgeException)
+void Person::setAge(int newAge) throw (InvalidAgeException)
 {
 	if (newAge < MIN_AGE || newAge > MAX_AGE)
 	{
-		throw invalidAgeException(newAge);
+		throw InvalidAgeException(newAge);
 	}
 	age = newAge;
 }

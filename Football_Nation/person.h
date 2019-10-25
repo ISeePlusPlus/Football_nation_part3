@@ -34,9 +34,9 @@ public:
 	int getAge() const;
 	const string& getNationality() const;
 
-	void setName(const string& newName) throw (invalidNameException) ;
-	void setAge(int newAge)  throw (invalidAgeException) ;
-	void setNationality(const string& newNationality)  throw (NullPointerException) ;
+	void setName(const string& newName);// throw (InvalidNameException);
+	void setAge(int newAge);//  throw (InvalidAgeException);
+	void setNationality(const string& newNationality);//  throw (NullPointerException);
 };
 
 
