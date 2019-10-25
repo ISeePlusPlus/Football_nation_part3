@@ -46,19 +46,21 @@ public:
 
 	void insertToEnd(T& item)
 	{
-		Node<T> newNode(item);
+		Node<T>* newNode = new Node<T>(item);
 		Node<T>* node = start;
-		while (node->next != nullptr)
+		while (node->getNext() != nullptr)
 		{
-			node = node->next;
+			node = node->getNext();
 		}
-		node->next = &newNode;
+		node->setNext(newNode);
 	}
 
 
 
-	LinkedList(T& item) : start(&Node<T>(item))
+	LinkedList(T& item)
 	{
+		Node<T>* node = new Node<T>(item);
+		start = node;
 	}
 
 	LinkedList(const LinkedList& other) :
@@ -69,7 +71,6 @@ public:
 
 	friend ostream& operator<<(ostream& os, const LinkedList& list) // IMPORTANT!!! operator << must be implemented for T!
 	{
-		cout << list.getStart()->getValue();
 		os << "Linked List: ";
 		Node<T>* node = list.getStart();
 		do
