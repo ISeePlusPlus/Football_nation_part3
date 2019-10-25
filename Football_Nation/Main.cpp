@@ -85,6 +85,10 @@ int main()
 	cout << lig << endl;
 	delete[] teams;
 	*/
+
+
+	system("pause");
+
 	ifstream inputFile("League.txt");
 	League* league = readLeague(inputFile);
 

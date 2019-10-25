@@ -41,12 +41,13 @@ public:
 
 	insertToEnd(T& item)
 	{
+		Node<T> newNode(item);
 		Node<T>* node = start;
 		while (node->next != nullptr)
 		{
 			node = node->next;
 		}
-		node->next = newNode;
+		node->next = &newNode;
 	}
 
 	LinkedList(T& item) : start(Node(item))
