@@ -62,15 +62,15 @@ void Person::setName(const string& newName) throw (invalidNameException)
 
 	this->name = name;
 }
-bool Person::setAge(int newAge) throw (invalidAgeException)
+void Person::setAge(int newAge) throw (invalidAgeException)
 {
 	if (newAge < MIN_AGE || newAge > MAX_AGE)
 	{
 		throw invalidAgeException(newAge);
 	}
 	age = newAge;
-	return true;
 }
+
 void Person::setNationality(const string& newNationality) throw (NullPointerException)
 {
 	newNationality.empty() ? throw NullPointerException("Person::nationality") : 0;
