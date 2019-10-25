@@ -25,11 +25,11 @@ private:
 		{
 			this->next = next;
 		}
-		T getValue()
+		T getValue() const
 		{
 			return value;
 		}
-		Node<T>* getNext()
+		Node<T>* getNext() const
 		{
 			return next;
 		}
@@ -59,7 +59,6 @@ public:
 
 	LinkedList(T& item) : start(&Node<T>(item))
 	{
-
 	}
 
 	LinkedList(const LinkedList& other) :

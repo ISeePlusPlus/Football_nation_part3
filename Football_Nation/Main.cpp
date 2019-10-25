@@ -87,6 +87,7 @@ int main()
 	*/
 	int val = 5;
 	LinkedList<int> list(val);
+	cout << "break" << endl;
 	cout << list;
 	system("pause");
 
