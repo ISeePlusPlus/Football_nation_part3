@@ -87,9 +87,14 @@ int main()
 	*/
 	int val = 5;
 	int val2 = 584;
+	int val3 = 8;
 	LinkedList<int> list(val);
-	list.insertToEnd(val);
 	list.insertToEnd(val2);
+	list.insertToEnd(val3);
+	list.insertToEnd(val);
+	list.deleteEnd();
+	list.deleteEnd();
+	list.deleteStart();
 	cout << list;
 	system("pause");
 
