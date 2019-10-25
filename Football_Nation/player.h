@@ -19,8 +19,8 @@ public:
 	void show() const; //TODO: IMPLEMENT THE FUNCTION
 	//double getRate();
 
-	Player(const char * name, int age,
-		const char* nationality,
+	Player(const string& name, int age,
+		const string& nationality,
 		int attack, int defence,
 		int goalkeeping, int goalScored = 0, int value=0,
 		Role role= (Role)0);
