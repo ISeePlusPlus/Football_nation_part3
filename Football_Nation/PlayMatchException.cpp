@@ -1,9 +1,8 @@
 #include "PlayMatchException.h"
 
-PlayMatchException::PlayMatchException(Team* team, const char* reason) : team(team)
+PlayMatchException::PlayMatchException(Team* team, const string& reason) : team(team)
 {
-	this->reason = new char[strlen(reason) + 1];
-	strcpy(this->reason, reason);
+	this->reason = reason;
 }
 
 void PlayMatchException::show() const
@@ -16,7 +15,7 @@ Team* PlayMatchException::getTeam() const
 	return team;
 }
 
-char* PlayMatchException::getReason() const
+const string& PlayMatchException::getReason() const
 {
 	return reason;
 }

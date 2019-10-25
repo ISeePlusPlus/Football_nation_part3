@@ -9,11 +9,11 @@ class PlayMatchException
 {
 protected:
 	Team* team;
-	char* reason;
+	string reason;
 public:
-	PlayMatchException(Team* team, const char* reason);
+	PlayMatchException(Team* team, const string& reason);
 	virtual void show() const;
-	char* getReason() const;
+	const string& getReason() const;
 	Team* getTeam() const;
 };
 
