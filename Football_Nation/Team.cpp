@@ -170,7 +170,7 @@ void Team::addCoach(Coach* coach) throw (NoSpaceException, NullPointerException)
 	for (int i = 0; i < coachesSize ; i++) // return if the coach is already in team
 	{
 		if (coaches[i] == coach)
-			cout << "The coach " << coach->getName() << " is already in the team's coach position!";
+			return;
 	}
 	if (coach == nullptr) // don't add nullptr coach
 		throw NullPointerException("coach");
