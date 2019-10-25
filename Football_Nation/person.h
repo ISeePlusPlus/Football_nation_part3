@@ -14,24 +14,25 @@ class Person
 protected:
 	string name;//[NAME_SIZE];
 	int age;
-	char* nationality; //[NAME_SIZE] ;
+	string nationality; //[NAME_SIZE] ;
+
 	Person(const Person& other);
-	virtual ~Person();
+//	virtual ~Person();
 	const Person& operator=(const Person& other);
 
 public:
-	Person(const char* name, int age, const char* nationality);
+	Person(const string& name, int age, const string& nationality);
 
 	//virtual char* defineRoles() = 0;
 	//TODO think about this?
 
-	char* getName() const;
+	const string& getName() const;
 	int getAge() const;
-	char* getNationality() const;
+	const string& getNationality() const;
 
-	void setName(const char* newName);
+	void setName(const string& newName);
 	bool setAge(int newAge);
-	void setNationality(const char* newNationality);
+	void setNationality(const string& newNationality);
 };
 
 class invalidAgeException

@@ -1,7 +1,7 @@
 #include "person.h"
 
 
-Person::Person(const char* name, int age, const char* nationality)
+Person::Person(const string& name, int age, const string& nationality)
 {
 	try 
 	{
@@ -12,20 +12,16 @@ Person::Person(const char* name, int age, const char* nationality)
 
 	catch (invalidAgeException& e) 
 	{
-		delete[]this->name;
 		e.show();
 		throw e;
 	}
 	catch (invalidNameException& e)
 	{
-		delete[]this->name;
 		e.show();
 		throw e;
 	}
 	catch (NullPointerException& e)
 	{
-		delete[]this->name;
-		delete[]this->nationality;
 		e.show();
 		throw e;
 	}
@@ -45,28 +41,26 @@ Person::Person(const Person& other)
 {
 	*this = other;
 }
-
+/*
 Person::~Person()
 {
 	delete []name;
 	delete []nationality;
 }
-
+*/
 //Getters
 
-char* Person::getName() const { return name; }
+const string& Person::getName() const { return name; }
 int Person::getAge() const { return age; }
-char* Person::getNationality() const{ return nationality; }
+const string& Person::getNationality() const{ return nationality; }
 
 //Setters
 
-void Person::setName(const char* newName) throw (invalidNameException, NullPointerException)
+void Person::setName(const string& newName) throw (invalidNameException, NullPointerException)
 {
-	strcmp(newName, "") == 0 ? throw invalidNameException() : 0;
+	newName.compare("") == 0 ? throw invalidNameException() : 0;
 
-	delete []name;
-	name = new char[strlen(newName) + 1];
-	strcpy(name, newName);
+	this->name = name;
 }
 bool Person::setAge(int newAge) throw (invalidAgeException)
 {
@@ -77,11 +71,9 @@ bool Person::setAge(int newAge) throw (invalidAgeException)
 	age = newAge;
 	return true;
 }
-void Person::setNationality(const char* newNationality) throw (NullPointerException)
+void Person::setNationality(const string& newNationality) throw (NullPointerException)
 {
-	newNationality == nullptr ? throw NullPointerException("Person::nationality") : 0;
-	delete []nationality;
-	nationality = new char[strlen(newNationality) + 1];
-	strcpy(nationality, newNationality);
+	newNationality.compare(nullptr) ? throw NullPointerException("Person::nationality") : 0;
+	this->nationality = nationality;
 }
 
