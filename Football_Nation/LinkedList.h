@@ -10,7 +10,7 @@ private:
 	{
 	private:
 		T value;
-		Node* next;
+		Node<T>* next;
 	public:
 		Node(T& value)
 		{
@@ -21,25 +21,30 @@ private:
 		{
 			this->value = value;
 		}
-		void setNext(Node* next)
+		void setNext(Node<T>* next)
 		{
 			this->next = next;
 		}
-		T& getValue()
+		T getValue()
 		{
 			return value;
 		}
-		Node* getNext()
+		Node<T>* getNext()
 		{
 			return next;
 		}
 	};
 
-Node*<T> start;
+	Node<T>* start;
+
+	Node<T>* getStart() const
+	{
+		return start;
+	}
 
 public:
 
-	insertToEnd(T& item)
+	void insertToEnd(T& item)
 	{
 		Node<T> newNode(item);
 		Node<T>* node = start;
@@ -50,15 +55,31 @@ public:
 		node->next = &newNode;
 	}
 
-	LinkedList(T& item) : start(Node(item))
+
+
+	LinkedList(T& item) : start(&Node<T>(item))
 	{
 
 	}
 
 	LinkedList(const LinkedList& other) :
-		node(other.node)
+		start(other.node)
 	{
 
+	}
+
+	friend ostream& operator<<(ostream& os, const LinkedList& list) // IMPORTANT!!! operator << must be implemented for T!
+	{
+		cout << list.getStart()->getValue();
+		os << "Linked List: ";
+		Node<T>* node = list.getStart();
+		do
+		{
+			os << (node->getValue()) << " ---> ";
+			node = node->getNext();
+		} while (node != nullptr);
+		os << endl;
+		return os;
 	}
 };
 
