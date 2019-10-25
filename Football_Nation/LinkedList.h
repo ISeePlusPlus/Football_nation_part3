@@ -59,8 +59,6 @@ public:
 	{
 
 	}
-
-	void add
 };
 
 #endif //__LINKEDLIST_H
