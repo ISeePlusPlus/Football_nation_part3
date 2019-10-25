@@ -86,8 +86,10 @@ int main()
 	delete[] teams;
 	*/
 	int val = 5;
+	int val2 = 584;
 	LinkedList<int> list(val);
-	cout << "break" << endl;
+	list.insertToEnd(val);
+	list.insertToEnd(val2);
 	cout << list;
 	system("pause");
 
