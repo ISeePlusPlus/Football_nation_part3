@@ -26,10 +26,10 @@ class Team
 
 public:
 
-	Team(const char* name,
+	Team(const string& name,
 		Manager * manager = nullptr);
 
-	Team(const char* name,
+	Team(const string& name,
 		Manager* manager,
 		Coach** coaches,
 		Player** lineup,
@@ -51,18 +51,19 @@ public:
 	Team operator+(int points) const; // add points to the team
 	bool operator>=(const Team& otherTeam) const; //Team is bigger if team have more point
 	friend ostream& operator<<(ostream& os, const Team& team);
-	char* getName() const;
+	const string& getName() const;
 	int getLineupSize() const;
 	void scoreGoal();
 	int getPoints();
 	Player* getGoalLeader() const;
+	void setName(const string& name);
 
 private:
 	bool fillBench(Player* player); //try to fill a player in the bench. returns true if there is a room, and false if the bench is currenty full. an outside function will extend the bench array.
 	bool fillCoach(Coach* coach); //exactly like the bench filler but for coaches
 	void alignLineup(int strating_index); //Function to align the lineup array to the left, after removing a player.
 	void alignBench(int starting_index);
-	char* name;
+	string name;
 	Team(const Team& other);
 	const Team& operator=(const Team& other) = delete;
 	Manager* manager;

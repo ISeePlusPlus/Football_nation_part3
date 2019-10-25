@@ -3,10 +3,9 @@
 #include "player.h"
 #include "manager.h"
 
-Team::Team(const char* name, Manager* manager)
+Team::Team(const string& name, Manager* manager)
 {
-	this->name = new char[sizeof(name) + 1];
-	strcpy(this->name, name);
+	setName(name);
 	this->setManager(manager);
 	this->coaches = new Coach*[COACH_SIZE];
 	coachesSize = 0;
@@ -30,10 +29,9 @@ Team::Team(const char* name, Manager* manager)
 	this->points = 0;
 }
 
-Team::Team(const char* name, Manager* manager, Coach** coaches, Player** lineup, Player** benchPlayers, int points)
+Team::Team(const string& name, Manager* manager, Coach** coaches, Player** lineup, Player** benchPlayers, int points)
 {
-	this->name = new char[sizeof(name) + 1];
-	strcpy(this->name, name);
+	setName(name);
 	this->manager = manager;
 	this->coaches = coaches;
 	this->lineup = lineup;
@@ -46,7 +44,7 @@ Team::Team(const char* name, Manager* manager, Coach** coaches, Player** lineup,
 
 Team::~Team()
 {
-	delete[] name;
+	//delete[] name;
 	delete[] coaches;
 	delete[] lineup;
 	delete[] benchPlayers;
@@ -244,7 +242,7 @@ ostream& operator<<(ostream& os, const Team& team)
 	return os;
 }
 
-char* Team::getName() const
+const string& Team::getName() const
 {
 	return name;
 }
@@ -280,6 +278,11 @@ Player* Team::getGoalLeader() const
 		benchPlayers[i] >= goalLeader ? goalLeader = benchPlayers[i] : 0;
 
 	return goalLeader;
+}
+
+void Team::setName(const string& name)
+{
+	this->name = name;
 }
 
 Player** Team::getLineup() const

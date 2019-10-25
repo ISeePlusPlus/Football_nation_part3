@@ -92,7 +92,7 @@ void Player::show() const
 
 ostream& operator<<(ostream& os, const Player& player)
 {
-	const char* teamName;
+	string teamName;
 	if (player.currentTeam == nullptr)
 		teamName = "None";
 	else

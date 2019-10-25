@@ -18,7 +18,7 @@ Coach::Coach(const Coach& other):
 
 ostream& operator<<(ostream& os, const Coach& c)
 {
-	const char* teamName;
+	string teamName;
 	if (c.getCurrentTeam() == nullptr)
 		teamName = "None";
 	else

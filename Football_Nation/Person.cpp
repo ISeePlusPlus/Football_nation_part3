@@ -56,7 +56,7 @@ const string& Person::getNationality() const{ return nationality; }
 
 //Setters
 
-void Person::setName(const string& newName) throw (invalidNameException, NullPointerException)
+void Person::setName(const string& newName) throw (invalidNameException)
 {
 	newName.empty() ? throw invalidNameException() : 0;
 
