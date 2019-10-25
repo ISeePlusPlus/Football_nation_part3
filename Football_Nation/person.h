@@ -1,8 +1,12 @@
 #ifndef __PERSON_H
 #define __PERSON_H
 #pragma warning(disable:4996)
+#pragma warning(disable:4290)
+
 #include <iostream>
 #include "NullPointerException.h"
+#include "personException.h"
+
 using namespace std;
 
 const int NAME_SIZE = 30;
@@ -30,35 +34,12 @@ public:
 	int getAge() const;
 	const string& getNationality() const;
 
-	void setName(const string& newName);
-	bool setAge(int newAge);
-	void setNationality(const string& newNationality);
+	void setName(const string& newName)  throw (invalidNameException);
+	bool setAge(int newAge)  throw (invalidNameException);
+	void setNationality(const string& newNationality) throw (NullPointerException);
 };
 
-class invalidAgeException
-{
-	int age;
 
-public:
-	invalidAgeException(int age) : age(age) {}
-
-	void show() const
-	{
-		cout << "valid age is between " << MIN_AGE << " - " << MAX_AGE << ", cannot create a person " << age << " years old." << endl;
-	}
-
-};
-
-class invalidNameException
-{
-public:
-	invalidNameException() { }
-
-	void show() const
-	{
-		cout << "Name cannot be an empty string" << endl;
-	}
-};
 
 #endif //__PERSON_H
 

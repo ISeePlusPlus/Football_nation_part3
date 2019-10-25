@@ -129,6 +129,7 @@
     <ClCompile Include="NoSpaceException.cpp" />
     <ClCompile Include="NullPointerException.cpp" />
     <ClCompile Include="Person.cpp" />
+    <ClCompile Include="PersonExceptioncpp.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayMatchException.cpp" />
     <ClCompile Include="Referee.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="NoSpaceException.h" />
     <ClInclude Include="NullPointerException.h" />
     <ClInclude Include="person.h" />
+    <ClInclude Include="personException.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="PlayMatchException.h" />
     <ClInclude Include="referee.h" />

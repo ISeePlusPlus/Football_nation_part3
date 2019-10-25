@@ -14,7 +14,7 @@ void Manager::setTeam(Team* team)
 ostream& operator<<(ostream& os, const Manager& manager)
 {
 	//
-	const char* teamName;
+	string teamName;
 	if (manager.currentTeam == nullptr)
 		teamName = "None";
 	else
