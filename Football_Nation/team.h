@@ -31,9 +31,9 @@ public:
 
 	Team(const string& name,
 		Manager* manager,
-		Coach** coaches,
-		Player** lineup,
-		Player** benchPlayers,
+		vector<Coach> coaches,
+		vector<Player> lineup,
+		vector<Player> benchPlayers,
 		int points);
 
 	~Team();
@@ -67,9 +67,9 @@ private:
 	Team(const Team& other);
 	const Team& operator=(const Team& other) = delete;
 	Manager* manager;
-	Coach** coaches;
-	Player** benchPlayers;
-	Player** lineup;
+	vector<Coach> coaches;
+	vector<Player> benchPlayers;
+	vector<Player> lineup;
 	int points;
 
 	int currentBenchSize;

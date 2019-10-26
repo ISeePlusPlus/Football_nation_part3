@@ -7,29 +7,35 @@ Team::Team(const string& name, Manager* manager)
 {
 	setName(name);
 	this->setManager(manager);
-	this->coaches = new Coach*[COACH_SIZE];
-	coachesSize = 0;
+	//this->coaches = new Coach*[COACH_SIZE];
+	this->coaches.reserve(COACH_SIZE);
+	coachesSize = coaches.size();
+	/*
 	for (int i = 0; i < coachesSize; i++)
 	{
 		coaches[i] = nullptr;
 	}
-	this->lineup = new Player*[LINEUP_SIZE];
+	*/
+	this->lineup.reserve[LINEUP_SIZE];
+	/*
 	for (int i = 0; i < LINEUP_SIZE; i++)
 	{
 		lineup[i] = nullptr;
 	}
-	this->benchPlayers = new Player*[BENCH_SIZE];
-	currentBenchSize = 0;
-	
+	*/
+	this->benchPlayers.reserve[BENCH_SIZE];
+	currentBenchSize = benchPlayers.size();
+	/*
 	for (int i = 0; i < BENCH_SIZE; i++)
 	{
 		benchPlayers[i] = nullptr;
 	}
+	*/
 	currentLineup = 0;
 	this->points = 0;
 }
 
-Team::Team(const string& name, Manager* manager, Coach** coaches, Player** lineup, Player** benchPlayers, int points)
+Team::Team(const string& name, Manager* manager, vector<Coach> coaches, vector <Player> lineup, vector <Player> benchPlayers, int points)
 {
 	setName(name);
 	this->manager = manager;
@@ -45,9 +51,12 @@ Team::Team(const string& name, Manager* manager, Coach** coaches, Player** lineu
 Team::~Team()
 {
 	//delete[] name;
-	delete[] coaches;
-	delete[] lineup;
-	delete[] benchPlayers;
+	//delete[] coaches;
+	//delete[] lineup;
+	//delete[] benchPlayers;
+	coaches.clear(); //will not work for pointers
+	lineup.clear();
+	benchPlayers.clear();
 }
 
 void Team::addPlayer(Player* player) throw (NoSpaceException)
@@ -82,6 +91,7 @@ void Team::addToLineup(Player* player) throw (NoSpaceException, NullPointerExcep
 {
 	if (player == nullptr)
 		throw NullPointerException("player");
+	/*
 	for (int i = 0; i < currentLineup; i++) //return if the selected player is already in lineup
 	{
 		if (lineup[i] == player)
@@ -90,9 +100,25 @@ void Team::addToLineup(Player* player) throw (NoSpaceException, NullPointerExcep
 			return;
 		}
 	}
+	*/
+	vector<Player>::iterator itrStart = lineup.begin();
+	vector<Player>::iterator itrEnd = lineup.end();
+	for ( ; itrStart != itrEnd; ++itrStart)  //return if the selected player is already in lineup
+	{
+		if (&*itrStart == &*player)
+		{
+			cout << "The player " << player->getName() << " is already in the team's lineup!";
+			return;
+		}
+	}
+	/*
 	if (currentLineup >= LINEUP_SIZE) //return if the lineup is full
 		throw (NoSpaceException("Lineup", currentLineup));
+	*/
 
+	if (lineup.size() >= LINEUP_SIZE) //return if the lineup is full
+		throw (NoSpaceException("Lineup", lineup.size()));
+	/*
 	for (int i = 0; i < currentBenchSize; i++)
 	{
 		if (benchPlayers[i] == player)
@@ -102,8 +128,22 @@ void Team::addToLineup(Player* player) throw (NoSpaceException, NullPointerExcep
 			currentBenchSize--;
 			i = currentBenchSize;
 		}
-
+	
 	}
+	*/
+
+	vector<Player>::iterator itrStartBench = benchPlayers.begin();
+	vector<Player>::iterator itrEndBench = benchPlayers.end();
+
+	for (; itrStartBench != itrEndBench; ++itrStartBench)  //return if the selected player is already in lineup
+	{
+		if (*itrStartBench == *player)
+		{
+			cout << "The player " << player->getName() << " is already in the team's lineup!";
+			return;
+		}
+	}
+
 	lineup[currentLineup] = player;
 	currentLineup++;
 }
