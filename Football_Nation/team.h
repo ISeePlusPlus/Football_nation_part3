@@ -46,8 +46,8 @@ public:
 	void removeCoach(Coach* coach) throw (NullPointerException);
 	void addToLineup(Player* player) throw (NoSpaceException, NullPointerException); //this will add player from the bench to the lineup. (will remove the other player from the bench).
 	void removeFromLineup(Player* player) throw (NoSpaceException, NullPointerException); //this will remove the player from the lineup to the bench. NOTE: this function will not return a feedback if the index is already a nullptr
-	Player** getLineup() const; //returns the array of lineup
-	Player** getBench() const;
+	vector<Player> getLineup() const; //returns the array of lineup
+	vector<Player> getBench() const;
 	Team operator+(int points) const; // add points to the team
 	bool operator>=(const Team& otherTeam) const; //Team is bigger if team have more point
 	friend ostream& operator<<(ostream& os, const Team& team);
@@ -62,8 +62,8 @@ public:
 private:
 	bool fillBench(Player* player); //try to fill a player in the bench. returns true if there is a room, and false if the bench is currenty full. an outside function will extend the bench array.
 	bool fillCoach(Coach* coach); //exactly like the bench filler but for coaches
-	void alignLineup(int strating_index); //Function to align the lineup array to the left, after removing a player.
-	void alignBench(int starting_index);
+	//void alignLineup(int strating_index); //Function to align the lineup array to the left, after removing a player.
+	//void alignBench(int starting_index);
 	string name;
 	Team(const Team& other);
 	const Team& operator=(const Team& other) = delete;

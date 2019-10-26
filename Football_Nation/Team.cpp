@@ -372,15 +372,30 @@ ostream& operator<<(ostream& os, const Team& team)
 	}
 	*/
 
-	vector<Player>::iterator itrStartLineUp = *(team.getLineup()).begin();
-	vector<Player>::iterator itrEndLineUp = team.getLineup().end();
+	vector<Player>::iterator itrStart = team.getLineup().begin();
+	vector<Player>::iterator itrEnd = team.getLineup().end();
 
+	for (; itrStart != itrEnd; ++itrStart)  //coach already in team
+	{
+		os << *itrStart;
+	}
 
 	os << "--on bench--" << endl;
+	/*
 	for (int i = 0; i < team.currentBenchSize; i++)
 	{
 		os << *team.benchPlayers[i];
 	}
+	*/
+
+	itrStart = team.getBench().begin();
+	itrEnd = team.getBench().end();
+
+	for (; itrStart != itrEnd; ++itrStart)  //coach already in team
+	{
+		os << *itrStart;
+	}
+
 	return os;
 }
 
@@ -400,8 +415,13 @@ void Team::scoreGoal()
 	std::mt19937 rng(dev());
 	std::uniform_int_distribution<std::mt19937::result_type> random(MIN_RANDOM, LINEUP_SIZE - 1);
 
-	Player* scorer = this->getLineup()[random(rng)];    //add a goal to a player from team
-	++(*scorer);
+	vector<Player>::iterator itrStart = this->getLineup().begin();
+
+	for (int i = 0; i < random(rng); i++)
+	{
+		++itrStart;
+	}
+	++(*itrStart);
 }
 
 int Team::getPoints()
@@ -411,6 +431,7 @@ int Team::getPoints()
 
 Player* Team::getGoalLeader() const
 {
+	/*
 	Player* goalLeader;
 
 	for (int i = 1; i < LINEUP_SIZE; i++)
@@ -418,6 +439,26 @@ Player* Team::getGoalLeader() const
 
 	for (int i = 0; i < currentBenchSize; i++)
 		benchPlayers[i] >= goalLeader ? goalLeader = benchPlayers[i] : 0;
+
+	return goalLeader;
+	*/
+	Player* goalLeader;
+
+	vector<Player>::iterator itrStart = this->getLineup().begin();
+	vector<Player>::iterator itrEnd = this->getLineup().end();
+
+	for (; itrStart != itrEnd; ++itrStart)  //coach already in team
+	{
+		*itrStart >= *goalLeader ? goalLeader = &(*itrStart) : 0;
+	}
+
+	itrStart = this->getBench().begin();
+	itrEnd = this->getBench().begin();
+
+	for (; itrStart != itrEnd; ++itrStart)  //coach already in team
+	{
+		*itrStart >= *goalLeader ? goalLeader = &(*itrStart) : 0;
+	}
 
 	return goalLeader;
 }
@@ -432,12 +473,12 @@ vector<Coach> Team::getCoaches() const
 	return coaches;
 }
 
-Player** Team::getLineup() const
+vector<Player> Team::getLineup() const
 {
 	return lineup;
 }
 
-Player** Team::getBench() const
+vector<Player> Team::getBench() const
 {
 	return benchPlayers;
 }
@@ -447,8 +488,7 @@ bool Team::fillBench(Player* player)
 {
 	if (currentBenchSize < BENCH_SIZE)
 	{
-		benchPlayers[currentBenchSize] = player;
-		return true;
+		benchPlayers.insert(benchPlayers.begin(), *player);
 	}
 	return false;
 }
@@ -457,13 +497,11 @@ bool Team::fillCoach(Coach* coach)
 {
 	if (coachesSize < COACH_SIZE)
 	{
-		coaches[coachesSize] = coach;
-		coachesSize++;
-		return true;
+		coaches.insert(coaches.begin, *coach);
 	}
 	return false;
 }
-
+/*
 void Team::alignLineup(int starting_index)
 {
 	for (int i = starting_index; i < LINEUP_SIZE-1; i++)
@@ -481,3 +519,4 @@ void Team::alignBench(int starting_index)
 	}
 	benchPlayers[currentBenchSize] = nullptr;
 }
+*/
