@@ -109,7 +109,7 @@ int main()
 	{
 		for (int j = 0; j < LINEUP_SIZE; j++)
 		{
-			Player* p = league->getTeams()[i]->getBench()[0];
+			Player* p = &league->getTeams()[i]->getBench()[0];
 			try 
 			{
 				league->getTeams()[i]->addToLineup(p);

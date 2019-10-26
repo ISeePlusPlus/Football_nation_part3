@@ -40,7 +40,7 @@ void Match::simulateAttack(Team* attackingTeam, Team* defendingTeam)
 
 	for (int i = 0; i < LINEUP_SIZE; i++) 
 	{
-		Player* attPlayer = attackingTeam->getLineup()[i];
+		Player* attPlayer = &attackingTeam->getLineup()[i];
 
 		switch (attPlayer->getRole()) 
 		{
@@ -54,7 +54,7 @@ void Match::simulateAttack(Team* attackingTeam, Team* defendingTeam)
 				attackingScore += attPlayer->getAttack();
 		}
 
-		Player* defPlayer = defendingTeam->getLineup()[i];
+		Player* defPlayer = &defendingTeam->getLineup()[i];
 
 		switch (defPlayer->getRole())
 		{
