@@ -9,13 +9,11 @@ private:
 	class Node //private class: the Node class can only be used inside the LinkedList class, and the user using LinkedList should not worry about Nodes.
 	{
 	private:
-		T value;
+		T& value;
 		Node<T>* next;
 	public:
-		Node(T& value)
+		Node(T& value) : value(value), next(nullptr)
 		{
-			this->value = value;
-			this->next = nullptr;
 		}
 		void setValue(T& value)
 		{
@@ -25,7 +23,7 @@ private:
 		{
 			this->next = next;
 		}
-		T getValue() const
+		T& getValue() const
 		{
 			return value;
 		}
@@ -68,7 +66,7 @@ public:
 
 	bool isEmpty() const
 	{
-		start == nullptr? true : false;
+		return (start == nullptr)? true : false;
 	}
 
 	void insertToEnd(T& item)
@@ -106,6 +104,16 @@ public:
 		delete temp;
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	T& get(int index) // returns the value on requested index
+	{
+		Node<T>* node = start;
+		for (int i = 0; i < index; i++)
+		{
+			node = node->getNext();
+		}
+		return node->getValue();
+	}
 
 	friend ostream& operator<<(ostream& os, const LinkedList& list) // IMPORTANT!!! operator << must be implemented for T!
 	{

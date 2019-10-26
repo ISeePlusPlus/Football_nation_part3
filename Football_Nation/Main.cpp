@@ -21,7 +21,7 @@ Referee * readReferee(ifstream& inputFile);
 
 int main()
 {
-	/*
+	
 	Referee ref("Cpp", 25, "Language", 1, 0);
 	Player messi("Messi", 32, "Spain", 40, 30, 10, 0, 10000, (Role)0);
 	Player ronaldo("Ronaldo", 34, "Portugal", 90, 5, 10, 0, 9000, (Role)0);
@@ -29,7 +29,7 @@ int main()
 	Player m("AAA", 20, "Something", 20, 20, 20, 0, 1000, (Role)2);
 	Coach z("Zidan", 40, "French", (Role)2, nullptr);
 	CoachPlayer strange("Dr. Strange", 30, "British", z, messi);
-	
+	/*
 	Manager a("Arcadi", 60, "Russian", 10);
 	Team t1("Hapoel", &a);
 	++messi;
@@ -84,20 +84,21 @@ int main()
 	lig.startSeason();
 	cout << lig << endl;
 	delete[] teams;
-	*/
+	
 	int val = 5;
 	int val2 = 584;
 	int val3 = 8;
-	LinkedList<int> list(val);
-	list.insertToEnd(val2);
-	list.insertToEnd(val3);
-	list.insertToEnd(val);
-	list.deleteEnd();
-	list.deleteEnd();
-	list.deleteStart();
+	LinkedList<Player> list(messi);
+	list.insertToEnd(ronaldo);
+	list.insertToEnd(zlatan);
+	list.insertToEnd(strange);
+	//list.deleteEnd();
+	//list.deleteEnd();
+	//list.deleteStart();
 	cout << list;
+	cout << "\n\n" << list.get(3);
 	system("pause");
-
+	*/
 	ifstream inputFile("League.txt");
 	League* league = readLeague(inputFile);
 

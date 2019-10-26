@@ -60,7 +60,7 @@ void Person::setName(const string& newName) throw (InvalidNameException)
 {
 	newName.empty() ? throw InvalidNameException() : 0;
 
-	this->name = name;
+	this->name = newName;
 }
 void Person::setAge(int newAge) throw (InvalidAgeException)
 {
@@ -74,6 +74,6 @@ void Person::setAge(int newAge) throw (InvalidAgeException)
 void Person::setNationality(const string& newNationality) throw (NullPointerException)
 {
 	newNationality.empty() ? throw NullPointerException("Person::nationality") : 0;
-	this->nationality = nationality;
+	this->nationality = newNationality;
 }
 

@@ -6,13 +6,11 @@ Player::Player(const string& name, int age, const string& nationality, int attac
 	Role role) : Person(name, age, nationality), attack(attack), defence(defence), goalkeeping(goalkeeping), goalScored(goalScored), value(value),
 	role(role), currentTeam(nullptr)
 {
-
 }
 
 Player::Player(const Player& other) : Person (other.name, other.age, other.nationality), attack(other.attack), defence(other.defence), goalkeeping(other.goalkeeping), goalScored(other.goalScored),
 value(other.value), role(other.role), currentTeam(other.currentTeam)
 {
-
 }
 
 int Player::getAttack() const
