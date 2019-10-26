@@ -442,20 +442,24 @@ Player* Team::getGoalLeader() const
 
 	return goalLeader;
 	*/
-	Player* goalLeader;
 
 	vector<Player>::iterator itrStart = this->getLineup().begin();
 	vector<Player>::iterator itrEnd = this->getLineup().end();
 
-	for (; itrStart != itrEnd; ++itrStart)  //coach already in team
+	Player* goalLeader = &*itrStart;
+	++itrStart;
+	if (itrStart != itrEnd) 
 	{
-		*itrStart >= *goalLeader ? goalLeader = &(*itrStart) : 0;
+		for (; itrStart != itrEnd; ++itrStart)  
+		{
+			*itrStart >= *goalLeader ? goalLeader = &(*itrStart) : 0;
+		}
 	}
 
 	itrStart = this->getBench().begin();
 	itrEnd = this->getBench().begin();
 
-	for (; itrStart != itrEnd; ++itrStart)  //coach already in team
+	for (; itrStart != itrEnd; ++itrStart)  
 	{
 		*itrStart >= *goalLeader ? goalLeader = &(*itrStart) : 0;
 	}
