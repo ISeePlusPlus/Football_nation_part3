@@ -27,7 +27,7 @@ Person::Person(const string& name, int age, const string& nationality)
 	}
 
 }
-
+/*
 const Person& Person::operator=(const Person& other)
 {
 	setName(other.name);
@@ -41,7 +41,7 @@ Person::Person(const Person& other)
 {
 	*this = other;
 }
-/*
+
 Person::~Person()
 {
 	delete []name;

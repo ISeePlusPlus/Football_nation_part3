@@ -14,7 +14,7 @@ private:
 	Team* awayTeam;
 	int result[NUM_OF_RESULTS] = { 0,0 }; // index 0 = home result, index 1 = away result.
 	Referee* referee;
-	Match(const Match& other) = default;
+	Match(const Match& other) = default;   //do not allow copying a match
 	void simulateAttack(Team* attackingTeam, Team* defendingTeam);
 
 public:

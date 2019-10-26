@@ -21,15 +21,13 @@ protected:
 	int age;
 	string nationality; //[NAME_SIZE] ;
 
-	Person(const Person& other);
+//	Person(const Person& other);
 //	virtual ~Person();
-	const Person& operator=(const Person& other);
+//	const Person& operator=(const Person& other);
 
 public:
 	Person(const string& name, int age, const string& nationality);
 
-	//virtual char* defineRoles() = 0;
-	//TODO think about this?
 
 	const string& getName() const;
 	int getAge() const;
