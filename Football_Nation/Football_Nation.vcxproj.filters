@@ -16,7 +16,6 @@
     <ClCompile Include="NullPointerException.cpp" />
     <ClCompile Include="leagueException.cpp" />
     <ClCompile Include="PlayMatchException.cpp" />
-    <ClCompile Include="PersonExceptioncpp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="coach.h" />
@@ -35,6 +34,7 @@
     <ClInclude Include="leagueException.h" />
     <ClInclude Include="PlayMatchException.h" />
     <ClInclude Include="LinkedList.h" />
-    <ClInclude Include="personException.h" />
+    <ClInclude Include="InvalidAgeException.h" />
+    <ClInclude Include="InvalidNameException.h" />
   </ItemGroup>
 </Project>

@@ -129,7 +129,6 @@
     <ClCompile Include="NoSpaceException.cpp" />
     <ClCompile Include="NullPointerException.cpp" />
     <ClCompile Include="Person.cpp" />
-    <ClCompile Include="PersonExceptioncpp.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayMatchException.cpp" />
     <ClCompile Include="Referee.cpp" />
@@ -139,6 +138,8 @@
     <ClInclude Include="coach.h" />
     <ClInclude Include="coach_player.h" />
     <ClInclude Include="fixture.h" />
+    <ClInclude Include="InvalidAgeException.h" />
+    <ClInclude Include="InvalidNameException.h" />
     <ClInclude Include="league.h" />
     <ClInclude Include="leagueException.h" />
     <ClInclude Include="LinkedList.h" />
@@ -147,7 +148,6 @@
     <ClInclude Include="NoSpaceException.h" />
     <ClInclude Include="NullPointerException.h" />
     <ClInclude Include="person.h" />
-    <ClInclude Include="personException.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="PlayMatchException.h" />
     <ClInclude Include="referee.h" />
