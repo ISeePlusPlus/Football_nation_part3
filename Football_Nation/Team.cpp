@@ -65,25 +65,12 @@ void Team::addPlayer(Player* player) throw (NoSpaceException)
 {
 	if (player != nullptr && player->getTeam() == nullptr) // adds a new player only if it is not null & he is not on any other team.
 	{
-		if (!fillBench(player))
+		if (benchPlayers.size() < benchPlayers.capacity())
 		{
-			/* ---> old code <---
-			cout << "array of bench is full so we need to size it up\n\n\n";
-			int arr_multiplier = benchSize * 2;
-			Player** tempArray = new Player*[arr_multiplier];
-			for (int i = 0; i < benchSize; i++)
-			{
-				tempArray[i] = benchPlayers[i];
-			}
-			delete[] benchPlayers;
-			benchPlayers = tempArray;
-			tempArray[benchSize] = player;
-			benchSize *= 2;
-			cout << "now bench is size: " << benchSize << endl;
-			*/
-			throw (NoSpaceException("Bench", currentBenchSize)); // bench is full
+			benchPlayers.push_back(*player);
 		}
-	//	currentBenchSize++;
+		else
+			throw (NoSpaceException("Bench", currentBenchSize)); // bench is full
 		player->setTeam(this);
 	}
 }
@@ -256,22 +243,6 @@ void Team::setManager(Manager* manager)
 
 void Team::addCoach(Coach* coach) throw (NoSpaceException, NullPointerException)
 {
-	/*
-	for (int i = 0; i < coachesSize ; i++) // return if the coach is already in team
-	{
-		if (coaches[i] == coach)
-			return;
-	}
-	if (coach == nullptr) // don't add nullptr coach
-		throw NullPointerException("coach");
-
-	coach->setTeam(nullptr);
-	if (!fillCoach(coach))
-	{
-		throw (NoSpaceException("Coach Position", coachesSize));
-	}
-	coach->setTeam(this);
-	*/
 
 	vector<Coach>::iterator itrStart = coaches.begin();
 	vector<Coach>::iterator itrEnd = coaches.end();
@@ -286,10 +257,12 @@ void Team::addCoach(Coach* coach) throw (NoSpaceException, NullPointerException)
 		throw NullPointerException("coach");
 
 	coach->setTeam(nullptr);
-	if (!fillCoach(coach))
+	if (coaches.size() < coaches.capacity())
 	{
-		throw (NoSpaceException("Coach Position", coachesSize));
+		coaches.push_back(*coach);
 	}
+	else
+		throw (NoSpaceException("Coach Position", coachesSize));
 	coach->setTeam(this);
 }
 
@@ -486,41 +459,3 @@ vector<Player> Team::getBench() const
 {
 	return benchPlayers;
 }
-
-//below functions are for use inside this class only! (they are private)
-bool Team::fillBench(Player* player)
-{
-	if (currentBenchSize < BENCH_SIZE)
-	{
-		benchPlayers.insert(benchPlayers.begin(), *player);
-	}
-	return false;
-}
-
-bool Team::fillCoach(Coach* coach)
-{
-	if (coachesSize < COACH_SIZE)
-	{
-		coaches.insert(coaches.begin(), *coach);
-	}
-	return false;
-}
-/*
-void Team::alignLineup(int starting_index)
-{
-	for (int i = starting_index; i < LINEUP_SIZE-1; i++)
-	{
-		lineup[i] = lineup[i + 1];
-	}
-	lineup[LINEUP_SIZE] = nullptr;
-}
-
-void Team::alignBench(int starting_index)
-{
-	for (int i = starting_index; i < currentBenchSize - 1; i++)
-	{
-		benchPlayers[i] = benchPlayers[i + 1];
-	}
-	benchPlayers[currentBenchSize] = nullptr;
-}
-*/

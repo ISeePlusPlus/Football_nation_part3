@@ -60,8 +60,6 @@ public:
 	vector<Coach> getCoaches() const;
 
 private:
-	bool fillBench(Player* player); //try to fill a player in the bench. returns true if there is a room, and false if the bench is currenty full. an outside function will extend the bench array.
-	bool fillCoach(Coach* coach); //exactly like the bench filler but for coaches
 	//void alignLineup(int strating_index); //Function to align the lineup array to the left, after removing a player.
 	//void alignBench(int starting_index);
 	string name;
