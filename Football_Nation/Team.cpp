@@ -349,27 +349,33 @@ ostream& operator<<(ostream& os, const Team& team)
 		os << "None ";
 	}
 		os << "\n|| Coaches ||" << endl;
-		/*
+	/*
 	for (int i = 0; i < team.coachesSize; i++)
 	{
 		if (team.coaches[i] != nullptr)
 			os << *(team.coaches[i]);
 	}
 	*/
-	vector<Coach>::iterator itrStart = team.coaches.begin();
-	vector<Coach>::iterator itrEnd = coaches.end();
+	vector<Coach>::iterator itrStartCoach = team.getCoaches().begin();
+	vector<Coach>::iterator itrEndCoach = team.getCoaches().end();
 
-	for (; itrStart != itrEnd; ++itrStart)  //coach already in team
+	for (; itrStartCoach != itrEndCoach; ++itrStartCoach)  //coach already in team
 	{
-		if (&*itrStart == &*coach)
-			coaches.erase(itrStart);
+		os << *itrStartCoach;
 	}
 
+	/*
 	os << "|| Players ||\n--Lineup--" << endl;
 	for (int i = 0; i < team.currentLineup; i++)
 	{
 		os << *team.lineup[i];
 	}
+	*/
+
+	vector<Player>::iterator itrStartLineUp = *(team.getLineup()).begin();
+	vector<Player>::iterator itrEndLineUp = team.getLineup().end();
+
+
 	os << "--on bench--" << endl;
 	for (int i = 0; i < team.currentBenchSize; i++)
 	{
@@ -405,7 +411,7 @@ int Team::getPoints()
 
 Player* Team::getGoalLeader() const
 {
-	Player* goalLeader = lineup[0];
+	Player* goalLeader;
 
 	for (int i = 1; i < LINEUP_SIZE; i++)
 		lineup[i] >= goalLeader ? goalLeader = lineup[i] : 0;
@@ -419,6 +425,11 @@ Player* Team::getGoalLeader() const
 void Team::setName(const string& name)
 {
 	this->name = name;
+}
+
+vector<Coach> Team::getCoaches() const
+{
+	return coaches;
 }
 
 Player** Team::getLineup() const
