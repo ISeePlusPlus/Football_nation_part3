@@ -6,7 +6,7 @@ class LinkedList
 {
 private:
 	template<class T>
-	class Node
+	class Node //private class: the Node class can only be used inside the LinkedList class, and the user using LinkedList should not worry about Nodes.
 	{
 	private:
 		T value;
@@ -43,38 +43,6 @@ private:
 	}
 
 public:
-
-	void insertToEnd(T& item)
-	{
-		Node<T>* newNode = new Node<T>(item);
-		Node<T>* node = start;
-		while (node->getNext() != nullptr)
-		{
-			node = node->getNext();
-		}
-		node->setNext(newNode);
-	}
-	//NOTE: we didn't know which delete method to implement so we did both deleteEnd and deleteStart.
-	void deleteEnd()
-	{
-		Node<T>* preceding;
-		Node<T>* node = start;
-		do
-		{
-			preceding = node;
-			node = node->getNext();
-		} while (node->getNext() != nullptr);
-		delete node;
-		preceding->setNext(nullptr);
-	}
-
-	void deleteStart()
-	{
-		Node<T>* temp = start;
-		start = start->getNext();
-		delete temp;
-	}
-
 	LinkedList(T& item)
 	{
 		Node<T>* node = new Node<T>(item);
@@ -97,6 +65,48 @@ public:
 			node = next;
 		} while (node->getNext() != nullptr);
 	}
+
+	bool isEmpty() const
+	{
+		start == nullptr? true : false;
+	}
+
+	void insertToEnd(T& item)
+	{
+		Node<T>* newNode = new Node<T>(item);
+		Node<T>* node = start;
+		while (node->getNext() != nullptr)
+		{
+			node = node->getNext();
+		}
+		node->setNext(newNode);
+	}
+	/////////////////////////////////////////////////////////////////////////////////////////////////
+	//NOTE: we didn't know which delete method to implement so we did both deleteEnd and deleteStart.
+	void deleteEnd()
+	{
+		if (isEmpty())
+			return;
+		Node<T>* preceding;
+		Node<T>* node = start;
+		do
+		{
+			preceding = node;
+			node = node->getNext();
+		} while (node->getNext() != nullptr);
+		delete node;
+		preceding->setNext(nullptr);
+	}
+
+	void deleteStart()
+	{
+		if (isEmpty())
+			return;
+		Node<T>* temp = start;
+		start = start->getNext();
+		delete temp;
+	}
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	friend ostream& operator<<(ostream& os, const LinkedList& list) // IMPORTANT!!! operator << must be implemented for T!
 	{
