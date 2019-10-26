@@ -14,9 +14,9 @@ Match::Match(Team* homeTeam, Team* awayTeam, Referee* referee) : homeTeam(homeTe
 void Match::playMatch() throw(PlayMatchException)
 {
 	//check that the team has enough players in the lineup
-	if (homeTeam->getLineupSize() != LINEUP_SIZE)
+	if (homeTeam->getLineup().size() != LINEUP_SIZE)
 		throw (PlayMatchException(homeTeam, "Lineup is not full!"));
-	if (awayTeam->getLineupSize() != LINEUP_SIZE)
+	if (awayTeam->getLineup().size() != LINEUP_SIZE)
 		throw (PlayMatchException(awayTeam, "Lineup is not full!"));
 	//each team has the option to score goals in their turn to attack
 	simulateAttack(homeTeam, awayTeam);
@@ -30,6 +30,7 @@ void Match::playMatch() throw(PlayMatchException)
 		awayTeam->addPoints(1);
 	}
 	else getResult(0) > getResult(1) ? homeTeam->addPoints(3) : awayTeam->addPoints(3);    //Either home or away teams won
+	cout << *this;
 }
 
 void Match::simulateAttack(Team* attackingTeam, Team* defendingTeam) 

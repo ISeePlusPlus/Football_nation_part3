@@ -1,7 +1,7 @@
 #include "fixture.h"
 
-Fixture::Fixture(int gamesInFixture, int number, LinkedList<Match> matches) :
-	gamesInFixture(gamesInFixture), number(number), matches(matches), hasPlayed(false)
+Fixture::Fixture(int gamesInFixture, int number, LinkedList<Match>* matches) :
+	gamesInFixture(gamesInFixture), number(number), matches(*matches), hasPlayed(false)
 {
 
 }
