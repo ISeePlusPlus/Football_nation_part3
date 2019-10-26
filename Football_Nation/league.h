@@ -30,8 +30,9 @@ private:
 	int numberOfFixtures;
 	int playedFixtures;
 	Fixture** fixtures;
-	League(const League& other);
-	const League& operator=(const League& other) = delete;
+
+	//League(const League& other);                            //no longer needed
+	//const League& operator=(const League& other) = delete; 
 public:
 	League(const string& name, int numberOfTeams,
 		Team** teams = nullptr, int numberofreferees = 0,

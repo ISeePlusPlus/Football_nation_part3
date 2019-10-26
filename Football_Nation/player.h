@@ -25,6 +25,7 @@ public:
 		int goalkeeping, int goalScored = 0, int value=0,
 		Role role= (Role)0);
 
+	Player(const Player& other); // copy implemented for linkedList
 	friend ostream& operator<<(ostream& os, const Player& p);
 	const Player& operator++();
 	bool operator >=(const Player& player) const; //Player is bigger if he scored more goles
@@ -55,7 +56,6 @@ protected:
 	Role role;
 	Team* currentTeam;
 	void setTeam(Team* team); // changing the team is only available through Team
-	Player(const Player& other);
 
 };
 

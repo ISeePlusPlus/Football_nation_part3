@@ -15,7 +15,7 @@ public:
 		const string& nationality,
 		Role type = (Role) 0,
 		Team* currentTeam = nullptr);
-	Coach(const Coach& other);
+	Coach(const Coach& other);                  //needed for coachPlayer
 
 	//virtual const Coach& operator=(const Coach& other) = delete;
 	friend ostream& operator<<(ostream& os, const Coach& c);
