@@ -9,22 +9,22 @@ Team::Team(const string& name, Manager* manager)
 	this->setManager(manager);
 	//this->coaches = new Coach*[COACH_SIZE];
 	this->coaches.reserve(COACH_SIZE);
-	coachesSize = coaches.size();
+	//coachesSize = coaches.size();
 	/*
 	for (int i = 0; i < coachesSize; i++)
 	{
 		coaches[i] = nullptr;
 	}
 	*/
-	this->lineup.reserve[LINEUP_SIZE];
+	this->lineup.reserve(LINEUP_SIZE);
 	/*
 	for (int i = 0; i < LINEUP_SIZE; i++)
 	{
 		lineup[i] = nullptr;
 	}
 	*/
-	this->benchPlayers.reserve[BENCH_SIZE];
-	currentBenchSize = benchPlayers.size();
+	this->benchPlayers.reserve(BENCH_SIZE);
+	//currentBenchSize = benchPlayers.size();
 	/*
 	for (int i = 0; i < BENCH_SIZE; i++)
 	{
@@ -497,7 +497,7 @@ bool Team::fillCoach(Coach* coach)
 {
 	if (coachesSize < COACH_SIZE)
 	{
-		coaches.insert(coaches.begin, *coach);
+		coaches.insert(coaches.begin(), *coach);
 	}
 	return false;
 }
