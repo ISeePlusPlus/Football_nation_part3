@@ -54,7 +54,9 @@ Team::~Team()
 	//delete[] coaches;
 	//delete[] lineup;
 	//delete[] benchPlayers;
-	coaches.clear(); //will not work for pointers
+
+	//will not work for pointers
+	coaches.clear();
 	lineup.clear();
 	benchPlayers.clear();
 }
@@ -137,15 +139,17 @@ void Team::addToLineup(Player* player) throw (NoSpaceException, NullPointerExcep
 
 	for (; itrStartBench != itrEndBench; ++itrStartBench)  //return if the selected player is already in lineup
 	{
-		if (*itrStartBench == *player)
+		if (&*itrStartBench == &*player)
 		{
-			cout << "The player " << player->getName() << " is already in the team's lineup!";
-			return;
+			benchPlayers.erase(itrStartBench);
 		}
 	}
-
+	/*
 	lineup[currentLineup] = player;
 	currentLineup++;
+	*/
+
+	lineup.insert(lineup.begin(), *player);
 }
 
 void Team::removePlayer(Player* player) throw (NullPointerException)
