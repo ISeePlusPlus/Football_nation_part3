@@ -54,7 +54,9 @@ Team::~Team()
 	//delete[] coaches;
 	//delete[] lineup;
 	//delete[] benchPlayers;
-	coaches.clear(); //will not work for pointers
+
+	//will not work for pointers
+	coaches.clear();
 	lineup.clear();
 	benchPlayers.clear();
 }
@@ -81,7 +83,7 @@ void Team::addPlayer(Player* player) throw (NoSpaceException)
 			*/
 			throw (NoSpaceException("Bench", currentBenchSize)); // bench is full
 		}
-		currentBenchSize++;
+	//	currentBenchSize++;
 		player->setTeam(this);
 	}
 }
@@ -137,19 +139,22 @@ void Team::addToLineup(Player* player) throw (NoSpaceException, NullPointerExcep
 
 	for (; itrStartBench != itrEndBench; ++itrStartBench)  //return if the selected player is already in lineup
 	{
-		if (*itrStartBench == *player)
+		if (&*itrStartBench == &*player)
 		{
-			cout << "The player " << player->getName() << " is already in the team's lineup!";
-			return;
+			benchPlayers.erase(itrStartBench);
 		}
 	}
-
+	/*
 	lineup[currentLineup] = player;
 	currentLineup++;
+	*/
+
+	lineup.insert(lineup.begin(), *player);
 }
 
 void Team::removePlayer(Player* player) throw (NullPointerException)
 {
+	/*
 	if (player == nullptr)
 		throw NullPointerException("player");
 
@@ -172,11 +177,39 @@ void Team::removePlayer(Player* player) throw (NullPointerException)
 		}
 	}
 	player->setTeam(nullptr);
-}
+
+	*/
+
+	if (player == nullptr)
+		throw NullPointerException("player");
+
+	vector<Player>::iterator itrStart = lineup.begin();
+	vector<Player>::iterator itrEnd = lineup.end();
+	for (; itrStart != itrEnd; ++itrStart)
+	{
+		if (&*itrStart == &*player)
+		{
+			lineup.erase(itrStart);
+		}
+	}
+
+	vector<Player>::iterator itrStartBench = benchPlayers.begin();
+	vector<Player>::iterator itrEndBench = benchPlayers.end();
+
+	for (; itrStartBench != itrEndBench; ++itrStartBench)
+	{
+		if (&*itrStartBench == &*player)
+		{
+			benchPlayers.erase(itrStartBench);
+		}
+		}
+		player->setTeam(nullptr);
+	}
 
 
 void Team::removeFromLineup(Player* player) throw (NoSpaceException, NullPointerException)
 {
+	/*
 	if (player == nullptr)
 		throw NullPointerException("player");
 	if (currentBenchSize >= BENCH_SIZE) // only remove when there is a room in bench
@@ -193,6 +226,24 @@ void Team::removeFromLineup(Player* player) throw (NoSpaceException, NullPointer
 			return;
 		}
 	}
+	*/
+	if (player == nullptr)
+		throw NullPointerException("player");
+	if (benchPlayers.size() >= BENCH_SIZE) // only remove when there is a room in bench
+		throw (NoSpaceException("Bench", currentBenchSize));
+
+	vector<Player>::iterator itrStart = lineup.begin();
+	vector<Player>::iterator itrEnd = lineup.end();
+
+	for (; itrStart != itrEnd; ++itrStart)
+	{
+		if (&*itrStart == &*player)
+		{
+			lineup.erase(itrStart);
+			addPlayer(player);
+			return;
+		}
+	}
 }
 
 
@@ -205,6 +256,7 @@ void Team::setManager(Manager* manager)
 
 void Team::addCoach(Coach* coach) throw (NoSpaceException, NullPointerException)
 {
+	/*
 	for (int i = 0; i < coachesSize ; i++) // return if the coach is already in team
 	{
 		if (coaches[i] == coach)
@@ -219,10 +271,31 @@ void Team::addCoach(Coach* coach) throw (NoSpaceException, NullPointerException)
 		throw (NoSpaceException("Coach Position", coachesSize));
 	}
 	coach->setTeam(this);
+	*/
+
+	vector<Coach>::iterator itrStart = coaches.begin();
+	vector<Coach>::iterator itrEnd = coaches.end();
+
+	for (; itrStart != itrEnd; ++itrStart)  //coach already in team
+	{
+		if (&*itrStart == &*coach)
+			return;
+	}
+
+	if (coach == nullptr) // don't add nullptr coach
+		throw NullPointerException("coach");
+
+	coach->setTeam(nullptr);
+	if (!fillCoach(coach))
+	{
+		throw (NoSpaceException("Coach Position", coachesSize));
+	}
+	coach->setTeam(this);
 }
 
 void Team::removeCoach(Coach* coach) throw (NullPointerException)
 {
+	/*
 	if (coach == nullptr)
 		throw NullPointerException("coach");
 	for (int i = 0; i < coachesSize; i++)
@@ -233,6 +306,18 @@ void Team::removeCoach(Coach* coach) throw (NullPointerException)
 			coaches[i] = nullptr;
 			coachesSize--;
 		}
+	}
+	*/
+	if (coach == nullptr)
+		throw NullPointerException("coach");
+
+	vector<Coach>::iterator itrStart = coaches.begin();
+	vector<Coach>::iterator itrEnd = coaches.end();
+
+	for (; itrStart != itrEnd; ++itrStart)  
+	{
+		if (&*itrStart == &*coach)
+			coaches.erase(itrStart);
 	}
 }
 
@@ -264,11 +349,22 @@ ostream& operator<<(ostream& os, const Team& team)
 		os << "None ";
 	}
 		os << "\n|| Coaches ||" << endl;
+		/*
 	for (int i = 0; i < team.coachesSize; i++)
 	{
 		if (team.coaches[i] != nullptr)
 			os << *(team.coaches[i]);
 	}
+	*/
+	vector<Coach>::iterator itrStart = team.coaches.begin();
+	vector<Coach>::iterator itrEnd = coaches.end();
+
+	for (; itrStart != itrEnd; ++itrStart)  //coach already in team
+	{
+		if (&*itrStart == &*coach)
+			coaches.erase(itrStart);
+	}
+
 	os << "|| Players ||\n--Lineup--" << endl;
 	for (int i = 0; i < team.currentLineup; i++)
 	{
