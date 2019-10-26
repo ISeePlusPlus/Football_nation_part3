@@ -32,7 +32,7 @@ League::~League()
 	{
 		for (int i = 0; i < numberOfFixtures; i++)
 		{
-			delete[] fixtures[i]->getMatchesInFixture();
+			//delete[] fixtures[i]->getMatchesInFixture();
 		}
 		delete[] fixtures;
 	}
@@ -63,7 +63,7 @@ void League::startSeason() throw (LeagueException)
 
 	for (int i = 0; i < numberOfFixtures; i++)    // i = overall fixtures to create
 	{
-		Match** matchesInFixture = new Match*[numberOfTeams / 2] ;
+		LinkedList<Match> matchesInFixture;
 
 		for (int matchNum = 0; matchNum < numberOfTeams/2; matchNum++)
 		{
@@ -79,7 +79,7 @@ void League::startSeason() throw (LeagueException)
 
 			i < numberOfFixtures / 2 ? match = new Match(team1, team2, ref) : match = new Match(team2, team1, ref);   //set home/away teams based on fixture number
 
-			matchesInFixture[matchNum] = match;
+			matchesInFixture.insertToEnd(*match);
 		}
 		rotate();
 		createdFixtures[i] = new Fixture(numberOfTeams / 2, i+1, matchesInFixture);
@@ -117,7 +117,7 @@ const Fixture& League::playFixture() throw (LeagueException)
 	{
 		try
 		{
-			fixtureToPlay->getMatchesInFixture()[i]->playMatch();
+			fixtureToPlay->getMatchesInFixture().get(i).playMatch();
 		}
 		catch (PlayMatchException & e)
 		{

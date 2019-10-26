@@ -41,16 +41,15 @@ private:
 	}
 
 public:
+	LinkedList()
+	{
+		start = nullptr;
+	}
+
 	LinkedList(T& item)
 	{
 		Node<T>* node = new Node<T>(item);
 		start = node;
-	}
-
-	LinkedList(const LinkedList& other) :
-		start(other.node)
-	{
-
 	}
 
 	~LinkedList()
@@ -105,7 +104,7 @@ public:
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	T& get(int index) // returns the value on requested index
+	T& get(int index) const // returns the value on requested index
 	{
 		Node<T>* node = start;
 		for (int i = 0; i < index; i++)
