@@ -13,7 +13,7 @@ private:
 	LinkedList<Match> matches;
 	//Match** matches;
 public:
-	Fixture(int gamesInFixture, int number, LinkedList<Match> matches);
+	Fixture(int gamesInFixture, int number, LinkedList<Match>* matches);
 //	~Fixture();
 //	Fixture(const Fixture& other);
 	void setHasPlayed(bool value);

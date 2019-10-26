@@ -29,7 +29,10 @@ private:
 		}
 		Node<T>* getNext() const
 		{
-			return next;
+			if (this != nullptr)
+				return next;
+			else
+				return nullptr;
 		}
 	};
 
@@ -54,13 +57,12 @@ public:
 
 	~LinkedList()
 	{
-		Node<T>* node = start;
+		if (isEmpty())
+			return;
 		do
 		{
-			Node<T>* next = node->getNext();
-			delete node;
-			node = next;
-		} while (node->getNext() != nullptr);
+			deleteEnd();
+		} while (!isEmpty());
 	}
 
 	bool isEmpty() const
@@ -71,6 +73,11 @@ public:
 	void insertToEnd(T& item)
 	{
 		Node<T>* newNode = new Node<T>(item);
+		if (isEmpty())
+		{
+			start = newNode;
+			return;
+		}
 		Node<T>* node = start;
 		while (node->getNext() != nullptr)
 		{
@@ -106,11 +113,14 @@ public:
 
 	T& get(int index) const // returns the value on requested index
 	{
+		if (isEmpty())
+			throw ("The list is empty");
 		Node<T>* node = start;
 		for (int i = 0; i < index; i++)
 		{
 			node = node->getNext();
 		}
+		cout << node->getValue();
 		return node->getValue();
 	}
 
