@@ -19,7 +19,7 @@ public:
 
 	//virtual const Coach& operator=(const Coach& other) = delete;
 	friend ostream& operator<<(ostream& os, const Coach& c);
-
+	bool operator==(const Coach& other) const;
 	Role getType() const;
 	Team* getCurrentTeam() const;
 

@@ -100,6 +100,14 @@ ostream& operator<<(ostream& os, const Player& player)
 	return os;
 }
 
+bool Player::operator==(const Player& other) const
+{
+	if (this->age == other.age && this->name == other.name && this->nationality == other.nationality)
+		return true;
+	else
+		return false;
+}
+
 const Player& Player::operator++()
 {
 	++goalScored;

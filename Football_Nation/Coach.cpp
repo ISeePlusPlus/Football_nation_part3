@@ -10,10 +10,10 @@ Coach::Coach(const string& name, int age, const string& nationality, Role type, 
 }
 
 Coach::Coach(const Coach& other):
-	Person(other.name, other.age, other.nationality)
+	Person(other.name, other.age, other.nationality), currentTeam(nullptr)
 {
 	setType(other.type);
-	setTeam(other.currentTeam);
+	//setTeam(nullptr);
 }
 
 ostream& operator<<(ostream& os, const Coach& c)
@@ -48,4 +48,12 @@ void Coach::setTeam(Team* team)
 			currentTeam->addCoach(this);  // add coach to team
 		}
 	}
+}
+
+bool Coach::operator==(const Coach& other) const
+{
+	if (this->getType() == other.getType() && this->age == other.age && this->name == other.name && this->nationality == other.nationality)
+		return true;
+	else
+		return false;
 }

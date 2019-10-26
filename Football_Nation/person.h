@@ -20,7 +20,6 @@ protected:
 	string name;//[NAME_SIZE];
 	int age;
 	string nationality; //[NAME_SIZE] ;
-
 //	Person(const Person& other);
 //	virtual ~Person();
 //	const Person& operator=(const Person& other);
@@ -37,8 +36,6 @@ public:
 	void setAge(int newAge) throw (InvalidAgeException);
 	void setNationality(const string& newNationality) throw (NullPointerException);
 };
-
-
 
 
 #endif //__PERSON_H

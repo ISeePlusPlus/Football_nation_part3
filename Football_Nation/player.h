@@ -29,6 +29,7 @@ public:
 	friend ostream& operator<<(ostream& os, const Player& p);
 	const Player& operator++();
 	bool operator >=(const Player& player) const; //Player is bigger if he scored more goles
+	bool operator==(const Player& other) const;
 
 	int getTotalStats() const; //TODO: IMPLEMENT THE FUNCTION
 

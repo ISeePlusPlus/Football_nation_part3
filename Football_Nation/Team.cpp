@@ -71,7 +71,7 @@ void Team::addPlayer(Player* player) throw (NoSpaceException)
 		}
 		else
 			throw (NoSpaceException("Bench", currentBenchSize)); // bench is full
-		player->setTeam(this);
+		benchPlayers.at(benchPlayers.size()-1).setTeam(this);
 	}
 }
 
@@ -80,21 +80,12 @@ void Team::addToLineup(Player* player) throw (NoSpaceException, NullPointerExcep
 {
 	if (player == nullptr)
 		throw NullPointerException("player");
-	/*
-	for (int i = 0; i < currentLineup; i++) //return if the selected player is already in lineup
-	{
-		if (lineup[i] == player)
-		{
-			cout << "The player " << player->getName() << " is already in the team's lineup!";
-			return;
-		}
-	}
-	*/
+
 	vector<Player>::iterator itrStart = lineup.begin();
 	vector<Player>::iterator itrEnd = lineup.end();
 	for ( ; itrStart != itrEnd; ++itrStart)  //return if the selected player is already in lineup
 	{
-		if (&*itrStart == &*player)
+		if (*itrStart == *player)
 		{
 			cout << "The player " << player->getName() << " is already in the team's lineup!";
 			return;
@@ -120,23 +111,26 @@ void Team::addToLineup(Player* player) throw (NoSpaceException, NullPointerExcep
 	
 	}
 	*/
-
+	
 	vector<Player>::iterator itrStartBench = benchPlayers.begin();
 	vector<Player>::iterator itrEndBench = benchPlayers.end();
 
 	for (; itrStartBench != itrEndBench; ++itrStartBench)  //return if the selected player is already in lineup
 	{
-		if (&*itrStartBench == &*player)
+		if (*itrStartBench == *player)
 		{
 			benchPlayers.erase(itrStartBench);
+			break;
 		}
 	}
+	
+
 	/*
 	lineup[currentLineup] = player;
 	currentLineup++;
 	*/
 
-	lineup.insert(lineup.begin(), *player);
+	lineup.push_back(*player);
 }
 
 void Team::removePlayer(Player* player) throw (NullPointerException)
@@ -249,7 +243,7 @@ void Team::addCoach(Coach* coach) throw (NoSpaceException, NullPointerException)
 
 	for (; itrStart != itrEnd; ++itrStart)  //coach already in team
 	{
-		if (&*itrStart == &*coach)
+		if (*itrStart == *coach)
 			return;
 	}
 
@@ -257,13 +251,14 @@ void Team::addCoach(Coach* coach) throw (NoSpaceException, NullPointerException)
 		throw NullPointerException("coach");
 
 	coach->setTeam(nullptr);
+
 	if (coaches.size() < coaches.capacity())
 	{
 		coaches.push_back(*coach);
 	}
 	else
 		throw (NoSpaceException("Coach Position", coachesSize));
-	coach->setTeam(this);
+	coaches.at(coaches.size()-1).setTeam(this);
 }
 
 void Team::removeCoach(Coach* coach) throw (NullPointerException)
