@@ -81,7 +81,7 @@ public:
 		}
 		node->setNext(newNode);
 	}
-	/////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
 	//NOTE: we didn't know which delete method to implement so we did both deleteEnd and deleteStart.
 	void deleteEnd()
 	{
@@ -97,7 +97,6 @@ public:
 		delete node;
 		preceding->setNext(nullptr);
 	}
-
 	void deleteStart()
 	{
 		if (isEmpty())
