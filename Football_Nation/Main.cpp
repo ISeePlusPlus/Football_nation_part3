@@ -109,10 +109,10 @@ int main()
 	{
 		for (int j = 0; j < LINEUP_SIZE; j++)
 		{
-			Player p = league->getTeams()[i]->getBench().at(0);
+			Player p = league->getTeams().at(i).getBench().at(0);
 			try 
 			{
-				league->getTeams()[i]->addToLineup(&p);
+				league->getTeams().at(i).addToLineup(&p);
 			}
 			catch (NullPointerException & e)
 			{
@@ -180,7 +180,7 @@ League* readLeague(ifstream& inputFile)
 {
 	int numberOfTeams;
 	int numberOfreferees;
-	char name[NAME_SIZE];
+	string name;
 	League* newLeague;
 
 	/*Get League name*/
@@ -194,7 +194,7 @@ League* readLeague(ifstream& inputFile)
 		Team* team = readTeam(inputFile);
 		try
 		{
-			newLeague->addTeam(team);
+			newLeague->addTeam(*team);
 		}
 		catch (NullPointerException & e)
 		{
