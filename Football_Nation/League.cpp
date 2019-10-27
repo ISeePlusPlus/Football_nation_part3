@@ -1,30 +1,18 @@
 #include "league.h"
 
 
-League::League(const string& name, int numberOfTeams, Team** teams, int numberofreferees, Referee** referees) : name(name), numberOfTeams(numberOfTeams), teams(teams), numberOfReferees(numberofreferees),
+League::League(const string& name, int numberOfTeams, vector<Team> teams, vector<Referee> referees, int numberofreferees) : name(name), numberOfTeams(numberOfTeams), teams(teams), numberOfReferees(numberofreferees),
 referees(referees), fixtures(nullptr)
 {
 	this->playedFixtures = 0;
-	refIndex = 0;
-	referees = new Referee*[numberOfReferees];
+	referees.reserve(numberofreferees);
 	numberOfFixtures = (numberOfTeams - 1) * 2;
-	rotationTeams = new Team*[numberOfTeams]; // makes a copy for rotations
-	if (this->teams != nullptr)
-	{
-		teamIndex = numberOfTeams;
-		for (int i = 0; i < numberOfTeams; i++)
-			rotationTeams[i] = this->teams[i];
-	}
-	else
-	{
-		this->teams = new Team*[numberOfTeams];
-		teamIndex = 0;
-	}
+	rotationTeams = teams; // makes a copy for rotations
 }
 
 League::~League()
 {
-	//delete[] name;
+	/*delete[] name;
 	delete[] referees;
 	delete[] teams;
 	delete[] rotationTeams;
@@ -36,6 +24,12 @@ League::~League()
 		}
 		delete[] fixtures;
 	}
+	*/
+	teams.clear();
+	rotationTeams.clear();
+	referees.clear();
+
+	//TODO: NOT SURE THIS IS FINE. ALSO DEAL WITH FIXTURES
 }
 
 int League::getNumberOfTeams() const
@@ -43,7 +37,7 @@ int League::getNumberOfTeams() const
 	return numberOfTeams;
 }
 
-Team** League::getTeams() const
+vector<Team>  League::getTeams() const
 {
 	return teams;
 }
@@ -52,7 +46,7 @@ void League::startSeason() throw (LeagueException)
 {
 	Fixture** createdFixtures = new Fixture*[numberOfFixtures];
 
-	if (refIndex == 0) 
+	if (referees.size() == 0) 
 	{
 		throw LeagueException("Must have at least one referee to start the season");
 	}
@@ -67,14 +61,14 @@ void League::startSeason() throw (LeagueException)
 
 		for (int matchNum = 0; matchNum < numberOfTeams/2; matchNum++)
 		{
-			Team* team1 = this->rotationTeams[matchNum];
-			Team* team2 = this->rotationTeams[numberOfTeams - 1 - matchNum];
+			Team* team1 = &rotationTeams.at(matchNum);
+			Team* team2 = &rotationTeams.at(numberOfTeams - 1 - matchNum);
 
 			std::random_device dev;
 			std::mt19937 rng(dev());
 			std::uniform_int_distribution<std::mt19937::result_type> random(MIN_RANDOM, numberOfReferees-1);
 
-			Referee* ref = this->referees[random(rng)];
+			Referee* ref = &referees.at(random(rng));
 			Match* match;
 
 			i < numberOfFixtures / 2 ? match = new Match(team1, team2, ref) : match = new Match(team2, team1, ref);   //set home/away teams based on fixture number
@@ -89,13 +83,16 @@ void League::startSeason() throw (LeagueException)
 
 void League::rotate()//rotates the teams clockwise, team 0 remains
 {
-	Team* tempTeam = rotationTeams[0];
-	rotationTeams[0] = rotationTeams[numberOfTeams - 1];
-	rotationTeams[numberOfTeams - 1] = tempTeam;
+	Team* tempTeam = &rotationTeams.at(0);
+	//rotationTeams.at(0) = rotationTeams.at(numberOfTeams - 1);     //THIS ONE IS TRICKY!
+	//rotationTeams.at(numberOfTeams - 1) = tempTeam;                   //solve above, solve this
+
+	//rotationTeams.erase(rotationTeams.begin);
+	//rotationTeams.insert(rotationTeams.begin, )                 I need to delete the first position, but then the tempteam is trash......
 
 	//need to switch 0 and last team position
 
-	Team* last = rotationTeams[numberOfTeams - 1];
+	Team* last = &rotationTeams[numberOfTeams - 1];
 
 	for (int i = numberOfTeams -1; i > 0 ; i--)
 	{
@@ -134,38 +131,43 @@ const Fixture& League::playFixture() throw (LeagueException)
 void League::setNumberOfReferees(int num)
 {
 	this->numberOfReferees = num;
-	delete[] referees;
-	referees = new Referee*[num];
-	refIndex = 0;
+//	delete[] referees;
+//	referees = new Referee*[num];
+//	refIndex = 0;
 }
 
-void League::addReferee(Referee* referee) throw(NoSpaceException, NullPointerException)
+void League::addReferee(Referee& referee) throw(NoSpaceException)
 {
-	if (referee == nullptr)
-		throw NullPointerException("referee");
-	if (refIndex < numberOfReferees)
+	/*if (&referee == nullptr)
+		throw NullPointerException("referee"); */
+	if (referees.size() < numberOfReferees)
 	{
-		this->referees[refIndex] = referee;
-		refIndex++;
+		this->referees.insert(referees.begin(), referee);
 	}
 	else
-		throw NoSpaceException("Referees at league", refIndex);
+		throw NoSpaceException("Referees at league", referees.size());
 }
 
-void League::addTeam(Team* team) throw(NoSpaceException, NullPointerException)
+void League::addTeam(Team& team) throw (NoSpaceException)
 {
-	if (team == nullptr)
+/*	if (team == nullptr)
 		throw NullPointerException("team");
-	if (teamIndex >= numberOfTeams)
-		throw NoSpaceException("Teams in league", teamIndex);
-	teams[teamIndex] = team;
-	rotationTeams[teamIndex] = team;
-	teamIndex++;
+		*/
+
+	if (teams.size() >= numberOfTeams)
+		throw NoSpaceException("Teams in league", teams.size());
+
+	teams.insert(teams.begin(), team);
+	rotationTeams.insert(rotationTeams.begin(), team);
 }
 
 void League::showMostActiveReferee() const
 {
-	Referee* activeRef = referees[0];
+	vector<Referee>::const_iterator itrStart = referees.begin();
+	vector<Referee>::const_iterator itrEnd = referees.end();
+
+	Referee* activeRef = *itrStart;
+
 	for (int i = 1; i < numberOfReferees; i++)
 	{
 		activeRef->getGamesPlayed() > referees[i]->getGamesPlayed()  ? 0 : activeRef = referees[i];
