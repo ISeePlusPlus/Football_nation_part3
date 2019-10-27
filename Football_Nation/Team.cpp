@@ -7,30 +7,9 @@ Team::Team(const string& name, Manager* manager)
 {
 	setName(name);
 	this->setManager(manager);
-	//this->coaches = new Coach*[COACH_SIZE];
 	this->coaches.reserve(COACH_SIZE);
-	//coachesSize = coaches.size();
-	/*
-	for (int i = 0; i < coachesSize; i++)
-	{
-		coaches[i] = nullptr;
-	}
-	*/
 	this->lineup.reserve(LINEUP_SIZE);
-	/*
-	for (int i = 0; i < LINEUP_SIZE; i++)
-	{
-		lineup[i] = nullptr;
-	}
-	*/
 	this->benchPlayers.reserve(BENCH_SIZE);
-	//currentBenchSize = benchPlayers.size();
-	/*
-	for (int i = 0; i < BENCH_SIZE; i++)
-	{
-		benchPlayers[i] = nullptr;
-	}
-	*/
 	currentLineup = 0;
 	this->points = 0;
 }
@@ -50,12 +29,7 @@ Team::Team(const string& name, Manager* manager, vector<Coach> coaches, vector <
 
 Team::~Team()
 {
-	//delete[] name;
-	//delete[] coaches;
-	//delete[] lineup;
-	//delete[] benchPlayers;
 
-	//will not work for pointers
 	coaches.clear();
 	lineup.clear();
 	benchPlayers.clear();
@@ -91,26 +65,11 @@ void Team::addToLineup(Player* player) throw (NoSpaceException, NullPointerExcep
 			return;
 		}
 	}
-	/*
-	if (currentLineup >= LINEUP_SIZE) //return if the lineup is full
-		throw (NoSpaceException("Lineup", currentLineup));
-	*/
+
 
 	if (lineup.size() >= LINEUP_SIZE) //return if the lineup is full
 		throw (NoSpaceException("Lineup", lineup.size()));
-	/*
-	for (int i = 0; i < currentBenchSize; i++)
-	{
-		if (benchPlayers[i] == player)
-		{
-			benchPlayers[i] = nullptr;
-			alignBench(i);
-			currentBenchSize--;
-			i = currentBenchSize;
-		}
-	
-	}
-	*/
+
 	
 	vector<Player>::iterator itrStartBench = benchPlayers.begin();
 	vector<Player>::iterator itrEndBench = benchPlayers.end();
@@ -123,43 +82,13 @@ void Team::addToLineup(Player* player) throw (NoSpaceException, NullPointerExcep
 			break;
 		}
 	}
-	
-
-	/*
-	lineup[currentLineup] = player;
-	currentLineup++;
-	*/
 
 	lineup.push_back(*player);
 }
 
 void Team::removePlayer(Player* player) throw (NullPointerException)
 {
-	/*
-	if (player == nullptr)
-		throw NullPointerException("player");
 
-	for (int i = 0; i < currentLineup; i++)
-	{
-		if (lineup[i] == player)
-		{
-			lineup[i] = nullptr;
-			alignLineup(i);
-			currentLineup--;
-		}
-	}
-	for (int i = 0; i < currentBenchSize; i++)
-	{
-		if (benchPlayers[i] == player)
-		{
-			benchPlayers[i] = nullptr;
-			alignBench(i);
-			currentBenchSize--;
-		}
-	}
-	player->setTeam(nullptr);
-
-	*/
 
 	if (player == nullptr)
 		throw NullPointerException("player");
@@ -179,7 +108,7 @@ void Team::removePlayer(Player* player) throw (NullPointerException)
 
 	for (; itrStartBench != itrEndBench; ++itrStartBench)
 	{
-		if (&*itrStartBench == &*player)
+		if (*itrStartBench == *player)
 		{
 			benchPlayers.erase(itrStartBench);
 		}
@@ -190,24 +119,7 @@ void Team::removePlayer(Player* player) throw (NullPointerException)
 
 void Team::removeFromLineup(Player* player) throw (NoSpaceException, NullPointerException)
 {
-	/*
-	if (player == nullptr)
-		throw NullPointerException("player");
-	if (currentBenchSize >= BENCH_SIZE) // only remove when there is a room in bench
-		throw (NoSpaceException("Bench", currentBenchSize));
 
-	for (int i = 0; i < currentLineup; i++)
-	{
-		if (lineup[i] == player)
-		{
-			lineup[i] = nullptr;
-			alignLineup(i);
-			currentLineup--;
-			addPlayer(player);
-			return;
-		}
-	}
-	*/
 	if (player == nullptr)
 		throw NullPointerException("player");
 	if (benchPlayers.size() >= BENCH_SIZE) // only remove when there is a room in bench
@@ -218,7 +130,7 @@ void Team::removeFromLineup(Player* player) throw (NoSpaceException, NullPointer
 
 	for (; itrStart != itrEnd; ++itrStart)
 	{
-		if (&*itrStart == &*player)
+		if (*itrStart == *player)
 		{
 			lineup.erase(itrStart);
 			addPlayer(player);
@@ -263,19 +175,7 @@ void Team::addCoach(Coach* coach) throw (NoSpaceException, NullPointerException)
 
 void Team::removeCoach(Coach* coach) throw (NullPointerException)
 {
-	/*
-	if (coach == nullptr)
-		throw NullPointerException("coach");
-	for (int i = 0; i < coachesSize; i++)
-	{
-		if (coaches[i] == coach)
-		{
-			coaches[i]->setTeam(nullptr);
-			coaches[i] = nullptr;
-			coachesSize--;
-		}
-	}
-	*/
+
 	if (coach == nullptr)
 		throw NullPointerException("coach");
 
@@ -284,7 +184,7 @@ void Team::removeCoach(Coach* coach) throw (NullPointerException)
 
 	for (; itrStart != itrEnd; ++itrStart)  
 	{
-		if (&*itrStart == &*coach)
+		if (*itrStart == *coach)
 			coaches.erase(itrStart);
 	}
 }
@@ -305,6 +205,11 @@ bool Team::operator>=(const Team& otherTeam) const
 }
 
 
+bool Team::operator<(const Team & otherTeam) const
+{
+	return points < otherTeam.points;
+}
+
 ostream& operator<<(ostream& os, const Team& team)
 {
 	os << "Team Name: " << team.name << "," << "\tPoints: " << team.points << "\n|| Manager || ";
@@ -317,13 +222,7 @@ ostream& operator<<(ostream& os, const Team& team)
 		os << "None ";
 	}
 		os << "\n|| Coaches ||" << endl;
-	/*
-	for (int i = 0; i < team.coachesSize; i++)
-	{
-		if (team.coaches[i] != nullptr)
-			os << *(team.coaches[i]);
-	}
-	*/
+
 	vector<Coach>::iterator itrStartCoach = team.getCoaches().begin();
 	vector<Coach>::iterator itrEndCoach = team.getCoaches().end();
 
@@ -332,13 +231,6 @@ ostream& operator<<(ostream& os, const Team& team)
 		os << *itrStartCoach;
 	}
 
-	/*
-	os << "|| Players ||\n--Lineup--" << endl;
-	for (int i = 0; i < team.currentLineup; i++)
-	{
-		os << *team.lineup[i];
-	}
-	*/
 
 	vector<Player>::iterator itrStart = team.getLineup().begin();
 	vector<Player>::iterator itrEnd = team.getLineup().end();
@@ -349,12 +241,7 @@ ostream& operator<<(ostream& os, const Team& team)
 	}
 
 	os << "--on bench--" << endl;
-	/*
-	for (int i = 0; i < team.currentBenchSize; i++)
-	{
-		os << *team.benchPlayers[i];
-	}
-	*/
+
 
 	itrStart = team.getBench().begin();
 	itrEnd = team.getBench().end();
@@ -393,25 +280,13 @@ void Team::scoreGoal()
 	++(*itrStart);*/
 }
 
-int Team::getPoints()
+int Team::getPoints() const
 {
 	return points;
 }
 
 Player* Team::getGoalLeader() const
 {
-	/*
-	Player* goalLeader;
-
-	for (int i = 1; i < LINEUP_SIZE; i++)
-		lineup[i] >= goalLeader ? goalLeader = lineup[i] : 0;
-
-	for (int i = 0; i < currentBenchSize; i++)
-		benchPlayers[i] >= goalLeader ? goalLeader = benchPlayers[i] : 0;
-
-	return goalLeader;
-	*/
-
 	vector<Player>::iterator itrStart = this->getLineup().begin();
 	vector<Player>::iterator itrEnd = this->getLineup().end();
 

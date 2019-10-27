@@ -10,6 +10,7 @@
 #include "NullPointerException.h"
 #include "NoSpaceException.h"
 #include "leagueException.h"
+#include <algorithm>
 
 class Team;
 class Referee;

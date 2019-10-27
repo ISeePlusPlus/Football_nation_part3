@@ -50,11 +50,12 @@ public:
 	vector<Player> getBench() const;
 	Team operator+(int points) const; // add points to the team
 	bool operator>=(const Team& otherTeam) const; //Team is bigger if team have more point
+	bool operator<(const Team & otherTeam) const;
 	friend ostream& operator<<(ostream& os, const Team& team);
 	const string& getName() const;
 	int getLineupSize() const;
 	void scoreGoal();
-	int getPoints();
+	int getPoints() const;
 	Player* getGoalLeader() const;
 	void setName(const string& name);
 	vector<Coach> getCoaches() const;

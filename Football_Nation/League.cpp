@@ -189,30 +189,19 @@ void League::showLosingTeam() const
 
 void League::showLeadingScorer() const
 {
-	Player* goalLeader = this->teams[0]->getGoalLeader();
+	Player* goalLeader = this->teams.at(0).getGoalLeader();
 	for (int i = 1; i < this->numberOfTeams; i++)
 	{
-		if (*(teams[i]->getGoalLeader()) >= *goalLeader)
-			goalLeader = teams[i]->getGoalLeader();
+		if (*(teams.at(i).getGoalLeader()) >= *goalLeader)
+			goalLeader = teams.at(i).getGoalLeader();
 	}
 	cout << "Player with most goals in league: " << goalLeader->getName() << " from " << goalLeader->getTeam()->getName() << " with " << goalLeader->getGoalScored() << " Goals!" << endl;
 }
 
-void League::sortTeams()
+void League::sortTeams() // sorts the teams by points (in Team::operator<) and then reverse it so the team with highest points will be first in the table.
 {
-	int i, j;
-	for (i = 0; i < numberOfTeams - 1; i++)
-	{
-		for (j = 0; j < numberOfTeams - i - 1; j++)
-		{
-			if (*teams[j+1] >= *teams[j]) //NOTE: checking is opposite because the table points is top down.
-			{
-				Team* temp = teams[j];
-				teams[j] = teams[j + 1];
-				teams[j + 1] = temp;
-			}
-		}
-	}
+	sort(teams.begin(), teams.end());
+	reverse(teams.begin(), teams.end());
 }
 
 
@@ -222,7 +211,7 @@ ostream& operator<<(ostream& os, const League& league)
 		<< ", Teams: " << league.numberOfTeams << ", Fixtures: " << league.numberOfFixtures << ".\n=======================================================\n";
 	for (int i = 0; i < league.numberOfTeams; i++)
 	{
-		os << league.teams[i]->getName() << ": " << league.teams[i]->getPoints() << " Points";
+		os << league.teams.at(i).getName() << ": " << league.teams.at(i).getPoints() << " Points";
 		if (i == 0)
 			os << "\t<< Winner! >>";
 		os << endl;
