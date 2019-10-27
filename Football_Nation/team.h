@@ -32,9 +32,6 @@ public:
 	
 	Team(const string& name,
 		Manager* manager,
-		vector<Coach> coaches,
-		vector<Player> lineup,
-		vector<Player> benchPlayers,
 		int points);
 
 	~Team();

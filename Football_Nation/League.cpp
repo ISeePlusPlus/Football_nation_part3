@@ -135,19 +135,19 @@ void League::setNumberOfReferees(int num)
 //	refIndex = 0;
 }
 
-void League::addReferee(Referee* referee) throw(NoSpaceException)
+void League::addReferee(Referee& referee) throw(NoSpaceException)
 {
 	/*if (&referee == nullptr)
 		throw NullPointerException("referee"); */
 	if (referees.size() < numberOfReferees)
 	{
-		this->referees.insert(referees.begin(), *referee);
+		this->referees.insert(referees.begin(), referee);
 	}
 	else
 		throw NoSpaceException("Referees at league", (int)referees.size());
 }
 
-void League::addTeam(Team* team) throw (NoSpaceException)
+void League::addTeam(Team& team) throw (NoSpaceException)
 {
 /*	if (team == nullptr)
 		throw NullPointerException("team");
@@ -156,8 +156,8 @@ void League::addTeam(Team* team) throw (NoSpaceException)
 	if (teams.size() >= numberOfTeams)
 		throw NoSpaceException("Teams in league", (int)teams.size());
 
-	teams.insert(teams.begin(), *team);
-	rotationTeams.insert(rotationTeams.begin(), *team);
+	teams.insert(teams.begin(), team);
+	rotationTeams.insert(rotationTeams.begin(), team);
 }
 
 void League::showMostActiveReferee() const

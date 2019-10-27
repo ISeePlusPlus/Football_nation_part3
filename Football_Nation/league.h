@@ -38,9 +38,9 @@ public:
 	League(const string& name, int numberOfTeams); //in the constructor, number of teams must be the size of team array!
 
 	virtual ~League();
-	void addTeam(Team* team) throw(NoSpaceException);
+	void addTeam(Team& team) throw(NoSpaceException);
 	void setNumberOfReferees(int numberOfreferees); 
-	void addReferee(Referee* referee) throw(NoSpaceException); //add a referee only if there is a room in the array.
+	void addReferee(Referee& referee) throw(NoSpaceException); //add a referee only if there is a room in the array.
 	void startSeason() throw (LeagueException);
 	const Fixture& playFixture() throw (LeagueException);
 	void showLeadingTeam() const;
