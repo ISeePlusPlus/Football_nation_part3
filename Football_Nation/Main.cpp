@@ -108,10 +108,9 @@ int main()
 	{
 		for (int j = 0; j < LINEUP_SIZE; j++)
 		{
-			Player p = league->getTeams().at(i).getBench().at(0);
 			try 
 			{
-				league->getTeams().at(i).addToLineup(&p);
+				league->getTeams().at(i).addToLineup(&league->getTeams().at(i).getBench().at(0));
 			}
 			catch (NullPointerException & e)
 			{
