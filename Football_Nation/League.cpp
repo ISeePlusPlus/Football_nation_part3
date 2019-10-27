@@ -44,7 +44,7 @@ vector<Team>  League::getTeams() const
 
 void League::startSeason() throw (LeagueException)
 {
-	Fixture** createdFixtures = new Fixture*[numberOfFixtures];
+	Fixture** createdFixtures = new Fixture * [numberOfFixtures];
 
 	if (referees.size() == 0) 
 	{
@@ -57,7 +57,7 @@ void League::startSeason() throw (LeagueException)
 
 	for (int i = 0; i < numberOfFixtures; i++)    // i = overall fixtures to create
 	{
-		LinkedList<Match>* matchesInFixture = new LinkedList<Match>();
+		Match** matchesInFixture = new Match * [numberOfTeams / 2];
 
 		for (int matchNum = 0; matchNum < numberOfTeams/2; matchNum++)
 		{
@@ -73,10 +73,10 @@ void League::startSeason() throw (LeagueException)
 
 			i < numberOfFixtures / 2 ? match = new Match(team1, team2, ref) : match = new Match(team2, team1, ref);   //set home/away teams based on fixture number
 
-			matchesInFixture->insertToEnd(*match);
+			matchesInFixture[matchNum] = match;
 		}
 		rotate();
-		createdFixtures[i] = new Fixture(numberOfTeams / 2, i+1, matchesInFixture);
+		createdFixtures[i] = new Fixture(numberOfTeams / 2, i + 1, matchesInFixture);
 	}
 	this->fixtures = createdFixtures;
 }
