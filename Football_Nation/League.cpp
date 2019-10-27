@@ -117,8 +117,7 @@ const Fixture& League::playFixture() throw (LeagueException)
 	{
 		try
 		{
-			Match* match = &fixtureToPlay->getMatchesInFixture().get(i);
-			match->playMatch();
+			fixtureToPlay->getMatchesInFixture().get(i).playMatch();
 		}
 		catch (PlayMatchException & e)
 		{
