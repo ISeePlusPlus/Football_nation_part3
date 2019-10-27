@@ -166,7 +166,7 @@ void League::showMostActiveReferee() const
 	vector<Referee>::const_iterator itrStart = referees.begin();
 	vector<Referee>::const_iterator itrEnd = referees.end();
 
-	Referee activeRef = *itrStart ;
+	const Referee* activeRef = &(*itrStart) ;
 
 	for (int i = 1; i < numberOfReferees; i++)
 	{
