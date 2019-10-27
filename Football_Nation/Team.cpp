@@ -87,6 +87,8 @@ void Team::addToLineup(Player* player) throw (NoSpaceException, NullPointerExcep
 
 void Team::removePlayer(Player* player) throw (NullPointerException)
 {
+
+
 	if (player == nullptr)
 		throw NullPointerException("player");
 
@@ -97,7 +99,6 @@ void Team::removePlayer(Player* player) throw (NullPointerException)
 		if (&*itrStart == &*player)
 		{
 			lineup.erase(itrStart);
-			break;
 		}
 	}
 
@@ -109,15 +110,15 @@ void Team::removePlayer(Player* player) throw (NullPointerException)
 		if (*itrStartBench == *player)
 		{
 			benchPlayers.erase(itrStartBench);
-			break;
 		}
+		}
+		player->setTeam(nullptr);
 	}
-	player->setTeam(nullptr);
-}
 
 
 void Team::removeFromLineup(Player* player) throw (NoSpaceException, NullPointerException)
 {
+
 	if (player == nullptr)
 		throw NullPointerException("player");
 	if (benchPlayers.size() >= BENCH_SIZE) // only remove when there is a room in bench
@@ -147,7 +148,7 @@ void Team::setManager(Manager* manager)
 
 void Team::addCoach(Coach* coach) throw (NoSpaceException, NullPointerException)
 {
-	
+
 	vector<Coach>::iterator itrStart = coaches.begin();
 	vector<Coach>::iterator itrEnd = coaches.end();
 
@@ -173,7 +174,7 @@ void Team::addCoach(Coach* coach) throw (NoSpaceException, NullPointerException)
 
 void Team::removeCoach(Coach* coach) throw (NullPointerException)
 {
-	
+
 	if (coach == nullptr)
 		throw NullPointerException("coach");
 
@@ -183,11 +184,7 @@ void Team::removeCoach(Coach* coach) throw (NullPointerException)
 	for (; itrStart != itrEnd; ++itrStart)  
 	{
 		if (*itrStart == *coach)
-		{
 			coaches.erase(itrStart);
-			return;
-		}
-
 	}
 }
 
@@ -263,7 +260,7 @@ ostream& operator<<(ostream& os, const Team& team)
 	{
 		os << *itrStart;
 	}
-	
+
 	return os;
 }
 
