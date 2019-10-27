@@ -14,11 +14,11 @@ private:
 	Team* awayTeam;
 	int result[NUM_OF_RESULTS] = { 0,0 }; // index 0 = home result, index 1 = away result.
 	Referee* referee;
-	Match(const Match& other) = default;   //do not allow copying a match
 	void simulateAttack(Team* attackingTeam, Team* defendingTeam);
 
 public:
 	Match(Team* homeTeam, Team* awayTeam, Referee * referee);
+	Match(const Match& other);
 	void playMatch() throw(PlayMatchException); //move to private?
 
 	Team* getWinnerTeam() const; //returns the winner team. If match has ended with a tie, returns nullptr

@@ -10,16 +10,15 @@ private:
 	bool hasPlayed;
 	int gamesInFixture;
 	int number;
-	LinkedList<Match> matches;
-	//Match** matches;
+	Match** matches;
 public:
-	Fixture(int gamesInFixture, int number, LinkedList<Match>* matches);
+	Fixture(int gamesInFixture, int number, Match** matches);
 //	~Fixture();
 //	Fixture(const Fixture& other);
 	void setHasPlayed(bool value);
 	int getGamesInFixture() const;
 	int getFixtureNumber() const;
-	LinkedList<Match> getMatchesInFixture();
+	Match** getMatchesInFixture();
 
 	
 

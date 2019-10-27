@@ -1,7 +1,7 @@
 #include "fixture.h"
 
-Fixture::Fixture(int gamesInFixture, int number, LinkedList<Match>* matches) :
-	gamesInFixture(gamesInFixture), number(number), matches(*matches), hasPlayed(false)
+Fixture::Fixture(int gamesInFixture, int number, Match** matches) :
+	gamesInFixture(gamesInFixture), number(number), matches(matches), hasPlayed(false)
 {
 
 }
@@ -16,7 +16,7 @@ int Fixture::getFixtureNumber() const
 	return number;
 }
 
-LinkedList<Match> Fixture::getMatchesInFixture()
+Match** Fixture::getMatchesInFixture()
 {
 	return matches;
 }
@@ -31,12 +31,12 @@ ostream& operator<<(ostream& os, const Fixture& fixture)
 	os << "Fixture #" << fixture.number << endl;
 	for (int i = 0; i < fixture.gamesInFixture; i++)
 	{
-		os << fixture.matches.get(i);
-		if (fixture.hasPlayed == true) 
+		os << *fixture.matches[i];
+		if (fixture.hasPlayed == true)
 		{
-			os << " || result:  " << fixture.matches.get(i).getResult(0) << ":" << fixture.matches.get(i).getResult(1)<< endl;
+			Match* match = fixture.matches[i];
+			os << " || result:  " << match->getResult(0) << ":" << match->getResult(1) << endl;
 		}
 	}
 	return os;
 }
-

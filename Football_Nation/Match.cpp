@@ -11,6 +11,11 @@ Match::Match(Team* homeTeam, Team* awayTeam, Referee* referee) : homeTeam(homeTe
 	
 }
 
+Match::Match(const Match& other) : homeTeam(other.homeTeam), awayTeam(other.awayTeam), referee(other.referee)
+{
+	cout << "in copy\n";
+}
+
 void Match::playMatch() throw(PlayMatchException)
 {
 	//check that the team has enough players in the lineup
