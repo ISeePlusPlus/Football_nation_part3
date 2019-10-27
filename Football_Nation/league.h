@@ -35,9 +35,7 @@ private:
 	//League(const League& other);                            //no longer needed
 	//const League& operator=(const League& other) = delete; 
 public:
-	League(const string& name, int numberOfTeams,
-		vector<Team> teams, vector<Referee> referees,
-		 int numberofreferees = 0); //in the constructor, number of teams must be the size of team array!
+	League(const string& name, int numberOfTeams); //in the constructor, number of teams must be the size of team array!
 
 	virtual ~League();
 	void addTeam(Team* team) throw(NoSpaceException);

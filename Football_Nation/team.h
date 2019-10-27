@@ -51,6 +51,7 @@ public:
 	Team operator+(int points) const; // add points to the team
 	bool operator>=(const Team& otherTeam) const; //Team is bigger if team have more point
 	bool operator<(const Team & otherTeam) const;
+	const Team& operator=(const Team& other);
 	friend ostream& operator<<(ostream& os, const Team& team);
 	const string& getName() const;
 	int getLineupSize() const;
@@ -64,8 +65,6 @@ private:
 	//void alignLineup(int strating_index); //Function to align the lineup array to the left, after removing a player.
 	//void alignBench(int starting_index);
 	string name;
-	Team(const Team& other);
-	const Team& operator=(const Team& other) = delete;
 	Manager* manager;
 	vector<Coach> coaches;
 	vector<Player> benchPlayers;

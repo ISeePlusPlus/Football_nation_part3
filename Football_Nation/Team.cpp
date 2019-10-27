@@ -29,7 +29,6 @@ Team::Team(const string& name, Manager* manager, vector<Coach> coaches, vector <
 
 Team::~Team()
 {
-
 	coaches.clear();
 	lineup.clear();
 	benchPlayers.clear();
@@ -68,7 +67,7 @@ void Team::addToLineup(Player* player) throw (NoSpaceException, NullPointerExcep
 
 
 	if (lineup.size() >= LINEUP_SIZE) //return if the lineup is full
-		throw (NoSpaceException("Lineup", lineup.size()));
+		throw (NoSpaceException("Lineup", (int)lineup.size()));
 
 	
 	vector<Player>::iterator itrStartBench = benchPlayers.begin();
@@ -192,6 +191,17 @@ void Team::removeCoach(Coach* coach) throw (NullPointerException)
 void Team::addPoints(int points)
 {
 	this->points += points;
+}
+
+const Team& Team::operator=(const Team& other)
+{
+	benchPlayers = other.getBench();
+	lineup = other.getLineup();
+	coaches = other.getCoaches();
+	name = other.getName();
+	//manager = other.getManager();
+	points = other.getPoints();
+	return *this;
 }
 
 Team Team::operator+(int points) const

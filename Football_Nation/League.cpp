@@ -1,11 +1,10 @@
 #include "league.h"
 
 
-League::League(const string& name, int numberOfTeams, vector<Team> teams, vector<Referee> referees, int numberofreferees) : name(name), numberOfTeams(numberOfTeams), teams(teams), numberOfReferees(numberofreferees),
-referees(referees), fixtures(nullptr)
+League::League(const string& name, int numberOfTeams) : name(name), numberOfTeams(numberOfTeams)
 {
 	this->playedFixtures = 0;
-	referees.reserve(numberofreferees);
+	referees.reserve(0);
 	numberOfFixtures = (numberOfTeams - 1) * 2;
 	rotationTeams = teams; // makes a copy for rotations
 }
@@ -145,7 +144,7 @@ void League::addReferee(Referee* referee) throw(NoSpaceException)
 		this->referees.insert(referees.begin(), *referee);
 	}
 	else
-		throw NoSpaceException("Referees at league", referees.size());
+		throw NoSpaceException("Referees at league", (int)referees.size());
 }
 
 void League::addTeam(Team* team) throw (NoSpaceException)
@@ -155,7 +154,7 @@ void League::addTeam(Team* team) throw (NoSpaceException)
 		*/
 
 	if (teams.size() >= numberOfTeams)
-		throw NoSpaceException("Teams in league", teams.size());
+		throw NoSpaceException("Teams in league", (int)teams.size());
 
 	teams.insert(teams.begin(), *team);
 	rotationTeams.insert(rotationTeams.begin(), *team);
