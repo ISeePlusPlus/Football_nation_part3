@@ -75,7 +75,7 @@ void League::startSeason() throw (LeagueException)
 
 			matchesInFixture[matchNum] = match;
 		}
-		rotate();
+	//	rotate();
 		createdFixtures[i] = new Fixture(numberOfTeams / 2, i + 1, matchesInFixture);
 	}
 	this->fixtures = createdFixtures;
@@ -166,24 +166,24 @@ void League::showMostActiveReferee() const
 	vector<Referee>::const_iterator itrStart = referees.begin();
 	vector<Referee>::const_iterator itrEnd = referees.end();
 
-	const Referee* activeRef = &(*itrStart) ;
+	Referee activeRef = *itrStart ;
 
-	for (int i = 1; i < numberOfReferees; i++)
+	for (; itrStart != itrEnd; ++itrStart)
 	{
-		activeRef->getGamesPlayed() > referees[i]->getGamesPlayed()  ? 0 : activeRef = referees[i];
+		activeRef.getGamesPlayed() > (*itrStart).getGamesPlayed()  ? 0 : activeRef = *itrStart;
 	}
-	cout << "Most Active Referee: " << *activeRef << endl;
+	cout << "Most Active Referee: " << activeRef << endl;
 }
 
 void League::showLeadingTeam() const
 {
-	Team* leadingTeam = teams[0]; // leading team will be at first index once the team array is sorted by points
+	const Team* leadingTeam = &teams.at(0); // leading team will be at first index once the team array is sorted by points
 	cout << "Leading Team: " << leadingTeam->getName() << " with " << leadingTeam->getPoints() << " Points" << endl;
 }
 
 void League::showLosingTeam() const
 {
-	Team* losingTeam = teams[numberOfTeams-1]; // last team is on the last index once the team array is sorted by points
+	const Team* losingTeam = &teams.at(numberOfTeams - 1); // last team is on the last index once the team array is sorted by points
 	cout << "Team on last place: " << losingTeam->getName() << " with " << losingTeam->getPoints() << " Points" << endl;
 }
 
