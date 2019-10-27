@@ -393,7 +393,7 @@ void Team::scoreGoal()
 	++(*itrStart);*/
 }
 
-int Team::getPoints()
+int Team::getPoints() const
 {
 	return points;
 }

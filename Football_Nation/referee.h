@@ -17,7 +17,7 @@ public:
 	Referee(const string& name, int age, const string& nationality,int rating, int gamesPlayed);
 	const Referee& operator++();
 	friend ostream& operator<<(ostream& os, const Referee& r);
-	Referee(const Referee& other) = delete;
+	Referee(const Referee& other) = default;  //needed for ref assinmengt
 
 	int getGamesPlayed() const;
 	int getRating() const;
