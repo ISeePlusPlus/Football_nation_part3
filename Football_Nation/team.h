@@ -6,6 +6,7 @@
 #include <random>
 #include "NoSpaceException.h"
 #include "NullPointerException.h"
+#include "coach.h"
 
 #pragma warning(disable:4290)
 using namespace std;
@@ -31,9 +32,6 @@ public:
 
 	Team(const string& name,
 		Manager* manager,
-		vector<Coach> coaches,
-		vector<Player> lineup,
-		vector<Player> benchPlayers,
 		int points);
 
 	~Team();

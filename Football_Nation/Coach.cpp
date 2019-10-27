@@ -10,7 +10,7 @@ Coach::Coach(const string& name, int age, const string& nationality, Role type, 
 }
 
 Coach::Coach(const Coach& other):
-	Person(other.name, other.age, other.nationality), currentTeam(nullptr)
+	Person(other.name, other.age, other.nationality) //currentTeam(nullptr)
 {
 	setType(other.type);
 	//setTeam(nullptr);

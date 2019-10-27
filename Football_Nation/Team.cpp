@@ -14,7 +14,7 @@ Team::Team(const string& name, Manager* manager)
 	this->points = 0;
 }
 
-Team::Team(const string& name, Manager* manager, vector<Coach> coaches, vector <Player> lineup, vector <Player> benchPlayers, int points)
+Team::Team(const string& name, Manager* manager, int points)
 {
 	setName(name);
 	this->manager = manager;
@@ -111,6 +111,7 @@ void Team::removePlayer(Player* player) throw (NullPointerException)
 		{
 			benchPlayers.erase(itrStartBench);
 		}
+
 		}
 		player->setTeam(nullptr);
 	}
