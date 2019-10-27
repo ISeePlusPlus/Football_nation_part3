@@ -114,7 +114,7 @@ const Fixture& League::playFixture() throw (LeagueException)
 	{
 		try
 		{
-			fixtureToPlay->getMatchesInFixture().get(i).playMatch();
+			fixtureToPlay->getMatchesInFixture()[i]->playMatch();
 		}
 		catch (PlayMatchException & e)
 		{
@@ -163,6 +163,7 @@ void League::addTeam(Team& team) throw (NoSpaceException)
 
 void League::showMostActiveReferee() const
 {
+	/*
 	vector<Referee>::const_iterator itrStart = referees.begin();
 	vector<Referee>::const_iterator itrEnd = referees.end();
 
@@ -173,6 +174,7 @@ void League::showMostActiveReferee() const
 		activeRef.getGamesPlayed() > (*itrStart).getGamesPlayed()  ? 0 : activeRef = *itrStart;
 	}
 	cout << "Most Active Referee: " << activeRef << endl;
+	*/
 }
 
 void League::showLeadingTeam() const
