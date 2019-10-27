@@ -75,12 +75,12 @@ void League::startSeason() throw (LeagueException)
 
 			matchesInFixture->insertToEnd(*match);
 		}
-		rotate();
+		//rotate();
 		createdFixtures[i] = new Fixture(numberOfTeams / 2, i+1, matchesInFixture);
 	}
 	this->fixtures = createdFixtures;
 }
-
+/*
 void League::rotate()//rotates the teams clockwise, team 0 remains
 {
 	Team* tempTeam = &rotationTeams.at(0);
@@ -100,7 +100,7 @@ void League::rotate()//rotates the teams clockwise, team 0 remains
 	}
 	rotationTeams[0] = last;
 }
-
+*/
 const Fixture& League::playFixture() throw (LeagueException)
 {
 	/*if (isEnded())
@@ -167,7 +167,7 @@ void League::showMostActiveReferee() const
 	vector<Referee>::const_iterator itrStart = referees.begin();
 	vector<Referee>::const_iterator itrEnd = referees.end();
 
-	Referee* activeRef = *itrStart;
+	Referee activeRef = *itrStart ;
 
 	for (int i = 1; i < numberOfReferees; i++)
 	{
