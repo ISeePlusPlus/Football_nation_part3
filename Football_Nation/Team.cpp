@@ -14,16 +14,16 @@ Team::Team(const string& name, Manager* manager)
 	this->points = 0;
 }
 
-Team::Team(const string& name, Manager* manager, vector<Coach> coaches, vector <Player> lineup, vector <Player> benchPlayers, int points)
+Team::Team(const string& name, Manager* manager, int points)
 {
 	setName(name);
-	this->manager = manager;
-	this->coaches = coaches;
-	this->lineup = lineup;
-	this->benchPlayers = benchPlayers;
-	currentBenchSize = 0;
-	coachesSize = 0;
-	currentLineup = 0;
+//	this->manager = manager;
+//	this->coaches = coaches;
+//	this->lineup = lineup;
+//	this->benchPlayers = benchPlayers;
+//	currentBenchSize = 0;
+//	coachesSize = 0;
+//	currentLineup = 0;
 	this->points = points;
 }
 
@@ -209,7 +209,8 @@ const Team& Team::operator=(const Team& other)
 
 Team Team::operator+(int points) const
 {
-	return Team(name, manager, coaches, lineup, benchPlayers, this->points + points);
+	points += 1;
+	return *this;
 }
 
 bool Team::operator>=(const Team& otherTeam) const
