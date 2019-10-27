@@ -5,6 +5,7 @@ League::League(const string& name, int numberOfTeams) : name(name), numberOfTeam
 {
 	this->playedFixtures = 0;
 	referees.reserve(0);
+	teams.reserve(numberOfTeams);
 	numberOfFixtures = (numberOfTeams - 1) * 2;
 	rotationTeams = teams; // makes a copy for rotations
 }
@@ -27,7 +28,6 @@ League::~League()
 	teams.clear();
 	rotationTeams.clear();
 	referees.clear();
-
 	//TODO: NOT SURE THIS IS FINE. ALSO DEAL WITH FIXTURES
 }
 
@@ -105,7 +105,7 @@ const Fixture& League::playFixture() throw (LeagueException)
 	/*if (isEnded())
 		return nullptr;
 		TODO : handle in main? */
-
+	
 	Fixture* fixtureToPlay = fixtures[playedFixtures++]; 
 	cout <<  "==========================================================\n";
 
@@ -152,7 +152,7 @@ void League::addTeam(Team* team) throw (NoSpaceException)
 /*	if (team == nullptr)
 		throw NullPointerException("team");
 		*/
-
+	
 	if (teams.size() >= numberOfTeams)
 		throw NoSpaceException("Teams in league", (int)teams.size());
 
