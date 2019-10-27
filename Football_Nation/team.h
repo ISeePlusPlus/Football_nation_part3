@@ -29,7 +29,7 @@ public:
 
 	Team(const string& name,
 		Manager * manager = nullptr);
-
+	
 	Team(const string& name,
 		Manager* manager,
 		int points);
@@ -64,9 +64,9 @@ private:
 	//void alignBench(int starting_index);
 	string name;
 	Manager* manager;
-	vector<Coach> coaches;
 	vector<Player> benchPlayers;
 	vector<Player> lineup;
+	vector<Coach> coaches;
 	int points;
 
 	int currentBenchSize;

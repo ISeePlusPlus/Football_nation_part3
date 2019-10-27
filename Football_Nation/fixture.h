@@ -1,7 +1,6 @@
 #ifndef __FIXTURE_H
 #define __FIXTURE_H
 #include "match.h"
-#include "LinkedList.h"
 
 class Fixture
 {
