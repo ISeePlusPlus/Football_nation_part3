@@ -38,12 +38,13 @@ public:
 
 	void setManager(Manager * manger); 
 	void addPoints(int points); // a negative number can be delievered here, it will decrease the team's points.
-	void addCoach(Coach * coach) throw (NoSpaceException, NullPointerException);
-	void addPlayer(Player * player) throw (NoSpaceException);
-	void removePlayer(Player* Player) throw (NullPointerException);
-	void removeCoach(Coach* coach) throw (NullPointerException);
-	void addToLineup(Player* player) throw (NoSpaceException, NullPointerException); //this will add player from the bench to the lineup. (will remove the other player from the bench).
-	void removeFromLineup(Player* player) throw (NoSpaceException, NullPointerException); //this will remove the player from the lineup to the bench. NOTE: this function will not return a feedback if the index is already a nullptr
+	void addCoach(Coach &coach) throw (NoSpaceException);
+	void addPlayer(Player &player) throw (NoSpaceException);
+	void removePlayer(Player& Player);
+	void removeCoach(Coach &coach);
+	void addToLineup(Player &player) throw (NoSpaceException); //this will add player from the bench to the lineup. (will remove the other player from the bench).
+	void fillLineup(); // only use this method on a team with empty lineup and bench with more than 5 players.
+	void removeFromLineup(Player &player) throw (NoSpaceException); //this will remove the player from the lineup to the bench. NOTE: this function will not return a feedback if the index is already a nullptr
 	vector<Player> getLineup() const; //returns the array of lineup
 	vector<Player> getBench() const;
 	Team operator+(int points) const; // add points to the team

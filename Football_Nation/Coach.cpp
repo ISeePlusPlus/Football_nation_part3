@@ -9,8 +9,7 @@ Coach::Coach(const string& name, int age, const string& nationality, Role type, 
 	setTeam(currentTeam);
 }
 
-Coach::Coach(const Coach& other):
-	Person(other.name, other.age, other.nationality) //currentTeam(nullptr)
+Coach::Coach(const Coach& other): Person(other.name, other.age, other.nationality), currentTeam(nullptr)
 {
 	setType(other.type);
 	//setTeam(nullptr);
@@ -41,11 +40,11 @@ void Coach::setTeam(Team* team)
 	if (currentTeam != team)
 	{
 		if (currentTeam != nullptr)
-			currentTeam->removeCoach(this);
+			currentTeam->removeCoach(*this);
 		currentTeam = team;
 		if (currentTeam != nullptr)
 		{
-			currentTeam->addCoach(this);  // add coach to team
+			currentTeam->addCoach(*this);  // add coach to team
 		}
 	}
 }

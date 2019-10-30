@@ -106,21 +106,7 @@ int main()
 	// adding the players from bench to the line up, because PlayMatch() cannot work when the lineup is empty.
 	for (int i = 0; i < league->getNumberOfTeams(); i++)
 	{
-		for (int j = 0; j < LINEUP_SIZE; j++)
-		{
-			try 
-			{
-				league->getTeams().at(i).addToLineup(&league->getTeams().at(i).getBench().at(0));
-			}
-			catch (NullPointerException & e)
-			{
-				e.show();
-			}
-			catch (NoSpaceException & e)
-			{
-				e.show();
-			}
-		}
+		league->getTeams().at(i).fillLineup();
 		//cout << *league->getTeams()[i];
 	}
 	/*
@@ -241,7 +227,7 @@ Team* readTeam(ifstream& inputFile)
 	Team* newTeam = new Team(name);
 	for (int i = 0; i < numberOfPlayers; i++)
 	{
-		Player* player = readPlayer(inputFile);
+		Player player = *readPlayer(inputFile);
 		try
 		{
 			newTeam->addPlayer(player);
@@ -261,7 +247,7 @@ Team* readTeam(ifstream& inputFile)
 
 	for (int i = 0; i < numberOfCoaches; i++)
 	{
-		Coach* coach = readCoach(inputFile);
+		Coach coach = *readCoach(inputFile);
 		try
 		{
 		newTeam->addCoach(coach);

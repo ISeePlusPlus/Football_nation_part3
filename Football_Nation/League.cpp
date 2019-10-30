@@ -36,7 +36,7 @@ int League::getNumberOfTeams() const
 	return numberOfTeams;
 }
 
-vector<Team>  League::getTeams() const
+vector<Team>&  League::getTeams()
 {
 	return teams;
 }
@@ -61,7 +61,7 @@ void League::startSeason() throw (LeagueException)
 		for (int matchNum = 0; matchNum < numberOfTeams/2; matchNum++)
 		{
 			Team* team1 = &rotationTeams.at(matchNum);
-			Team* team2 = &rotationTeams.at(numberOfTeams - 1 - matchNum);
+			Team* team2 = &rotationTeams.at((int)numberOfTeams - 1 - matchNum);
 
 			std::random_device dev;
 			std::mt19937 rng(dev());
@@ -184,7 +184,7 @@ void League::showLeadingTeam() const
 
 void League::showLosingTeam() const
 {
-	const Team* losingTeam = &teams.at(numberOfTeams - 1); // last team is on the last index once the team array is sorted by points
+	const Team* losingTeam = &teams.at((int)numberOfTeams - 1); // last team is on the last index once the team array is sorted by points
 	cout << "Team on last place: " << losingTeam->getName() << " with " << losingTeam->getPoints() << " Points" << endl;
 }
 

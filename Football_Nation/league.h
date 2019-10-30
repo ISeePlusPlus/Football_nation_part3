@@ -50,7 +50,7 @@ public:
 	bool isEnded();
 //	void rotate();
 	int getNumberOfTeams() const;
-	vector<Team> getTeams() const;
+	vector<Team>& getTeams();
 	void sortTeams(); //sort the teams by points (std::sort)
 	friend ostream& operator<<(ostream& os, const League& league);
 
