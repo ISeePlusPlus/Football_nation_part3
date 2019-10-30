@@ -50,7 +50,7 @@ void Team::addPlayer(Player &player) throw (NoSpaceException)
 
 void Team::fillLineup()
 {
-	if (benchPlayers.size() < 5 || lineup.size() != 0)
+	if (benchPlayers.size() < LINEUP_SIZE || lineup.size() != 0)
 		return;
 	vector<Player>::iterator itrStart = lineup.begin();
 	vector<Player>::iterator itrEnd = lineup.end();
