@@ -43,6 +43,7 @@ vector<Team>&  League::getTeams()
 
 void League::startSeason() throw (LeagueException)
 {
+	rotationTeams = teams;
 	Fixture** createdFixtures = new Fixture * [numberOfFixtures];
 
 	if (referees.size() == 0) 

@@ -84,12 +84,11 @@ void Team::addToLineup(Player &player) throw (NoSpaceException)
 	{
 		if (*itrStartBench == player)
 		{
+			lineup.push_back(player);
 			benchPlayers.erase(itrStartBench);
 			break;
 		}
 	}
-
-	lineup.push_back(player);
 }
 
 void Team::removePlayer(Player &player)
