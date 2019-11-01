@@ -178,7 +178,7 @@ League* readLeague(ifstream& inputFile)
 		Team* team = readTeam(inputFile);
 		try
 		{
-			newLeague->addTeam(team);
+			newLeague->addTeam(*team);
 		}
 		catch (NullPointerException & e)
 		{
@@ -198,7 +198,7 @@ League* readLeague(ifstream& inputFile)
 		Referee* referee = readReferee(inputFile);
 		try 
 		{
-			newLeague->addReferee(referee);
+			newLeague->addReferee(*referee);
 		}
 		catch (NullPointerException & e)
 		{

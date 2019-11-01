@@ -18,29 +18,12 @@ class Fixture;
 class League
 
 {
-
-private:
-	string name;
-	int numberOfTeams;
-	int numberOfReferees;
-//	int teamIndex;
-//	int refIndex;
-	vector<Team> teams;
-	vector<Team> rotationTeams;         //to rotate while keeping the original team order in teams
-	vector<Referee> referees;
-	int numberOfFixtures;
-	int playedFixtures;
-	Fixture** fixtures;
-
-	//League(const League& other);                            //no longer needed
-	//const League& operator=(const League& other) = delete; 
 public:
 	League(const string& name, int numberOfTeams); //in the constructor, number of teams must be the size of team array!
-
 	virtual ~League();
-	void addTeam(Team* team) throw(NoSpaceException);
+	void addTeam(Team& team) throw(NoSpaceException);
 	void setNumberOfReferees(int numberOfreferees); 
-	void addReferee(Referee* referee) throw(NoSpaceException); //add a referee only if there is a room in the array.
+	void addReferee(Referee& referee) throw(NoSpaceException); //add a referee only if there is a room in the array.
 	void startSeason() throw (LeagueException);
 	const Fixture& playFixture() throw (LeagueException);
 	void showLeadingTeam() const;
@@ -57,13 +40,23 @@ public:
 	int getPlayedFixtures() const;
 	void addPlayedFixture();
 //	void setName(const string& name);
-};
-/*
-class oddTeamNumberException 
-{
-public:
 
+private:
+	string name;
+	int numberOfTeams;
+	int numberOfReferees;
+	//	int teamIndex;
+	//	int refIndex;
+	vector<Team> teams;
+	vector<Team> rotationTeams;         //to rotate while keeping the original team order in teams
+	vector<Referee> referees;
+	int numberOfFixtures;
+	int playedFixtures;
+	Fixture** fixtures;
+
+	//League(const League& other);                            //no longer needed
+	//const League& operator=(const League& other) = delete; 
 };
-*/
+
 #endif // !__LEAGUE_H
 
