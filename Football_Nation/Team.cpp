@@ -52,8 +52,8 @@ void Team::fillLineup()
 {
 	if (benchPlayers.size() < LINEUP_SIZE || lineup.size() != 0)
 		return;
-	vector<Player>::iterator itrStart = lineup.begin();
-	vector<Player>::iterator itrEnd = lineup.end();
+	vector<Player>::iterator itrStart = benchPlayers.begin();
+	vector<Player>::iterator itrEnd = benchPlayers.end();
 	for (; itrStart != itrEnd; ++itrStart)
 	{
 		addToLineup(this->benchPlayers.at(0));
