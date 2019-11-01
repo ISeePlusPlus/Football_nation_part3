@@ -75,32 +75,22 @@ void League::startSeason() throw (LeagueException)
 
 			matchesInFixture[matchNum] = match;
 		}
-	//	rotate();
+		rotate();
 		createdFixtures[i] = new Fixture(numberOfTeams / 2, i + 1, matchesInFixture);
 	}
 	this->fixtures = createdFixtures;
 }
-/*
+
 void League::rotate()//rotates the teams clockwise, team 0 remains
 {
-	Team* tempTeam = &rotationTeams.at(0);
-	//rotationTeams.at(0) = rotationTeams.at(numberOfTeams - 1);     //THIS ONE IS TRICKY!
-	//rotationTeams.at(numberOfTeams - 1) = tempTeam;                   //solve above, solve this
-
-	//rotationTeams.erase(rotationTeams.begin);
-	//rotationTeams.insert(rotationTeams.begin, )                 I need to delete the first position, but then the tempteam is trash......
-
-	//need to switch 0 and last team position
-
-	Team* last = &rotationTeams[numberOfTeams - 1];
-
-	for (int i = numberOfTeams -1; i > 0 ; i--)
-	{
-		rotationTeams[i] = rotationTeams[i-1];
-	}
-	rotationTeams[0] = last;
+	
+	Team& tempTeam = rotationTeams.at(0);
+	rotationTeams.at(0) = rotationTeams.at((int)numberOfTeams - 1);
+	rotationTeams.at((int)numberOfTeams - 1) = tempTeam;
+	
+	std::rotate(rotationTeams.rbegin(), rotationTeams.rbegin() + 1, rotationTeams.rend());
 }
-*/
+
 const Fixture& League::playFixture() throw (LeagueException)
 {
 	/*if (isEnded())
@@ -157,7 +147,7 @@ void League::addTeam(Team& team) throw (NoSpaceException)
 	if (teams.size() >= numberOfTeams)
 		throw NoSpaceException("Teams in league", (int)teams.size());
 
-	teams.insert(teams.begin(), team);
+	teams.insert(teams.end(), team);
 	rotationTeams.insert(rotationTeams.begin(), team);
 }
 

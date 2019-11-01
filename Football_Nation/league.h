@@ -31,7 +31,7 @@ public:
 	void showLeadingScorer() const;
 	void showMostActiveReferee() const;
 	bool isEnded();
-//	void rotate();
+	void rotate();
 	int getNumberOfTeams() const;
 	vector<Team>& getTeams();
 	void sortTeams(); //sort the teams by points (std::sort)
