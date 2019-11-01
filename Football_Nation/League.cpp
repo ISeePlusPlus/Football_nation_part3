@@ -61,9 +61,6 @@ void League::startSeason() throw (LeagueException)
 
 		for (int matchNum = 0; matchNum < numberOfTeams/2; matchNum++)
 		{
-			Team* team1 = &rotationTeams.at(matchNum);
-			Team* team2 = &rotationTeams.at((int)numberOfTeams - 1 - matchNum);
-
 			std::random_device dev;
 			std::mt19937 rng(dev());
 			std::uniform_int_distribution<std::mt19937::result_type> random(MIN_RANDOM, numberOfReferees-1);
@@ -71,7 +68,7 @@ void League::startSeason() throw (LeagueException)
 			Referee* ref = &referees.at(random(rng));
 			Match* match;
 
-			i < numberOfFixtures / 2 ? match = new Match(team1, team2, ref) : match = new Match(team2, team1, ref);   //set home/away teams based on fixture number
+			i < numberOfFixtures / 2 ? match = new Match(rotationTeams.at(matchNum), rotationTeams.at((int)numberOfTeams - 1 - matchNum), ref) : match = new Match(rotationTeams.at((int)numberOfTeams - 1 - matchNum), rotationTeams.at(matchNum), ref);   //set home/away teams based on fixture number
 
 			matchesInFixture[matchNum] = match;
 		}

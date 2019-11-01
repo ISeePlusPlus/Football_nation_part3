@@ -6,23 +6,21 @@
 
 
 
-Match::Match(Team* homeTeam, Team* awayTeam, Referee* referee) : homeTeam(homeTeam), awayTeam(awayTeam), referee(referee)
+Match::Match(Team& homeTeam, Team& awayTeam, Referee* referee) : homeTeam(homeTeam), awayTeam(awayTeam), referee(referee)
 {
-	
 }
 
 Match::Match(const Match& other) : homeTeam(other.homeTeam), awayTeam(other.awayTeam), referee(other.referee)
 {
-	cout << "in copy\n";
 }
 
 void Match::playMatch() throw(PlayMatchException)
 {
 	//check that the team has enough players in the lineup
-	if (homeTeam->getLineup().size() != LINEUP_SIZE)
-		throw (PlayMatchException(homeTeam, "Lineup is not full!"));
-	if (awayTeam->getLineup().size() != LINEUP_SIZE)
-		throw (PlayMatchException(awayTeam, "Lineup is not full!"));
+	if (homeTeam.getLineup().size() != LINEUP_SIZE)
+		throw (PlayMatchException(&homeTeam, "Lineup is not full!"));
+	if (awayTeam.getLineup().size() != LINEUP_SIZE)
+		throw (PlayMatchException(&awayTeam, "Lineup is not full!"));
 	//each team has the option to score goals in their turn to attack
 	simulateAttack(homeTeam, awayTeam);
 	simulateAttack(awayTeam, homeTeam);
@@ -31,14 +29,13 @@ void Match::playMatch() throw(PlayMatchException)
 
 	if (getResult(0) == getResult(1))        //Draw - add one point to each team
 	{
-		homeTeam->addPoints(1);
-		awayTeam->addPoints(1);
+		homeTeam.addPoints(1);
+		awayTeam.addPoints(1);
 	}
-	else getResult(0) > getResult(1) ? homeTeam->addPoints(3) : awayTeam->addPoints(3);    //Either home or away teams won
-	cout << *this;
+	else getResult(0) > getResult(1) ? homeTeam.addPoints(3) : awayTeam.addPoints(3);    //Either home or away teams won
 }
 
-void Match::simulateAttack(Team* attackingTeam, Team* defendingTeam) 
+void Match::simulateAttack(Team& attackingTeam, Team& defendingTeam) 
 {
 	int attackingScore = 0;
 	int defendingScore = 0;
@@ -46,7 +43,7 @@ void Match::simulateAttack(Team* attackingTeam, Team* defendingTeam)
 
 	for (int i = 0; i < LINEUP_SIZE; i++) 
 	{
-		Player* attPlayer = &attackingTeam->getLineup()[i];
+		Player* attPlayer = &attackingTeam.getLineup()[i];
 
 		switch (attPlayer->getRole()) 
 		{
@@ -60,7 +57,7 @@ void Match::simulateAttack(Team* attackingTeam, Team* defendingTeam)
 				attackingScore += attPlayer->getAttack();
 		}
 
-		Player* defPlayer = &defendingTeam->getLineup()[i];
+		Player* defPlayer = &defendingTeam.getLineup()[i];
 
 		switch (defPlayer->getRole())
 		{
@@ -86,8 +83,8 @@ void Match::simulateAttack(Team* attackingTeam, Team* defendingTeam)
 
 		if ((int)random(rng) + attackingScore > defendingScore + goalKeepingScore)
 		{
-			attackingTeam->scoreGoal();
-			attackingTeam == this->homeTeam ? this->result[0] += 1 : this->result[1] += 1;
+			attackingTeam.scoreGoal();
+			&attackingTeam == &this->homeTeam ? this->result[0] += 1 : this->result[1] += 1;
 		}
 	}
 }
@@ -100,12 +97,12 @@ Team* Match::getWinnerTeam() const
 }
 
 
-Team* Match::getHomeTeam() const
+const Team& Match::getHomeTeam() const
 {
 	return homeTeam;
 }
 
-Team* Match::getAwayTeam() const
+const Team& Match::getAwayTeam() const
 {
 	return awayTeam;
 }
@@ -122,6 +119,6 @@ int Match::getResult(int index) const
 
 ostream& operator<<(ostream& os, const Match& match)
 {
-	os << match.getHomeTeam()->getName() << " VS " << match.getAwayTeam()->getName() << "\tReferee: " << match.getReferee()->getName() << "\t";
+	os << match.getHomeTeam().getName() << " VS " << match.getAwayTeam().getName() << "\tReferee: " << match.getReferee()->getName() << "\t";
 	return os;
 }

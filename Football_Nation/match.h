@@ -10,20 +10,20 @@ class Match
 
 private:
 
-	Team* homeTeam;
-	Team* awayTeam;
+	Team& homeTeam;
+	Team& awayTeam;
 	int result[NUM_OF_RESULTS] = { 0,0 }; // index 0 = home result, index 1 = away result.
 	Referee* referee;
-	void simulateAttack(Team* attackingTeam, Team* defendingTeam);
+	void simulateAttack(Team& attackingTeam, Team& defendingTeam);
 
 public:
-	Match(Team* homeTeam, Team* awayTeam, Referee * referee);
+	Match(Team& homeTeam, Team& awayTeam, Referee * referee);
 	Match(const Match& other);
 	void playMatch() throw(PlayMatchException); //move to private?
 
 	Team* getWinnerTeam() const; //returns the winner team. If match has ended with a tie, returns nullptr
-	Team* getHomeTeam() const;
-	Team* getAwayTeam() const;
+	const Team& getHomeTeam() const;
+	const Team& getAwayTeam() const;
 	Referee* getReferee() const;
 	int getResult(int index) const;
 	friend ostream& operator<<(ostream& os, const Match& fixture);

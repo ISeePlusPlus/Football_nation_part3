@@ -279,14 +279,13 @@ void Team::scoreGoal()
 	std::mt19937 rng(dev());
 	std::uniform_int_distribution<std::mt19937::result_type> random(MIN_RANDOM, LINEUP_SIZE - 1);
 
-	/*
-	vector<Player>::iterator itrStart = this->getLineup().begin();
+	vector<Player>::iterator itrStart = this->lineup.begin();
 
 	for (int i = 0; i < random(rng); i++)
 	{
 		++itrStart;
 	}
-	++(*itrStart);*/
+	++(*itrStart);
 }
 
 int Team::getPoints() const
