@@ -52,9 +52,7 @@ void Team::fillLineup()
 {
 	if (benchPlayers.size() < LINEUP_SIZE || lineup.size() != 0)
 		return;
-	vector<Player>::iterator itrStart = benchPlayers.begin();
-	vector<Player>::iterator itrEnd = benchPlayers.end();
-	for (; itrStart != itrEnd; ++itrStart)
+	for (int i=0; i<LINEUP_SIZE ; i++)
 	{
 		addToLineup(this->benchPlayers.at(0));
 	}
@@ -69,7 +67,7 @@ void Team::addToLineup(Player &player) throw (NoSpaceException)
 	{
 		if (*itrStart == player)
 		{
-			cout << "The player " << player.getName() << " is already in the team's lineup!";
+			cout << "The player " << player.getName() << " is already in the team's lineup!" << endl;
 			return;
 		}
 	}
