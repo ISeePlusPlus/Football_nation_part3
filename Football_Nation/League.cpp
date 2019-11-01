@@ -65,12 +65,14 @@ void League::startSeason() throw (LeagueException)
 			Referee* ref = &referees.at(random(rng));
 			Match* match;
 
-			i < numberOfFixtures / 2 ? match = new Match(teams.at(matchNum), teams.at((int)numberOfTeams - 1 - matchNum), ref) : match = new Match(teams.at((int)numberOfTeams - 1 - matchNum), teams.at(matchNum), ref);   //set home/away teams based on fixture number
+			i < numberOfFixtures / 2 ? 
+				match = new Match(teams.at(matchNum), teams.at((int)numberOfTeams - 1 - matchNum), ref) :
+				match = new Match(teams.at((int)numberOfTeams - 1 - matchNum), teams.at(matchNum), ref);   //set home/away teams based on fixture number
 
 			matchesInFixture[matchNum] = match;
 		}
-		rotate();
 		createdFixtures[i] = new Fixture(numberOfTeams / 2, i + 1, matchesInFixture);
+		rotate();
 	}
 	this->fixtures = createdFixtures;
 }
