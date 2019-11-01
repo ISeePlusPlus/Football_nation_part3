@@ -171,11 +171,11 @@ void League::showLosingTeam() const
 
 void League::showLeadingScorer() const
 {
-	Player* goalLeader = this->teams.at(0).getGoalLeader();
+	Player* goalLeader = &this->teams.at(0).getGoalLeader();
 	for (int i = 1; i < this->numberOfTeams; i++)
 	{
-		if (*(teams.at(i).getGoalLeader()) >= *goalLeader)
-			goalLeader = teams.at(i).getGoalLeader();
+		if ((teams.at(i).getGoalLeader()) >= *goalLeader)
+			goalLeader = &teams.at(i).getGoalLeader();
 	}
 	cout << "Player with most goals in league: " << goalLeader->getName() << " from " << goalLeader->getTeam()->getName() << " with " << goalLeader->getGoalScored() << " Goals!" << endl;
 }

@@ -293,27 +293,27 @@ int Team::getPoints() const
 	return points;
 }
 
-Player* Team::getGoalLeader() const
+Player Team::getGoalLeader() const
 {
-	vector<Player>::iterator itrStart = this->getLineup().begin();
-	vector<Player>::iterator itrEnd = this->getLineup().end();
+	vector<Player>::const_iterator itrStart = this->getLineup().begin();
+	vector<Player>::const_iterator itrEnd = this->getLineup().end();
 
-	Player* goalLeader = &*itrStart;
+	Player goalLeader = *itrStart;
 	++itrStart;
-	if (itrStart != itrEnd) 
+	if (itrStart != itrEnd)
 	{
-		for (; itrStart != itrEnd; ++itrStart)  
+		for (; itrStart != itrEnd; ++itrStart)
 		{
-			*itrStart >= *goalLeader ? goalLeader = &(*itrStart) : 0;
+			(*itrStart >= goalLeader) ? goalLeader = *itrStart : goalLeader;
 		}
 	}
 
 	itrStart = this->getBench().begin();
 	itrEnd = this->getBench().begin();
 
-	for (; itrStart != itrEnd; ++itrStart)  
+	for (; itrStart != itrEnd; ++itrStart)
 	{
-		*itrStart >= *goalLeader ? goalLeader = &(*itrStart) : 0;
+		(*itrStart >= goalLeader) ? goalLeader = *itrStart : goalLeader;
 	}
 
 	return goalLeader;
