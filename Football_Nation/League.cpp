@@ -7,7 +7,6 @@ League::League(const string& name, int numberOfTeams) : name(name), numberOfTeam
 	referees.reserve(0);
 	teams.reserve(numberOfTeams);
 	numberOfFixtures = (numberOfTeams - 1) * 2;
-	rotationTeams = teams; // makes a copy for rotations
 }
 
 League::~League()
@@ -26,7 +25,6 @@ League::~League()
 	}
 	*/
 	teams.clear();
-	rotationTeams.clear();
 	referees.clear();
 	//TODO: NOT SURE THIS IS FINE. ALSO DEAL WITH FIXTURES
 }
@@ -43,7 +41,6 @@ vector<Team>&  League::getTeams()
 
 void League::startSeason() throw (LeagueException)
 {
-	rotationTeams = teams;
 	Fixture** createdFixtures = new Fixture * [numberOfFixtures];
 
 	if (referees.size() == 0) 
@@ -68,7 +65,7 @@ void League::startSeason() throw (LeagueException)
 			Referee* ref = &referees.at(random(rng));
 			Match* match;
 
-			i < numberOfFixtures / 2 ? match = new Match(rotationTeams.at(matchNum), rotationTeams.at((int)numberOfTeams - 1 - matchNum), ref) : match = new Match(rotationTeams.at((int)numberOfTeams - 1 - matchNum), rotationTeams.at(matchNum), ref);   //set home/away teams based on fixture number
+			i < numberOfFixtures / 2 ? match = new Match(teams.at(matchNum), teams.at((int)numberOfTeams - 1 - matchNum), ref) : match = new Match(teams.at((int)numberOfTeams - 1 - matchNum), teams.at(matchNum), ref);   //set home/away teams based on fixture number
 
 			matchesInFixture[matchNum] = match;
 		}
@@ -80,12 +77,9 @@ void League::startSeason() throw (LeagueException)
 
 void League::rotate()//rotates the teams clockwise, team 0 remains
 {
-	
-	Team& tempTeam = rotationTeams.at(0);
-	rotationTeams.at(0) = rotationTeams.at((int)numberOfTeams - 1);
-	rotationTeams.at((int)numberOfTeams - 1) = tempTeam;
-	
-	std::rotate(rotationTeams.rbegin(), rotationTeams.rbegin() + 1, rotationTeams.rend());
+	//std::swap(teams.at(0),teams.at(teams.size()-1));
+	iter_swap(teams.begin(), teams.end()-1);
+	std::rotate(teams.rbegin(), teams.rbegin() + 1, teams.rend());
 }
 
 const Fixture& League::playFixture() throw (LeagueException)
@@ -145,7 +139,6 @@ void League::addTeam(Team& team) throw (NoSpaceException)
 		throw NoSpaceException("Teams in league", (int)teams.size());
 
 	teams.insert(teams.end(), team);
-	rotationTeams.insert(rotationTeams.begin(), team);
 }
 
 void League::showMostActiveReferee() const

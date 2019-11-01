@@ -48,7 +48,7 @@ private:
 	//	int teamIndex;
 	//	int refIndex;
 	vector<Team> teams;
-	vector<Team> rotationTeams;         //to rotate while keeping the original team order in teams
+	//vector<Team> rotationTeams;         //no longer needed
 	vector<Referee> referees;
 	int numberOfFixtures;
 	int playedFixtures;
