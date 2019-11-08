@@ -295,6 +295,7 @@ int Team::getPoints() const
 
 const Player& Team::getGoalLeader() const
 {
+	/*
 	vector<Player> leadingPlayers;
 	vector<Player>::const_iterator itrStart = this->lineup.begin();
 	vector<Player>::const_iterator itrEnd = this->lineup.end();
@@ -309,10 +310,10 @@ const Player& Team::getGoalLeader() const
 		leadingPlayers.push_back(*itrStartBench);
 
 	sort(leadingPlayers.begin(), leadingPlayers.end()); // sorts the players by goals scored (in Player::operator<)
-
-	const Player& leader = leadingPlayers.at(leadingPlayers.size() - 1);
+	*/
+	//const Player& leader = leadingPlayers.at(leadingPlayers.size() - 1);
 	//leadingPlayers.clear();
-	return leader;
+	return lineup[0];
 }
 
 void Team::setName(const string& name)

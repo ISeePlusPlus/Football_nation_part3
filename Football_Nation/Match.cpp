@@ -43,35 +43,35 @@ void Match::simulateAttack(Team& attackingTeam, Team& defendingTeam)
 
 	for (int i = 0; i < LINEUP_SIZE; i++) 
 	{
-		Player* attPlayer = &attackingTeam.getLineup()[i];
+		Player attPlayer = attackingTeam.getLineup().at(i);
 
-		switch (attPlayer->getRole()) 
+		switch (attPlayer.getRole()) 
 		{
 			case (Role) 0:
-				attackingScore += attPlayer->getAttack() + STRIKER_BONUS;                 //Player is a striker
+				attackingScore += attPlayer.getAttack() + STRIKER_BONUS;                 //Player is a striker
 				break;
 			case (Role) 3:
-				attackingScore += attPlayer->getAttack() + MID_BONUS;                     //Player is a midfielder
+				attackingScore += attPlayer.getAttack() + MID_BONUS;                     //Player is a midfielder
 				break;
 			default:
-				attackingScore += attPlayer->getAttack();
+				attackingScore += attPlayer.getAttack();
 		}
 
-		Player* defPlayer = &defendingTeam.getLineup()[i];
+		Player defPlayer = defendingTeam.getLineup().at(i);
 
-		switch (defPlayer->getRole())
+		switch (defPlayer.getRole())
 		{
 		case (Role) 1:
-			defendingScore += defPlayer->getDefence() + DEFENDER_BONUS;                 //Player is a defender
+			defendingScore += defPlayer.getDefence() + DEFENDER_BONUS;                 //Player is a defender
 			break;
 		case (Role) 2:
-			goalKeepingScore += defPlayer->getDefence() + defPlayer->getGoalkeeping(); //Player is a goalkepper
+			goalKeepingScore += defPlayer.getDefence() + defPlayer.getGoalkeeping(); //Player is a goalkepper
 			break;
 		case (Role) 3:
-			defendingScore += defPlayer->getDefence() + MID_BONUS;                     //Player is a midfielder
+			defendingScore += defPlayer.getDefence() + MID_BONUS;                     //Player is a midfielder
 			break;
 		default:
-			defendingScore += defPlayer->getDefence();
+			defendingScore += defPlayer.getDefence();
 		}
 	}
 
