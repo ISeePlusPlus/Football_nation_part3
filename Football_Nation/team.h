@@ -55,6 +55,7 @@ public:
 	const string& getName() const;
 	int getLineupSize() const;
 	void scoreGoal();
+	Manager* getManager() const;
 	int getPoints() const;
 	Player getGoalLeader() const;
 	void setName(const string& name);

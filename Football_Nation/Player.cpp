@@ -121,3 +121,11 @@ bool Player::operator>=(const Player& player) const
 	else
 		return false;
 }
+
+bool Player::operator<(const Player& player) const
+{
+	if (this->goalScored < player.getGoalScored())
+		return true;
+	else
+		return false;
+}

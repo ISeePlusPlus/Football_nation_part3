@@ -197,7 +197,7 @@ const Team& Team::operator=(const Team& other)
 	lineup = other.getLineup();
 	coaches = other.getCoaches();
 	name = other.getName();
-	//manager = other.getManager();
+	manager = other.getManager();
 	points = other.getPoints();
 	return *this;
 }
@@ -322,6 +322,11 @@ Player Team::getGoalLeader() const
 void Team::setName(const string& name)
 {
 	this->name = name;
+}
+
+Manager* Team::getManager() const
+{
+	return manager;
 }
 
 vector<Coach> Team::getCoaches() const
