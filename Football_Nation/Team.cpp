@@ -295,9 +295,21 @@ int Team::getPoints() const
 
 const Player& Team::getGoalLeader() const
 {
-//	sort(lineup.begin(), lineup.end());
-//	const Player leadingScorer = lineup.at(lineup.size() - 1);
-//	return leadingScorer;
+	vector<Player> leadingPlayers;
+	vector<Player>::const_iterator itrStart = this->lineup.begin();
+	vector<Player>::const_iterator itrEnd = this->lineup.end();
+
+	for (; itrStart != itrEnd; ++itrStart)
+		leadingPlayers.push_back(*itrStart);
+
+	vector<Player>::const_iterator itrStartBench = this->benchPlayers.begin();
+	vector<Player>::const_iterator itrEndBench = this->benchPlayers.end();
+
+	for (; itrStartBench != itrEndBench; ++itrStartBench)
+		leadingPlayers.push_back(*itrStartBench);
+
+	sort(leadingPlayers.begin(), leadingPlayers.end());
+
 	return lineup.at(lineup.size() - 1);
 }
 
