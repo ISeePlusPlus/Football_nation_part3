@@ -308,9 +308,11 @@ const Player& Team::getGoalLeader() const
 	for (; itrStartBench != itrEndBench; ++itrStartBench)
 		leadingPlayers.push_back(*itrStartBench);
 
-	sort(leadingPlayers.begin(), leadingPlayers.end());
+	sort(leadingPlayers.begin(), leadingPlayers.end()); // sorts the players by goals scored (in Player::operator<)
 
-	return lineup.at(lineup.size() - 1);
+	const Player& leader = leadingPlayers.at(leadingPlayers.size() - 1);
+	//leadingPlayers.clear();
+	return leader;
 }
 
 void Team::setName(const string& name)
