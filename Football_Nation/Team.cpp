@@ -295,7 +295,10 @@ int Team::getPoints() const
 
 const Player& Team::getGoalLeader() const
 {
-	return this->lineup[0];
+//	sort(lineup.begin(), lineup.end());
+//	const Player leadingScorer = lineup.at(lineup.size() - 1);
+//	return leadingScorer;
+	return lineup.at(lineup.size() - 1);
 }
 
 void Team::setName(const string& name)
