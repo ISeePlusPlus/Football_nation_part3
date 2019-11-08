@@ -1,7 +1,7 @@
 #include "league.h"
 
 
-League::League(const string& name, int numberOfTeams) : name(name), numberOfTeams(numberOfTeams)
+League::League(const string& name, int numberOfTeams) : name(name), numberOfTeams(numberOfTeams), fixtures(nullptr), numberOfReferees(0)
 {
 	this->playedFixtures = 0;
 	referees.reserve(0);
@@ -26,6 +26,7 @@ League::~League()
 	*/
 	teams.clear();
 	referees.clear();
+	//TODO: NOT SURE THIS IS FINE. ALSO DEAL WITH FIXTURES
 }
 
 int League::getNumberOfTeams() const
@@ -40,7 +41,7 @@ vector<Team>&  League::getTeams()
 
 void League::startSeason() throw (LeagueException)
 {
-	Fixture** createdFixtures = new Fixture* [numberOfFixtures];
+	Fixture** createdFixtures = new Fixture * [numberOfFixtures];
 
 	if (referees.size() == 0) 
 	{
@@ -63,10 +64,10 @@ void League::startSeason() throw (LeagueException)
 
 			Referee* ref = &referees.at(random(rng));
 			Match* match;
-
+			int idx = numberOfTeams - 1 - matchNum;
 			i < numberOfFixtures / 2 ? 
-				match = new Match(teams.at(matchNum), teams.at((int)numberOfTeams - 1 - matchNum), ref) :
-				match = new Match(teams.at((int)numberOfTeams - 1 - matchNum), teams.at(matchNum), ref);   //set home/away teams based on fixture number
+				match = new Match(teams.at(matchNum), teams.at(idx), ref) :
+				match = new Match(teams.at(idx), teams.at(matchNum), ref);   //set home/away teams based on fixture number
 
 			matchesInFixture[matchNum] = match;
 		}
@@ -104,7 +105,7 @@ const Fixture& League::playFixture() throw (LeagueException)
 		}
 	}
 	fixtureToPlay->setHasPlayed(true);
-//	sortTeams();
+	//sortTeams();
 	return *fixtureToPlay;
 }
 
@@ -144,7 +145,6 @@ void League::addTeam(Team& team) throw (NoSpaceException)
 
 void League::showMostActiveReferee() const
 {
-	/*
 	vector<Referee>::const_iterator itrStart = referees.begin();
 	vector<Referee>::const_iterator itrEnd = referees.end();
 
@@ -152,10 +152,10 @@ void League::showMostActiveReferee() const
 
 	for (; itrStart != itrEnd; ++itrStart)
 	{
-		activeRef.getGamesPlayed() > (*itrStart).getGamesPlayed()  ? 0 : activeRef = *itrStart;
+		if (activeRef.getGamesPlayed() > (*itrStart).getGamesPlayed())
+			activeRef = *itrStart;
 	}
 	cout << "Most Active Referee: " << activeRef << endl;
-	*/
 }
 
 void League::showLeadingTeam() const
@@ -166,7 +166,8 @@ void League::showLeadingTeam() const
 
 void League::showLosingTeam() const
 {
-	const Team* losingTeam = &teams.at((int)numberOfTeams - 1); // last team is on the last index once the team array is sorted by points
+	int idx = numberOfTeams - 1;
+	const Team* losingTeam = &teams.at(idx); // last team is on the last index once the team array is sorted by points
 	cout << "Team on last place: " << losingTeam->getName() << " with " << losingTeam->getPoints() << " Points" << endl;
 }
 
