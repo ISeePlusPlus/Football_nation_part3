@@ -57,7 +57,7 @@ public:
 	void scoreGoal();
 	Manager* getManager() const;
 	int getPoints() const;
-	const Player& getGoalLeader() const;
+	Player* getGoalLeader();
 	void setName(const string& name);
 	vector<Coach> getCoaches() const;
 

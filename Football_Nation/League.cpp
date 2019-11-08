@@ -171,22 +171,20 @@ void League::showLosingTeam() const
 	cout << "Team on last place: " << losingTeam->getName() << " with " << losingTeam->getPoints() << " Points" << endl;
 }
 
-void League::showLeadingScorer() const
+void League::showLeadingScorer()
 {
-	vector<Player> leadingPlayers;
+	Player* leader = teams.at(0).getGoalLeader();
 
-	vector<Team>::const_iterator itrStart = this->teams.begin();
-	vector<Team>::const_iterator itrEnd = this->teams.end();
+	vector<Team>::iterator itrStart = this->teams.begin();
+	vector<Team>::iterator itrEnd = this->teams.end();
 
 	for (; itrStart != itrEnd; ++itrStart)
-		leadingPlayers.push_back(itrStart->getGoalLeader()); 
-
-	sort(leadingPlayers.begin(), leadingPlayers.end()); // sorts the players by goals scored (in Player::operator<)
-
-	Player& goalLeader = leadingPlayers.at(leadingPlayers.size()-1);
-
-	cout << "Player with most goals in league: " << goalLeader.getName() << " from " << goalLeader.getTeam()->getName() << " with " << goalLeader.getGoalScored() << " Goals!" << endl;
-	leadingPlayers.clear();
+	{
+		Player* player = itrStart->getGoalLeader();
+		if (*player >= *leader)
+			leader = player;
+	}
+	cout << "Player with most goals in league: " << leader->getName() << " from " << leader->getTeam()->getName() << " with " << leader->getGoalScored() << " Goals!" << endl;
 }
 
 void League::sortTeams() // sorts the teams by points (in Team::operator<) and then reverse it so the team with highest points will be first in the table.
