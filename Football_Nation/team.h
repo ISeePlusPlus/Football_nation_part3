@@ -56,7 +56,7 @@ public:
 	int getLineupSize() const;
 	void scoreGoal();
 	int getPoints() const;
-	Player getGoalLeader() const;
+	const Player& getGoalLeader() const;
 	void setName(const string& name);
 	vector<Coach> getCoaches() const;
 
