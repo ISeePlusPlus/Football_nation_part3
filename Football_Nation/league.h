@@ -52,7 +52,7 @@ private:
 	vector<Referee> referees;
 	int numberOfFixtures;
 	int playedFixtures;
-	Fixture** fixtures;
+	vector<Fixture> fixtures;
 
 	//League(const League& other);                            //no longer needed
 	//const League& operator=(const League& other) = delete; 

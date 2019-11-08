@@ -1,12 +1,13 @@
 #include "league.h"
 
 
-League::League(const string& name, int numberOfTeams) : name(name), numberOfTeams(numberOfTeams), fixtures(nullptr), numberOfReferees(0)
+League::League(const string& name, int numberOfTeams) : name(name), numberOfTeams(numberOfTeams), numberOfReferees(0)
 {
 	this->playedFixtures = 0;
 	referees.reserve(0);
 	teams.reserve(numberOfTeams);
 	numberOfFixtures = (numberOfTeams - 1) * 2;
+	this->fixtures.reserve(numberOfFixtures);
 }
 
 League::~League()
@@ -41,8 +42,6 @@ vector<Team>&  League::getTeams()
 
 void League::startSeason() throw (LeagueException)
 {
-	Fixture** createdFixtures = new Fixture * [numberOfFixtures];
-
 	if (referees.size() == 0) 
 	{
 		throw LeagueException("Must have at least one referee to start the season");
@@ -71,10 +70,10 @@ void League::startSeason() throw (LeagueException)
 
 			matchesInFixture[matchNum] = match;
 		}
-		createdFixtures[i] = new Fixture(numberOfTeams / 2, i + 1, matchesInFixture);
+		fixtures.push_back(Fixture(numberOfTeams / 2, i + 1, matchesInFixture));
 		rotate();
 	}
-	this->fixtures = createdFixtures;
+
 }
 
 void League::rotate()//rotates the teams clockwise, team 0 remains
@@ -90,7 +89,7 @@ const Fixture& League::playFixture() throw (LeagueException)
 		return nullptr;
 		TODO : handle in main? */
 	
-	Fixture* fixtureToPlay = fixtures[playedFixtures++]; 
+	Fixture* fixtureToPlay = &fixtures.at(playedFixtures++); 
 	cout <<  "==========================================================\n";
 
 	for (int i = 0; i < fixtureToPlay->getGamesInFixture(); i++)
