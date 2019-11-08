@@ -30,6 +30,7 @@ public:
 	const Player& operator++();
 	bool operator >=(const Player& player) const; //Player is bigger if he scored more goles
 	bool operator==(const Player& other) const;
+	bool operator<(const Player& other) const;
 
 	int getTotalStats() const; //TODO: IMPLEMENT THE FUNCTION
 
