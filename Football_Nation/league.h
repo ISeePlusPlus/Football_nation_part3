@@ -28,7 +28,7 @@ public:
 	const Fixture& playFixture() throw (LeagueException);
 	void showLeadingTeam() const;
 	void showLosingTeam() const;
-	void showLeadingScorer() const;
+	void showLeadingScorer();
 	void showMostActiveReferee() const;
 	bool isEnded();
 	void rotate();
