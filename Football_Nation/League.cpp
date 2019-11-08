@@ -26,7 +26,6 @@ League::~League()
 	*/
 	teams.clear();
 	referees.clear();
-	//TODO: NOT SURE THIS IS FINE. ALSO DEAL WITH FIXTURES
 }
 
 int League::getNumberOfTeams() const
@@ -41,7 +40,7 @@ vector<Team>&  League::getTeams()
 
 void League::startSeason() throw (LeagueException)
 {
-	Fixture** createdFixtures = new Fixture * [numberOfFixtures];
+	Fixture** createdFixtures = new Fixture* [numberOfFixtures];
 
 	if (referees.size() == 0) 
 	{
@@ -105,7 +104,7 @@ const Fixture& League::playFixture() throw (LeagueException)
 		}
 	}
 	fixtureToPlay->setHasPlayed(true);
-	sortTeams();
+//	sortTeams();
 	return *fixtureToPlay;
 }
 
