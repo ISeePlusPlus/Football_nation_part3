@@ -16,7 +16,7 @@ int Fixture::getFixtureNumber() const
 	return number;
 }
 
-vector<Match> Fixture::getMatchesInFixture()
+vector<Match>& Fixture::getMatchesInFixture()
 {
 	return matches;
 }

@@ -17,7 +17,7 @@ public:
 	void setHasPlayed(bool value);
 	int getGamesInFixture() const;
 	int getFixtureNumber() const;
-	vector<Match> getMatchesInFixture();
+	vector<Match>& getMatchesInFixture();
 
 	
 
