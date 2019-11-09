@@ -64,8 +64,9 @@ void League::startSeason() throw (LeagueException)
 
 			Referee* ref = &referees.at(random(rng));
 			Match* match;
+			int idx = numberOfTeams - 1 - matchNum;
 			Team& t1 = *(find(teams.begin(), teams.end(), rotationTeams.at(matchNum)));
-			Team& t2 = *(find(teams.begin(), teams.end(), rotationTeams.at(numberOfTeams - 1 - matchNum)));
+			Team& t2 = *(find(teams.begin(), teams.end(), rotationTeams.at(idx)));
 			i < numberOfFixtures / 2 ? 
 				match = new Match(t1, t2, ref) :
 				match = new Match(t2, t1, ref);   //set home/away teams based on fixture number
@@ -92,7 +93,7 @@ const Fixture& League::playFixture() throw (LeagueException)
 		TODO : handle in main? */
 	
 	Fixture* fixtureToPlay = &fixtures.at(playedFixtures++); 
-	cout <<  "==========================================================\n";
+	cout <<  "================================================================\n";
 
 	for (int i = 0; i < fixtureToPlay->getGamesInFixture(); i++)
 	{
@@ -105,8 +106,9 @@ const Fixture& League::playFixture() throw (LeagueException)
 			throw LeagueException(e.getReason());
 		}
 	}
+	leaderBoard = teams;
+	sortTeams();
 	fixtureToPlay->setHasPlayed(true);
-	//sortTeams();
 	return *fixtureToPlay;
 }
 
@@ -161,14 +163,14 @@ void League::showMostActiveReferee() const
 
 void League::showLeadingTeam() const
 {
-	const Team* leadingTeam = &teams.at(0); // leading team will be at first index once the team array is sorted by points
+	const Team* leadingTeam = &leaderBoard.at(0); // leading team will be at first index once the team array is sorted by points
 	cout << "Leading Team: " << leadingTeam->getName() << " with " << leadingTeam->getPoints() << " Points" << endl;
 }
 
 void League::showLosingTeam() const
 {
 	int idx = numberOfTeams - 1;
-	const Team* losingTeam = &teams.at(idx); // last team is on the last index once the team array is sorted by points
+	const Team* losingTeam = &leaderBoard.at(idx); // last team is on the last index once the team array is sorted by points
 	cout << "Team on last place: " << losingTeam->getName() << " with " << losingTeam->getPoints() << " Points" << endl;
 }
 
@@ -190,18 +192,18 @@ void League::showLeadingScorer()
 
 void League::sortTeams() // sorts the teams by points (in Team::operator<) and then reverse it so the team with highest points will be first in the table.
 {
-	sort(teams.begin(), teams.end());
-	reverse(teams.begin(), teams.end());
+	sort(leaderBoard.begin(), leaderBoard.end());
+	reverse(leaderBoard.begin(), leaderBoard.end());
 }
 
 
 ostream& operator<<(ostream& os, const League& league)
 {
-	os << "=======================================================\n" << "League Name: " << league.name
-		<< ", Teams: " << league.numberOfTeams << ", Fixtures: " << league.numberOfFixtures << ".\n=======================================================\n";
+	os << "================================================================\n" << "League Name: " << league.name
+		<< ", Teams: " << league.numberOfTeams << ", Fixtures: " << league.numberOfFixtures << ".\n================================================================\n";
 	for (int i = 0; i < league.numberOfTeams; i++)
 	{
-		os << league.teams.at(i).getName() << ": " << league.teams.at(i).getPoints() << " Points";
+		os << league.leaderBoard.at(i).getName() << ": " << league.leaderBoard.at(i).getPoints() << " Points";
 		if (i == 0)
 			os << "\t<< Winner! >>";
 		os << endl;

@@ -132,7 +132,7 @@ int main()
 	{
 		try
 		{
-			Fixture fixture = league->playFixture();
+			const Fixture& fixture = league->playFixture();
 			cout << fixture;
 		}
 		catch (LeagueException& e)

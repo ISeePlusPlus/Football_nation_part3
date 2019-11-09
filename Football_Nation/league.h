@@ -49,6 +49,7 @@ private:
 	//	int refIndex;
 	vector<Team> teams;
 	vector<Team> rotationTeams;
+	vector<Team> leaderBoard;
 	//vector<Team> rotationTeams;         //no longer needed
 	vector<Referee> referees;
 	int numberOfFixtures;
