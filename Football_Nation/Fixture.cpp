@@ -1,6 +1,6 @@
 #include "fixture.h"
 
-Fixture::Fixture(int gamesInFixture, int number, Match** matches) :
+Fixture::Fixture(int gamesInFixture, int number, vector<Match> matches) :
 	gamesInFixture(gamesInFixture), number(number), matches(matches), hasPlayed(false)
 {
 
@@ -16,7 +16,7 @@ int Fixture::getFixtureNumber() const
 	return number;
 }
 
-Match** Fixture::getMatchesInFixture()
+vector<Match> Fixture::getMatchesInFixture()
 {
 	return matches;
 }
@@ -31,10 +31,10 @@ ostream& operator<<(ostream& os, const Fixture& fixture)
 	os << "Fixture #" << fixture.number << endl;
 	for (int i = 0; i < fixture.gamesInFixture; i++)
 	{
-		os << *fixture.matches[i];
+		os << fixture.matches[i];
 		if (fixture.hasPlayed == true)
 		{
-			Match* match = fixture.matches[i];
+			const Match* match = &fixture.matches[i];
 			os << " || result:  " << match->getResult(0) << ":" << match->getResult(1) << endl;
 		}
 	}

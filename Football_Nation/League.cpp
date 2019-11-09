@@ -42,6 +42,7 @@ vector<Team>&  League::getTeams()
 
 void League::startSeason() throw (LeagueException)
 {
+	rotationTeams = teams;
 	if (referees.size() == 0) 
 	{
 		throw LeagueException("Must have at least one referee to start the season");
@@ -53,7 +54,7 @@ void League::startSeason() throw (LeagueException)
 
 	for (int i = 0; i < numberOfFixtures; i++)    // i = overall fixtures to create
 	{
-		Match** matchesInFixture = new Match * [numberOfTeams / 2];
+		vector<Match> matchesInFixture;
 
 		for (int matchNum = 0; matchNum < numberOfTeams/2; matchNum++)
 		{
@@ -63,12 +64,13 @@ void League::startSeason() throw (LeagueException)
 
 			Referee* ref = &referees.at(random(rng));
 			Match* match;
-			int idx = numberOfTeams - 1 - matchNum;
+			Team& t1 = *(find(teams.begin(), teams.end(), rotationTeams.at(matchNum)));
+			Team& t2 = *(find(teams.begin(), teams.end(), rotationTeams.at(numberOfTeams - 1 - matchNum)));
 			i < numberOfFixtures / 2 ? 
-				match = new Match(teams.at(matchNum), teams.at(idx), ref) :
-				match = new Match(teams.at(idx), teams.at(matchNum), ref);   //set home/away teams based on fixture number
+				match = new Match(t1, t2, ref) :
+				match = new Match(t2, t1, ref);   //set home/away teams based on fixture number
 
-			matchesInFixture[matchNum] = match;
+			matchesInFixture.push_back(*match);
 		}
 		fixtures.push_back(Fixture(numberOfTeams / 2, i + 1, matchesInFixture));
 		rotate();
@@ -79,8 +81,8 @@ void League::startSeason() throw (LeagueException)
 void League::rotate()//rotates the teams clockwise, team 0 remains
 {
 	//std::swap(teams.at(0),teams.at(teams.size()-1));
-	iter_swap(teams.begin(), teams.end()-1);
-	std::rotate(teams.rbegin(), teams.rbegin() + 1, teams.rend());
+	iter_swap(rotationTeams.begin(), rotationTeams.end()-1);
+	std::rotate(rotationTeams.rbegin(), rotationTeams.rbegin() + 1, rotationTeams.rend());
 }
 
 const Fixture& League::playFixture() throw (LeagueException)
@@ -96,7 +98,7 @@ const Fixture& League::playFixture() throw (LeagueException)
 	{
 		try
 		{
-			fixtureToPlay->getMatchesInFixture()[i]->playMatch();
+			fixtureToPlay->getMatchesInFixture().at(i).playMatch();
 		}
 		catch (PlayMatchException & e)
 		{

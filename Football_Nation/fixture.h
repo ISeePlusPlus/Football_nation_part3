@@ -9,15 +9,15 @@ private:
 	bool hasPlayed;
 	int gamesInFixture;
 	int number;
-	Match** matches;
+	vector<Match> matches;
 public:
-	Fixture(int gamesInFixture, int number, Match** matches);
+	Fixture(int gamesInFixture, int number, vector<Match> matches);
 //	~Fixture();
 //	Fixture(const Fixture& other);
 	void setHasPlayed(bool value);
 	int getGamesInFixture() const;
 	int getFixtureNumber() const;
-	Match** getMatchesInFixture();
+	vector<Match> getMatchesInFixture();
 
 	
 

@@ -49,7 +49,8 @@ public:
 	vector<Player> getBench() const;
 	Team operator+(int points) const; // add points to the team
 	bool operator>=(const Team& otherTeam) const; //Team is bigger if team have more point
-	bool operator<(const Team & otherTeam) const;
+	bool operator<(const Team& otherTeam) const;
+	bool operator==(const Team& otherTeam) const;
 	const Team& operator=(const Team& other);
 	friend ostream& operator<<(ostream& os, const Team& team);
 	const string& getName() const;

@@ -202,6 +202,13 @@ const Team& Team::operator=(const Team& other)
 	return *this;
 }
 
+bool Team::operator==(const Team& other) const
+{
+	if (this->name == other.getName() && this->points == other.getPoints())
+		return true;
+	return false;
+}
+
 Team Team::operator+(int points) const
 {
 	points += 1;
