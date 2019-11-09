@@ -156,7 +156,19 @@ int main()
 	league->showLeadingScorer();
 	//show the ref that played the most matches
 	league->showMostActiveReferee();
-	league->getWinner().assignWorldCup();
+
+
+	WorldCup::assign(&league->getTeams().at(3));
+
+	WorldCup::assign(&league->getTeams().at(5));
+
+	WorldCup::assign(&league->getWinner());
+
+	for (int i = 0; i < league->getNumberOfTeams(); i++)
+	{
+		if (league->getTeams().at(i).getCup() != nullptr)
+			cout << "Cups: " << *league->getTeams().at(i).getCup();
+	}
 
 	inputFile.close();
 

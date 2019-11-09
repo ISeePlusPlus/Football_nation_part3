@@ -18,6 +18,7 @@ const int MAX_RANDOM_ATTACK = 40;
 class Coach;
 class Player;
 class Manager;
+class WorldCup;
 
 const int LINEUP_SIZE = 5; // size of the team lineup 
 const int BENCH_SIZE = 10; // size of the bench. MUST BE > 0;
@@ -25,7 +26,7 @@ const int COACH_SIZE = 4; // size of the coach array.  MUST BE > 0;
 
 class Team 
 {
-
+	friend WorldCup;
 public:
 
 	Team(const string& name,
@@ -62,8 +63,7 @@ public:
 	Player* getGoalLeader();
 	void setName(const string& name);
 	vector<Coach> getCoaches() const;
-
-	void assignWorldCup(); //assign the world cup to the team.
+	WorldCup* getCup() const;
 
 private:
 	//void alignLineup(int strating_index); //Function to align the lineup array to the left, after removing a player.

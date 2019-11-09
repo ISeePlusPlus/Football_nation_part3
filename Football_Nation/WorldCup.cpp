@@ -1,15 +1,26 @@
 #include "WorldCup.h"
 
 WorldCup WorldCup::theCup;
+Team* WorldCup::currentTeam = nullptr;
 
 WorldCup::WorldCup()
 {
-
 }
 
-void WorldCup::show()
+void WorldCup::assign(Team* team)
 {
-	cout << "this is the cup\n";
+	if (currentTeam != nullptr)
+	{
+		currentTeam->cup = nullptr;
+	}
+	team->cup = getInstance();
+	currentTeam = team;
+}
+
+ostream& operator<<(ostream& os, const WorldCup& cup)
+{
+	os << "<{| World Cup |}>";
+	return os;
 }
 
 WorldCup* WorldCup::getInstance()

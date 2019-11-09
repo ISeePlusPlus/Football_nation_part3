@@ -228,7 +228,7 @@ void League::addPlayedFixture()
 
 Team& League::getWinner() // leaderBoard must be sorted to get the actual winner
 {
-	return leaderBoard.at(0);
+	return *(find(teams.begin(), teams.end(), leaderBoard.at(0)));
 }
 
 /*

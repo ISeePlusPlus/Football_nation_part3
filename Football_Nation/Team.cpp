@@ -228,7 +228,10 @@ bool Team::operator<(const Team & otherTeam) const
 
 ostream& operator<<(ostream& os, const Team& team)
 {
-	os << "Team Name: " << team.name << "," << "\tPoints: " << team.points << "\n|| Manager || ";
+	os << "Team Name: " << team.name << "," << "\tPoints: " << team.points;
+	if (team.cup != nullptr)
+		os << "Cups: " << *team.cup << endl;
+	os	<< "\n|| Manager || ";
 	if (team.manager != nullptr)
 	{
 		os << *team.manager;
@@ -345,7 +348,8 @@ vector<Player> Team::getBench() const
 	return benchPlayers;
 }
 
-void Team::assignWorldCup()
+
+WorldCup* Team::getCup() const
 {
-	cup = WorldCup::getInstance();
+	return cup;
 }
