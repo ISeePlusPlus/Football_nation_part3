@@ -12,6 +12,8 @@ using namespace std;
 #include "coach_player.h"
 #include "LinkedList.h"
 
+#include "WorldCup.h"
+
 League * readLeague(ifstream& inputFile);
 Team * readTeam(ifstream& inputFile);
 Player * readPlayer(ifstream& inputFile);
@@ -154,8 +156,10 @@ int main()
 	league->showLeadingScorer();
 	//show the ref that played the most matches
 	league->showMostActiveReferee();
-	
+	league->getWinner().assignWorldCup();
+
 	inputFile.close();
+
 	system("pause");
 	return 0;
 }

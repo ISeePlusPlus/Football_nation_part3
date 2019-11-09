@@ -133,6 +133,7 @@
     <ClCompile Include="PlayMatchException.cpp" />
     <ClCompile Include="Referee.cpp" />
     <ClCompile Include="Team.cpp" />
+    <ClCompile Include="WorldCup.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="coach.h" />
@@ -153,6 +154,7 @@
     <ClInclude Include="referee.h" />
     <ClInclude Include="role.h" />
     <ClInclude Include="team.h" />
+    <ClInclude Include="WorldCup.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

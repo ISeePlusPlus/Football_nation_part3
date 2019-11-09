@@ -3,7 +3,7 @@
 #include "player.h"
 #include "manager.h"
 
-Team::Team(const string& name, Manager* manager)
+Team::Team(const string& name, Manager* manager) : cup(nullptr)
 {
 	setName(name);
 	this->setManager(manager);
@@ -14,7 +14,7 @@ Team::Team(const string& name, Manager* manager)
 	this->points = 0;
 }
 
-Team::Team(const string& name, Manager* manager, int points)
+Team::Team(const string& name, Manager* manager, int points) : cup(nullptr)
 {
 	setName(name);
 //	this->manager = manager;
@@ -343,4 +343,9 @@ vector<Player> Team::getLineup() const
 vector<Player> Team::getBench() const
 {
 	return benchPlayers;
+}
+
+void Team::assignWorldCup()
+{
+	cup = WorldCup::getInstance();
 }

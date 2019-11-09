@@ -36,6 +36,7 @@ public:
 	vector<Team>& getTeams();
 	void sortTeams(); //sort the teams by points (std::sort)
 	friend ostream& operator<<(ostream& os, const League& league);
+	Team& getWinner();
 
 	int getPlayedFixtures() const;
 	void addPlayedFixture();

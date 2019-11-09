@@ -7,6 +7,7 @@
 #include "NoSpaceException.h"
 #include "NullPointerException.h"
 #include "coach.h"
+#include "WorldCup.h"
 
 #pragma warning(disable:4290)
 using namespace std;
@@ -62,6 +63,8 @@ public:
 	void setName(const string& name);
 	vector<Coach> getCoaches() const;
 
+	void assignWorldCup(); //assign the world cup to the team.
+
 private:
 	//void alignLineup(int strating_index); //Function to align the lineup array to the left, after removing a player.
 	//void alignBench(int starting_index);
@@ -75,6 +78,8 @@ private:
 	int currentBenchSize;
 	int coachesSize;
 	int currentLineup;
+
+	WorldCup* cup;
 };
 
 #endif // !__TEAM_H

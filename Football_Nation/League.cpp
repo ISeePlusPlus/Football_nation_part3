@@ -225,6 +225,12 @@ void League::addPlayedFixture()
 {
 	this->playedFixtures += 1;
 }
+
+Team& League::getWinner() // leaderBoard must be sorted to get the actual winner
+{
+	return leaderBoard.at(0);
+}
+
 /*
 void League::setName(const string& name)
 {
