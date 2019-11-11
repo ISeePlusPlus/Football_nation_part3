@@ -231,6 +231,11 @@ Team& League::getWinner() // leaderBoard must be sorted to get the actual winner
 	return *(find(teams.begin(), teams.end(), leaderBoard.at(0)));
 }
 
+vector<Fixture>& League::getFixtures()
+{
+	return fixtures;
+}
+
 /*
 void League::setName(const string& name)
 {

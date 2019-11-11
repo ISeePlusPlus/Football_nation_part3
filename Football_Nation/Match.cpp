@@ -33,6 +33,7 @@ void Match::playMatch() throw(PlayMatchException)
 		awayTeam.addPoints(1);
 	}
 	else getResult(0) > getResult(1) ? homeTeam.addPoints(3) : awayTeam.addPoints(3);    //Either home or away teams won
+	notifyAllRegistered();
 }
 
 void Match::simulateAttack(Team& attackingTeam, Team& defendingTeam) 
@@ -92,7 +93,10 @@ void Match::simulateAttack(Team& attackingTeam, Team& defendingTeam)
 Team* Match::getWinnerTeam() const
 {
 	if (result[0] != result[1])
-		result[0] > result[1] ? homeTeam : awayTeam;
+		if (result[0] > result[1])
+			return &homeTeam;
+		else
+			return &awayTeam;
 	return nullptr;
 }
 
@@ -121,4 +125,19 @@ ostream& operator<<(ostream& os, const Match& match)
 {
 	os << match.getHomeTeam().getName() << " VS " << match.getAwayTeam().getName() << "\tReferee: " << match.getReferee()->getName() << "\t";
 	return os;
+}
+
+void Match::registerObserver(Observer* obs)
+{
+	gamblers.push_back(obs);
+}
+
+void Match::notifyAllRegistered()
+{
+	vector<Observer*>::iterator itrStart = gamblers.begin();
+	vector<Observer*>::iterator itrEnd = gamblers.end();
+	for (; itrStart != itrEnd; ++itrStart)
+	{
+		(*itrStart)->notify(this, this->getWinnerTeam());
+	}
 }

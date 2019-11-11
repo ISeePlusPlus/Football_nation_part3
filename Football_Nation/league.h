@@ -34,6 +34,7 @@ public:
 	void rotate();
 	int getNumberOfTeams() const;
 	vector<Team>& getTeams();
+	vector<Fixture>& getFixtures();
 	void sortTeams(); //sort the teams by points (std::sort)
 	friend ostream& operator<<(ostream& os, const League& league);
 	Team& getWinner();

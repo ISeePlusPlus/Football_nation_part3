@@ -11,6 +11,8 @@ using namespace std;
 #include "fixture.h"
 #include "coach_player.h"
 #include "LinkedList.h"
+#include "Gambler.h"
+#include "Observer.h"
 
 #include "WorldCup.h"
 
@@ -20,6 +22,8 @@ Player * readPlayer(ifstream& inputFile);
 Coach * readCoach(ifstream& inputFile);
 Manager * readManager(ifstream& inputFile);
 Referee * readReferee(ifstream& inputFile);
+
+void placeBetOnMatch(Gambler& gambler, Match& match, Team& team);
 
 int main()
 {
@@ -104,6 +108,8 @@ int main()
 	ifstream inputFile("League.txt");
 	League* league = readLeague(inputFile);
 
+	Gambler g1("Tal", 28, "is");
+	Gambler g2("Yigal", 27, "rs");
 
 	// adding the players from bench to the line up, because PlayMatch() cannot work when the lineup is empty.
 	for (int i = 0; i < league->getNumberOfTeams(); i++)
@@ -130,6 +136,15 @@ int main()
 	 *	-display the fixture's matches results
 	 *	-every fixture played u should increment number of fixtures played
 	 */
+
+	//demo for observer design pattern
+	Fixture* fixture1 = &league->getFixtures().at(0);
+	placeBetOnMatch(g1, fixture1->getMatchesInFixture().at(0), league->getTeams().at(0));
+	placeBetOnMatch(g2, fixture1->getMatchesInFixture().at(0), league->getTeams().at(5));
+	placeBetOnMatch(g1, fixture1->getMatchesInFixture().at(1), league->getTeams().at(1));
+	placeBetOnMatch(g2, fixture1->getMatchesInFixture().at(1), league->getTeams().at(4));
+	placeBetOnMatch(g1, fixture1->getMatchesInFixture().at(2), league->getTeams().at(2));
+	placeBetOnMatch(g2, fixture1->getMatchesInFixture().at(2), league->getTeams().at(3));
 	do
 	{
 		try
@@ -329,4 +344,10 @@ Referee* readReferee(ifstream& inputFile)
 	inputFile >> name >> age >> nationality >> rating;
 
 	return new Referee(name, age, nationality, rating, 0);
+}
+
+void placeBetOnMatch(Gambler& gambler, Match& match, Team& team)
+{
+	gambler.placeBet(match, team);
+	match.registerObserver(&gambler);
 }
