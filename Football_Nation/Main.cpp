@@ -172,7 +172,7 @@ int main()
 	//show the ref that played the most matches
 	league->showMostActiveReferee();
 
-
+	//demo for design pattern singleton
 	WorldCup::assign(&league->getTeams().at(3));
 
 	WorldCup::assign(&league->getTeams().at(5));

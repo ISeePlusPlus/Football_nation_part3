@@ -18,6 +18,15 @@
     <ClCompile Include="PlayMatchException.cpp" />
     <ClCompile Include="WorldCup.cpp" />
     <ClCompile Include="Gambler.cpp" />
+    <ClCompile Include="Happy.cpp">
+      <Filter>Mood</Filter>
+    </ClCompile>
+    <ClCompile Include="Unhappy.cpp">
+      <Filter>Mood</Filter>
+    </ClCompile>
+    <ClCompile Include="Neutral.cpp">
+      <Filter>Mood</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="coach.h" />
@@ -41,5 +50,22 @@
     <ClInclude Include="WorldCup.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Gambler.h" />
+    <ClInclude Include="Unhappy.h">
+      <Filter>Mood</Filter>
+    </ClInclude>
+    <ClInclude Include="Mood.h">
+      <Filter>Mood</Filter>
+    </ClInclude>
+    <ClInclude Include="Neutral.h">
+      <Filter>Mood</Filter>
+    </ClInclude>
+    <ClInclude Include="Happy.h">
+      <Filter>Mood</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Mood">
+      <UniqueIdentifier>{40982907-bc5b-4321-bbd4-14f51af956ff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

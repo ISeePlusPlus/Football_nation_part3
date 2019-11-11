@@ -1,7 +1,11 @@
 #include "person.h"
 
+#include "Mood.h"
+#include "Neutral.h"
+#include "Happy.h"
+#include "Unhappy.h"
 
-Person::Person(const string& name, int age, const string& nationality)
+Person::Person(const string& name, int age, const string& nationality) : mood(new Neutral())
 {
 	try 
 	{
@@ -27,6 +31,12 @@ Person::Person(const string& name, int age, const string& nationality)
 	}
 
 }
+
+Person::~Person()
+{
+	delete mood;
+}
+
 /*
 const Person& Person::operator=(const Person& other)
 {
@@ -77,3 +87,22 @@ void Person::setNationality(const string& newNationality) throw (NullPointerExce
 	this->nationality = newNationality;
 }
 
+void Person::setMood(Mood* mood)
+{
+	this->mood = mood;
+}
+
+void Person::happy()
+{
+	mood->happy(*this);
+}
+
+void Person::unhappy()
+{
+	mood->unhappy(*this);
+}
+
+void Person::neutral()
+{
+	mood->neutral(*this);
+}

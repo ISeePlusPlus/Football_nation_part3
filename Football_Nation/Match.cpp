@@ -58,6 +58,7 @@ void Match::simulateAttack(Team& attackingTeam, Team& defendingTeam)
 				attackingScore += attPlayer.getAttack();
 		}
 
+
 		Player defPlayer = defendingTeam.getLineup().at(i);
 
 		switch (defPlayer.getRole())
@@ -75,18 +76,20 @@ void Match::simulateAttack(Team& attackingTeam, Team& defendingTeam)
 			defendingScore += defPlayer.getDefence();
 		}
 	}
-
 	for (int i = 0; i < ATTACK_ROUNDS; i++)
 	{
 		std::random_device dev;
 		std::mt19937 rng(dev());
 		std::uniform_int_distribution<std::mt19937::result_type> random(MIN_RANDOM, MAX_RANDOM_ATTACK);
+		std::uniform_int_distribution<std::mt19937::result_type> extra_round(0, 100);
 
 		if ((int)random(rng) + attackingScore > defendingScore + goalKeepingScore)
 		{
 			attackingTeam.scoreGoal();
 			&attackingTeam == &this->homeTeam ? this->result[0] += 1 : this->result[1] += 1;
 		}
+		if (extra_round(rng) < 18)
+			i--;
 	}
 }
 
