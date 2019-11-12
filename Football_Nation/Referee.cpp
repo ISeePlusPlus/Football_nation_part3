@@ -1,6 +1,6 @@
 #include "referee.h"
 
-const int Referee::arr[] = {10, 15, 30, 50, 100 };
+const int Referee::arr[] = {3, 5, 15, 50, 100 };
 
 Referee::Referee(const string& name, int age, const string& nationality, int rating = 0, int gamesPlayed = 0):
 	Person(name,age,nationality)
@@ -39,10 +39,10 @@ void Referee::setRating()
 	}
 
 	int counter = 0;
-	while (this->getGamesPlayed() < Referee::arr[counter])
+	while (this->getGamesPlayed() > Referee::arr[counter])
 	{
 		counter += 1;
+		this->rating = counter;
 	}
-	this->rating = counter;
 }
 
