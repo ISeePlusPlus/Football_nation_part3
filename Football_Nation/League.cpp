@@ -155,7 +155,7 @@ void League::showMostActiveReferee() const
 
 	for (; itrStart != itrEnd; ++itrStart)
 	{
-		if (activeRef.getGamesPlayed() > (*itrStart).getGamesPlayed())
+		if (activeRef.getGamesPlayed() < (*itrStart).getGamesPlayed())
 			activeRef = *itrStart;
 	}
 	cout << "Most Active Referee: " << activeRef << endl;
