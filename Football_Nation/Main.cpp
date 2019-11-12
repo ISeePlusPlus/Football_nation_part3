@@ -191,20 +191,6 @@ int main()
 
 	inputFile.close();
 
-	BuildingBuilder bob;
-	Builder* b = new Stadium();
-	Builder* fan = new FanClub();
-	bob.construct(b, "C++", '^', 2, 30);
-	bob.construct(fan, "Messi", '$', 5, 5);
-	Building* stad = b->getResult();
-	Building* club = fan->getResult();
-	stad->show();
-	cout << "\n\n";
-	club->show();
-
-	delete b;
-	delete fan;
-
 	system("pause");
 	return 0;
 }
@@ -230,12 +216,12 @@ League* readLeague(ifstream& inputFile)
 			BuildingBuilder bob;
 			Builder* s = new Stadium();
 			bob.construct(s, team->getName(), '^', 2, 30);
-			team->setStadium(s->getResult());
+			team->setStadium((Stadium*)(s->getResult()));
 			if (i % 2 == 0)
 			{
 				Builder* f = new FanClub();
-				bob.construct(f, team->getGoalLeader()->getName(), '%' ,5, 10);
-				team->setFanClub(f->getResult());
+				bob.construct(f, team->getName(), '%' ,5, 10);
+				team->setFanClub((FanClub*)(f->getResult()));
 			}
 			newLeague->addTeam(*team);
 		}
