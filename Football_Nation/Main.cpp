@@ -116,6 +116,7 @@ int main()
 
 	Gambler g1("Tal", 28, "is");
 	Gambler g2("Yigal", 27, "rs");
+	Gambler drawGambler("Toto", 50, "lala");
 
 	// adding the players from bench to the line up, because PlayMatch() cannot work when the lineup is empty.
 	for (int i = 0; i < league->getNumberOfTeams(); i++)
@@ -145,12 +146,18 @@ int main()
 
 	//demo for observer design pattern
 	Fixture* fixture1 = &league->getFixtures().at(0);
+	Team* nullPtrTeam = nullptr;
 	placeBetOnMatch(g1, fixture1->getMatchesInFixture().at(0), league->getTeams().at(0));
 	placeBetOnMatch(g2, fixture1->getMatchesInFixture().at(0), league->getTeams().at(5));
 	placeBetOnMatch(g1, fixture1->getMatchesInFixture().at(1), league->getTeams().at(1));
 	placeBetOnMatch(g2, fixture1->getMatchesInFixture().at(1), league->getTeams().at(4));
 	placeBetOnMatch(g1, fixture1->getMatchesInFixture().at(2), league->getTeams().at(2));
 	placeBetOnMatch(g2, fixture1->getMatchesInFixture().at(2), league->getTeams().at(3));
+	placeBetOnMatch(drawGambler, fixture1->getMatchesInFixture().at(0), *nullPtrTeam);
+	placeBetOnMatch(drawGambler, fixture1->getMatchesInFixture().at(1), *nullPtrTeam);
+	placeBetOnMatch(drawGambler, fixture1->getMatchesInFixture().at(2), *nullPtrTeam);
+
+
 	do
 	{
 		try

@@ -9,7 +9,11 @@ void Gambler::notify(Match* match, Team* winner)
 	if (bets.at(match) == winner)
 	{
 		prizeMoney += REWARD;
-		cout << this->getName() << " has earned " << REWARD << " prizeMoney by betting on " << winner->getName() << "!" << endl;
+		cout << this->getName() << " has earned " << REWARD << " prizeMoney by betting on ";
+		if (winner == nullptr)
+			cout << "a Draw!" << endl;
+		else
+			cout << winner->getName() << "!" << endl;
 	}
 	cout << this->getName() << " has " << prizeMoney << " prizeMoney." << endl;
 }
