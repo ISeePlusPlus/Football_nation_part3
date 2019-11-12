@@ -185,11 +185,7 @@ int main()
 
 	WorldCup::assign(&league->getWinner());
 
-	for (int i = 0; i < league->getNumberOfTeams(); i++)
-	{
-		if (league->getTeams().at(i).getCup() != nullptr)
-			cout << "Cups: " << *league->getTeams().at(i).getCup();
-	}
+	cout << league->getWinner() << endl;
 
 	inputFile.close();
 

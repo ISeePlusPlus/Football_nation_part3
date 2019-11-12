@@ -56,7 +56,7 @@ public:
 	const Team& operator=(const Team& other);
 	friend ostream& operator<<(ostream& os, const Team& team);
 	const string& getName() const;
-	int getLineupSize() const;
+//	int getLineupSize() const;
 	void scoreGoal();
 	Manager* getManager() const;
 	int getPoints() const;
@@ -64,6 +64,9 @@ public:
 	void setName(const string& name);
 	vector<Coach> getCoaches() const;
 	WorldCup* getCup() const;
+
+	const vector<Player>& getLineupRef() const;
+	const vector<Player>& getBenchRef() const;
 
 private:
 	//void alignLineup(int strating_index); //Function to align the lineup array to the left, after removing a player.
