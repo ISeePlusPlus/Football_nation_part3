@@ -2,7 +2,6 @@
 #include "coach.h"
 #include "player.h"
 #include "manager.h"
-#include "Happy.h"
 
 Team::Team(const string& name, Manager* manager) : cup(nullptr)
 {
@@ -297,7 +296,7 @@ void Team::scoreGoal()
 		++itrStart;
 	}
 	++(*itrStart);
-	(*itrStart).setMood(new Happy());
+//	(*itrStart).setMood(new Happy());
 }
 
 int Team::getPoints() const

@@ -15,12 +15,12 @@ const int MAX_AGE = 120;
 #include "InvalidNameException.h"
 
 
-class Mood;
+//class Mood;
 
 class Person
 {
 protected:
-	Mood* mood;
+//	Mood* mood;
 	string name;//[NAME_SIZE];
 	int age;
 	string nationality; //[NAME_SIZE] ;
@@ -30,8 +30,6 @@ protected:
 
 public:
 	Person(const string& name, int age, const string& nationality);
-	Person(const Person& other);
-	~Person();
 
 	const string& getName() const;
 	int getAge() const;
@@ -41,11 +39,13 @@ public:
 	void setAge(int newAge) throw (InvalidAgeException);
 	void setNationality(const string& newNationality) throw (NullPointerException);
 
+	/*
 	void setMood(Mood* mood);
 	Mood* getMood() const;
 	void happy();
 	void unhappy();
 	void neutral();
+	*/
 };
 
 
