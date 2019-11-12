@@ -6,11 +6,11 @@
 
 class Building
 {
+private:
+	vector<Floor> floors;
 public:
 	void add(const Floor& floor);
 	void show() const;
-private:
-	vector<Floor> floors;
 };
 
 #endif // !__BUILDING_H
