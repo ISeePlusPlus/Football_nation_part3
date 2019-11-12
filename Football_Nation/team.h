@@ -8,6 +8,8 @@
 #include "NullPointerException.h"
 #include "coach.h"
 #include "WorldCup.h"
+#include "Stadium.h"
+#include "FanClub.h"
 
 #pragma warning(disable:4290)
 using namespace std;
@@ -67,6 +69,11 @@ public:
 
 	const vector<Player>& getLineupRef() const;
 	const vector<Player>& getBenchRef() const;
+	Stadium* getStadium();
+	void setStadium(Stadium* stadium);
+	FanClub* getFanClub();
+	void setFanClub(FanClub* fc);
+
 
 private:
 	//void alignLineup(int strating_index); //Function to align the lineup array to the left, after removing a player.
@@ -83,6 +90,8 @@ private:
 	int currentLineup;
 
 	WorldCup* cup;
+	Stadium* homeStadium;
+	FanClub* fanClub;
 };
 
 #endif // !__TEAM_H

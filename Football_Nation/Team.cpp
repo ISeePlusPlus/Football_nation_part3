@@ -356,3 +356,25 @@ const vector<Player>& Team::getBenchRef() const
 {
 	return benchPlayers;
 }
+
+Stadium* Team::getStadium()
+{
+	return homeStadium;
+}
+
+void Team::setStadium(Stadium* stadium)
+{
+	this->homeStadium = stadium;
+}
+
+FanClub* Team::getFanClub()
+{
+	if (fanClub)
+		return fanClub;
+	return nullptr;
+}
+
+void Team::setFanClub(FanClub* fc)
+{
+	this->fanClub = fc;
+}
