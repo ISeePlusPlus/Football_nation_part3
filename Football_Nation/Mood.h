@@ -8,6 +8,8 @@ class Person;
 class Mood
 {
 public:
+	Mood() {};
+	Mood(const Mood* other) {};
 	virtual void happy(Person& p) const {};
 	virtual void neutral(Person& p) const {};
 	virtual void unhappy(Person& p) const {};

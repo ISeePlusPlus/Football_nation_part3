@@ -41,6 +41,7 @@ public:
 	void setNationality(const string& newNationality) throw (NullPointerException);
 
 	void setMood(Mood* mood);
+	Mood* getMood() const;
 	void happy();
 	void unhappy();
 	void neutral();
