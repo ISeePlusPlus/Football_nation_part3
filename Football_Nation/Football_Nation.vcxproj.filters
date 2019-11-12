@@ -62,6 +62,7 @@
     <ClInclude Include="Happy.h">
       <Filter>Mood</Filter>
     </ClInclude>
+    <ClInclude Include="Building.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Mood">

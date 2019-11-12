@@ -140,6 +140,7 @@
     <ClCompile Include="WorldCup.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Building.h" />
     <ClInclude Include="coach.h" />
     <ClInclude Include="coach_player.h" />
     <ClInclude Include="fixture.h" />
