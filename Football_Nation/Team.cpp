@@ -230,7 +230,7 @@ ostream& operator<<(ostream& os, const Team& team)
 {
 	os << "Team Name: " << team.name << "," << "\tPoints: " << team.points;
 	if (team.cup != nullptr)
-		os << "Cups: " << *team.cup << endl;
+		os << "\nCups: " << *team.cup << endl;
 	os	<< "\n|| Manager || ";
 	if (team.manager != nullptr)
 	{
@@ -240,19 +240,11 @@ ostream& operator<<(ostream& os, const Team& team)
 	{
 		os << "None ";
 	}
-		os << "\n|| Coaches ||" << endl;
 
-	vector<Coach>::iterator itrStartCoach = team.getCoaches().begin();
-	vector<Coach>::iterator itrEndCoach = team.getCoaches().end();
+	os << "--in lineup--" << endl;
 
-	for (; itrStartCoach != itrEndCoach; ++itrStartCoach)  //coach already in team
-	{
-		os << *itrStartCoach;
-	}
-
-
-	vector<Player>::iterator itrStart = team.getLineup().begin();
-	vector<Player>::iterator itrEnd = team.getLineup().end();
+	vector<Player>::const_iterator itrStart = team.getLineupRef().begin();
+	vector<Player>::const_iterator itrEnd = team.getLineupRef().end();
 
 	for (; itrStart != itrEnd; ++itrStart)  //coach already in team
 	{
@@ -262,8 +254,8 @@ ostream& operator<<(ostream& os, const Team& team)
 	os << "--on bench--" << endl;
 
 
-	itrStart = team.getBench().begin();
-	itrEnd = team.getBench().end();
+	itrStart = team.getBenchRef().begin();
+	itrEnd = team.getBenchRef().end();
 
 	for (; itrStart != itrEnd; ++itrStart)  //coach already in team
 	{
@@ -277,11 +269,11 @@ const string& Team::getName() const
 {
 	return name;
 }
-
+/*
 int Team::getLineupSize() const
 {
 	return currentLineup;
-}
+}*/
 
 void Team::scoreGoal()
 {
@@ -353,4 +345,14 @@ vector<Player> Team::getBench() const
 WorldCup* Team::getCup() const
 {
 	return cup;
+}
+
+const vector<Player>& Team::getLineupRef() const
+{
+	return lineup;
+}
+
+const vector<Player>& Team::getBenchRef() const
+{
+	return benchPlayers;
 }
