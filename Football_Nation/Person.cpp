@@ -39,8 +39,7 @@ Person::Person(const Person& other)      // For mood assingment
 	setNationality(other.nationality);
 
 	Mood* mood = new Mood();
-	*mood = *other.mood;
-	setMood(mood);
+	setMood(other.mood);
 }
 
 Person::~Person()
