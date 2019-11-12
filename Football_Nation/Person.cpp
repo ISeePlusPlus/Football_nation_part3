@@ -103,6 +103,11 @@ void Person::setMood(Mood* mood)
 	this->mood = mood;
 }
 
+Mood* Person::getMood() const
+{
+	return mood;
+}
+
 void Person::happy()
 {
 	mood->happy(*this);

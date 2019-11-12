@@ -1,5 +1,12 @@
 #include "Neutral.h"
 
+Neutral::Neutral() {}
+
+Neutral::Neutral(const Neutral* other) 
+{
+
+}
+
 void Neutral::happy(Person& p) const
 {
 	p.setMood(new Happy());

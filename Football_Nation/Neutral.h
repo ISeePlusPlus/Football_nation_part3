@@ -8,7 +8,8 @@
 class Neutral : public Mood
 {
 public:
-	Neutral() { }
+	Neutral();
+	Neutral(const Neutral* other);
 	virtual void happy(Person& p) const;
 	virtual void unhappy(Person& p) const;
 };
