@@ -32,6 +32,17 @@ Person::Person(const string& name, int age, const string& nationality) : mood(ne
 
 }
 
+Person::Person(const Person& other)      // For mood assingment
+{
+	setName(other.name);
+	setAge(other.age);
+	setNationality(other.nationality);
+
+	Mood* mood = new Mood();
+	*mood = *other.mood;
+	setMood(mood);
+}
+
 Person::~Person()
 {
 	delete mood;
@@ -106,3 +117,4 @@ void Person::neutral()
 {
 	mood->neutral(*this);
 }
+

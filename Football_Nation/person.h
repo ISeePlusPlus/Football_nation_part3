@@ -30,6 +30,7 @@ protected:
 
 public:
 	Person(const string& name, int age, const string& nationality);
+	Person(const Person& other);
 	~Person();
 
 	const string& getName() const;
