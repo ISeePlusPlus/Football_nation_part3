@@ -118,6 +118,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Building.cpp" />
     <ClCompile Include="Coach.cpp" />
     <ClCompile Include="Coach_Player.cpp" />
     <ClCompile Include="Fixture.cpp" />
@@ -137,10 +138,14 @@
     <ClCompile Include="WorldCup.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Builder.h" />
     <ClInclude Include="Building.h" />
+    <ClInclude Include="BuildingBuilder.h" />
     <ClInclude Include="coach.h" />
     <ClInclude Include="coach_player.h" />
+    <ClInclude Include="FanClub.h" />
     <ClInclude Include="fixture.h" />
+    <ClInclude Include="Floor.h" />
     <ClInclude Include="Gambler.h" />
     <ClInclude Include="InvalidAgeException.h" />
     <ClInclude Include="InvalidNameException.h" />
@@ -157,6 +162,7 @@
     <ClInclude Include="PlayMatchException.h" />
     <ClInclude Include="referee.h" />
     <ClInclude Include="role.h" />
+    <ClInclude Include="Stadium.h" />
     <ClInclude Include="team.h" />
     <ClInclude Include="WorldCup.h" />
   </ItemGroup>

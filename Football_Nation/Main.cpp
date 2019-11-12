@@ -15,6 +15,12 @@ using namespace std;
 #include "Observer.h"
 
 #include "WorldCup.h"
+#include "Floor.h"
+#include "Builder.h"
+#include "Building.h"
+#include "Stadium.h"
+#include "BuildingBuilder.h"
+#include "FanClub.h"
 
 League * readLeague(ifstream& inputFile);
 Team * readTeam(ifstream& inputFile);
@@ -186,6 +192,20 @@ int main()
 	}
 
 	inputFile.close();
+
+	BuildingBuilder bob;
+	Builder* b = new Stadium();
+	Builder* fan = new FanClub();
+	bob.construct(b, "C++", '^', 2, 30);
+	bob.construct(fan, "Messi", '$', 5, 5);
+	Building* stad = b->getResult();
+	Building* club = fan->getResult();
+	stad->show();
+	cout << "\n\n";
+	club->show();
+
+	delete b;
+	delete fan;
 
 	system("pause");
 	return 0;
