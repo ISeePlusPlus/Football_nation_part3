@@ -38,8 +38,12 @@ Person::Person(const Person& other)      // For mood assingment
 	setAge(other.age);
 	setNationality(other.nationality);
 
-	Mood* mood = new Mood();
-	setMood(other.mood);
+	cout << typeid(*other.mood).name() << endl;
+
+	if (typeid(*other.mood).name() == "class Neutral")
+	{
+		mood->neutral(*this);
+	}
 }
 
 Person::~Person()
