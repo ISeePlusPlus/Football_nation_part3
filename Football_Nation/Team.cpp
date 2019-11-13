@@ -3,7 +3,7 @@
 #include "player.h"
 #include "manager.h"
 
-Team::Team(const string& name, Manager* manager) : cup(nullptr)
+Team::Team(const string& name, Manager* manager) : cup(nullptr), fanClub(nullptr)
 {
 	setName(name);
 	this->setManager(manager);
@@ -17,6 +17,7 @@ Team::Team(const string& name, Manager* manager) : cup(nullptr)
 Team::Team(const string& name, Manager* manager, int points) : cup(nullptr)
 {
 	setName(name);
+	setFanClub(nullptr);
 //	this->manager = manager;
 //	this->coaches = coaches;
 //	this->lineup = lineup;
@@ -357,24 +358,24 @@ const vector<Player>& Team::getBenchRef() const
 	return benchPlayers;
 }
 
-Stadium* Team::getStadium()
+Building* Team::getStadium()
 {
 	return homeStadium;
 }
 
-void Team::setStadium(Stadium* stadium)
+void Team::setStadium(Building* stadium)
 {
 	this->homeStadium = stadium;
 }
 
-FanClub* Team::getFanClub()
+Building* Team::getFanClub()
 {
 	if (fanClub)
 		return fanClub;
 	return nullptr;
 }
 
-void Team::setFanClub(FanClub* fc)
+void Team::setFanClub(Building* fc)
 {
 	this->fanClub = fc;
 }

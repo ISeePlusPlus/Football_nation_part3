@@ -8,8 +8,7 @@
 #include "NullPointerException.h"
 #include "coach.h"
 #include "WorldCup.h"
-#include "Stadium.h"
-#include "FanClub.h"
+#include "Building.h"
 
 #pragma warning(disable:4290)
 using namespace std;
@@ -69,10 +68,10 @@ public:
 
 	const vector<Player>& getLineupRef() const;
 	const vector<Player>& getBenchRef() const;
-	Stadium* getStadium();
-	void setStadium(Stadium* stadium);
-	FanClub* getFanClub();
-	void setFanClub(FanClub* fc);
+	Building* getStadium();
+	void setStadium(Building* stadium);
+	Building* getFanClub();
+	void setFanClub(Building* fc);
 
 
 private:
@@ -90,8 +89,8 @@ private:
 	int currentLineup;
 
 	WorldCup* cup;
-	Stadium* homeStadium;
-	FanClub* fanClub;
+	Building* homeStadium;
+	Building* fanClub;
 };
 
 #endif // !__TEAM_H

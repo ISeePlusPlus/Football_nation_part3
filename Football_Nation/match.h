@@ -3,6 +3,7 @@
 #include "team.h"
 #include "PlayMatchException.h"
 #include "Observer.h"
+#include "Building.h"
 
 class Observer;
 
@@ -20,6 +21,8 @@ private:
 
 	vector<Observer*> gamblers;
 	void notifyAllRegistered();
+	Building* stadium;
+
 
 public:
 	Match(Team& homeTeam, Team& awayTeam, Referee * referee);
@@ -32,6 +35,8 @@ public:
 	Referee* getReferee() const;
 	int getResult(int index) const;
 	friend ostream& operator<<(ostream& os, const Match& fixture);
+
+	Building* getStadium() const;
 
 	void registerObserver(Observer* obs); //adding gamblers to observe the match's result
 };

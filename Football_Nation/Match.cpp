@@ -8,9 +8,10 @@
 
 Match::Match(Team& homeTeam, Team& awayTeam, Referee* referee) : homeTeam(homeTeam), awayTeam(awayTeam), referee(referee)
 {
+	stadium = homeTeam.getStadium();
 }
 
-Match::Match(const Match& other) : homeTeam(other.homeTeam), awayTeam(other.awayTeam), referee(other.referee)
+Match::Match(const Match& other) : homeTeam(other.homeTeam), awayTeam(other.awayTeam), referee(other.referee), stadium(stadium)
 {
 }
 
@@ -143,4 +144,9 @@ void Match::notifyAllRegistered()
 	{
 		(*itrStart)->notify(this, this->getWinnerTeam());
 	}
+}
+
+Building* Match::getStadium() const
+{
+	return stadium;
 }

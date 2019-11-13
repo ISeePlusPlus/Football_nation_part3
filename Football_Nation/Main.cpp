@@ -188,6 +188,10 @@ int main()
 	WorldCup::assign(&league->getWinner());
 
 	cout << league->getWinner() << endl;
+	if (league->getWinner().getFanClub() != nullptr)
+		league->getWinner().getFanClub()->show();
+	cout << "\n\n";
+	league->getWinner().getStadium()->show();
 
 	inputFile.close();
 
@@ -216,12 +220,12 @@ League* readLeague(ifstream& inputFile)
 			BuildingBuilder bob;
 			Builder* s = new Stadium();
 			bob.construct(s, team->getName(), '^', 2, 30);
-			team->setStadium((Stadium*)(s->getResult()));
+			team->setStadium(s->getResult());
 			if (i % 2 == 0)
 			{
 				Builder* f = new FanClub();
 				bob.construct(f, team->getName(), '%' ,5, 10);
-				team->setFanClub((FanClub*)(f->getResult()));
+				team->setFanClub(f->getResult());
 			}
 			newLeague->addTeam(*team);
 		}
